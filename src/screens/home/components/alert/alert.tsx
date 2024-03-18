@@ -17,22 +17,21 @@ const AlertSection = () => {
     return (
         <Flex
             direction="column"
-            gap={3}
+            gap={6}
         >
             <Flex
                 paddingHorizontal={sizes.marginSM}
                 align="center"
-                gap={2}
             >
                 <Ionicons 
                     name="alert-circle"
                     size={18}
-                    color={theme.colors.main.text.head}
+                    color={theme.colors.main.text.body}
                 />
                 <AppTypography
                     size={TypographySize.md2}
                     bold={TypographyBold.md}
-                    textColor={theme.colors.main.text.head}
+                    textColor={theme.colors.main.text.body}
                 >
                     Alerts
                 </AppTypography>
