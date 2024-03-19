@@ -53,12 +53,4 @@ const SmallCard = () => {
     )
 }
 
-const style = StyleSheet.create({
-    imagebackground : {
-        width : '100%',
-        height : 150,
-        borderRadius : 5,
-    }
-})
-
 export default SmallCard

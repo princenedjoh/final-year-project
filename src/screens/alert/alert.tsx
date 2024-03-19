@@ -1,8 +1,11 @@
+import { useState } from "react"
 import Header from "../../components/header/header"
 import Safescroll from "../../components/safescroll"
 import Searchbar from "../../components/searchbar"
 import Flex from "../../styles/components/flex"
 import { sizes } from "../../utils/sizes"
+import Chips from "./components/chips"
+import AlertsSection from "./components/alertsSection"
 
 const Alert = () => {
     return (
@@ -23,6 +26,8 @@ const Alert = () => {
                     />
                     <Searchbar/>
                 </Flex>
+                <Chips />
+                <AlertsSection />
             </Flex>
         </Safescroll>
     )

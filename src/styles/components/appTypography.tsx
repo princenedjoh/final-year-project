@@ -1,5 +1,5 @@
 import { StyleSheet, Text } from "react-native"
-import { AppTypographyProps } from "./types"
+import { AppTypographyProps, TypographyBold, TypographySize } from "./types"
 import theme from "../theme"
 
 const AppTypography = (props : AppTypographyProps) => {
@@ -59,5 +59,22 @@ const style = ({
         lineHeight : lineHeight,
     }
 })
+
+export const Title = ({
+    size,
+    bold,
+    textColor,
+    children
+} : AppTypographyProps) => {
+    return (
+        <AppTypography
+            size={size ?? TypographySize.md2}
+            bold={bold ?? TypographyBold.md}
+            textColor={textColor ?? theme.colors.main.primary}
+        >
+            {children}
+        </AppTypography>
+    )
+}
 
 export default AppTypography

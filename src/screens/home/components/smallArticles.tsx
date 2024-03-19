@@ -1,19 +1,18 @@
-import { Image, StyleSheet, View } from "react-native"
+import { Image, Pressable, StyleSheet, View } from "react-native"
 import theme from "../../../styles/theme"
 import Flex from "../../../styles/components/flex"
 import { sizes } from "../../../utils/sizes"
-import LargeCard from "../../../components/article card/largeCard"
-import AwesomeIcon6 from 'react-native-vector-icons/FontAwesome6';
-import AppTypography from "../../../styles/components/appTypography"
+import AppTypography, { Title } from "../../../styles/components/appTypography"
 import { TypographyBold, TypographySize } from "../../../styles/components/types"
-import { images } from "../../../assets/assets"
 import SmallCard from "../../../components/article card/smallCard"
 import { useState } from "react"
 import Hr from "../../../styles/components/hr"
+import { useNavigation } from "@react-navigation/native"
 
 const SmallArticles = () => {
 
     const [data, setData] = useState([1,2,3,4,5,6])
+    const navigation = useNavigation()
 
     return (
         <Flex
@@ -22,6 +21,9 @@ const SmallArticles = () => {
             direction="column"
             gap={10}
         >
+            <Title>
+                Articles
+            </Title>
             {
                 data.map((item, index : number) => {
                     return (
@@ -32,7 +34,7 @@ const SmallArticles = () => {
                         >
                             <SmallCard />
                             {
-                                index < data.length &&
+                                index < data.length - 1 &&
                                 <Hr 
                                     marginLeft={85}
                                 />
@@ -41,6 +43,15 @@ const SmallArticles = () => {
                     )
                 })
             }
+            <Pressable
+                
+            >
+                <AppTypography
+                    textColor={theme.colors.blue.blue3}
+                >
+                    See more...
+                </AppTypography>
+            </Pressable>
         </Flex>
     )
 }

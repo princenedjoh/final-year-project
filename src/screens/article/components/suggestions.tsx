@@ -7,6 +7,7 @@ import { satellites } from "../../../assets/assets"
 import ImageBG from "../../../components/imgbg/imgbg"
 import AppTypography from "../../../styles/components/appTypography"
 import { TypographyBold } from "../../../styles/components/types"
+import Chip from "../../../components/chip/chip"
 
 const Suggestions = () => {
 
@@ -41,20 +42,10 @@ const Suggestions = () => {
                 {
                     suggestionList.map((item, index : number) => {
                         return (
-                            <View
+                            <Chip 
+                                name={item.name}
                                 key={index}
-                                style={{
-                                    padding : 7,
-                                    paddingHorizontal : 10,
-                                    borderWidth : 1,
-                                    borderRadius : 100,
-                                    borderColor : theme.colors.dark[9]
-                                }}
-                            >
-                                <AppTypography>
-                                    {item.name}
-                                </AppTypography>
-                            </View>
+                            />
                         )
                     })
                 }

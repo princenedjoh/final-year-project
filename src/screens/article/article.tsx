@@ -3,7 +3,7 @@ import Safescroll from "../../components/safescroll"
 import Searchbar from "../../components/searchbar"
 import Flex from "../../styles/components/flex"
 import { sizes } from "../../utils/sizes"
-import SmallArticles from "../home/components/smallArticles"
+import SmallArticles from "./components/smallArticles"
 import BigArticles from "./components/bigArticles"
 import Suggestions from "./components/suggestions"
 
@@ -34,9 +34,7 @@ const Article = () => {
                     <Flex marginTop={-3}>
                         <BigArticles />
                     </Flex>
-                    <Flex marginTop={-12}>
-                        <SmallArticles />
-                    </Flex>
+                    <SmallArticles />
                 </Flex>
             </Flex>
         </Safescroll>

@@ -3,6 +3,7 @@ import Safescroll from "../../components/safescroll"
 import Searchbar from "../../components/searchbar"
 import Flex from "../../styles/components/flex"
 import { sizes } from "../../utils/sizes"
+import NotifSection from "./components/notifSection"
 
 const Notification = () => {
     return (
@@ -21,6 +22,7 @@ const Notification = () => {
                         title="Notfication"
                     />
                 </Flex>
+                <NotifSection />
             </Flex>
         </Safescroll>
     )

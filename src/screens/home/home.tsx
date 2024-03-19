@@ -10,8 +10,12 @@ import ArticleFeature from "./components/bigArticles"
 import Hr from "../../styles/components/hr"
 import SmallArticles from "./components/smallArticles"
 import Safescroll from "../../components/safescroll"
+import { useNavigation } from "@react-navigation/native"
 
 const Home = () => {
+
+    const navigate = useNavigation()
+
     return (
         <Safescroll>
             <Flex
@@ -32,12 +36,12 @@ const Home = () => {
             >
                 <Satellites />
                 <AlertSection />
-                <ArticleFeature />
+                {/* <ArticleFeature />
                 <Flex
                     paddingHorizontal={sizes.marginSM}
                 >
                     <Hr />
-                </Flex>
+                </Flex> */}
                 <SmallArticles />
             </Flex>
         </Safescroll>

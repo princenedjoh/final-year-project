@@ -33,16 +33,16 @@ export interface flexProps {
   }
 
 export enum TypographySize {
-  xs = 12,
-  sm = 14,
-  sm2 = 16,
-  md = 17,
-  md2 = 19,
-  lg = 22,
-  lg2 = 28,
-  xl = 34,
-  xxl = 42,
-  xl3 = 57
+  xs = 11,
+  sm = 13,
+  sm2 = 15,
+  md = 16,
+  md2 = 18,
+  lg = 21,
+  lg2 = 27,
+  xl = 32,
+  xxl = 40,
+  xl3 = 55
 }
 
 export interface AppTypographyProps {

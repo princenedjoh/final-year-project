@@ -1,4 +1,4 @@
-import AppTypography from "../../../../styles/components/appTypography";
+import AppTypography, { Title } from "../../../../styles/components/appTypography";
 import Flex from "../../../../styles/components/flex"
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
@@ -9,6 +9,7 @@ import { ImageBackground, ScrollView, StyleSheet, View } from "react-native";
 import { useState } from "react";
 import { images } from "../../../../assets/assets";
 import ImageBG from "../../../../components/imgbg/imgbg";
+import { getSeverityColor } from "../../../../utils/getSeverityColor";
 
 const AlertSection = () => {
 
@@ -23,18 +24,9 @@ const AlertSection = () => {
                 paddingHorizontal={sizes.marginSM}
                 align="center"
             >
-                <Ionicons 
-                    name="alert-circle"
-                    size={18}
-                    color={theme.colors.main.text.body}
-                />
-                <AppTypography
-                    size={TypographySize.md2}
-                    bold={TypographyBold.md}
-                    textColor={theme.colors.main.text.body}
-                >
-                    Alerts
-                </AppTypography>
+            <Title>
+                Alerts
+            </Title>
             </Flex>
             <ScrollView
                 showsHorizontalScrollIndicator={false}
@@ -52,7 +44,7 @@ const AlertSection = () => {
                                     key={index}
                                 >
                                     <ImageBG
-                                        source={images.bg1}
+                                        source={images.bg4}
                                         width={300}
                                         height={120}
                                     >
@@ -62,18 +54,20 @@ const AlertSection = () => {
                                                 {
                                                     position : 'absolute',
                                                     top : 10,
-                                                    left : 10
+                                                    left : 10,
+                                                    backgroundColor : `${theme.colors.dark[1]}80`,
+                                                    padding : 5,
+                                                    borderRadius : 100
                                                 }
                                             }
                                         >
                                             <Flex
                                                 align="center"
-                                                gap={1}
                                             >
                                                 <View
                                                     style={
                                                         {
-                                                            backgroundColor : theme.colors.dark[9],
+                                                            backgroundColor : `${theme.colors.dark[10]}cc`,
                                                             width : 20,
                                                             height : 20,
                                                             display : 'flex',
@@ -84,10 +78,14 @@ const AlertSection = () => {
                                                         }
                                                     }
                                                 >
-                                                    <AwesomeIcon name="thermometer-1"/>
+                                                    <AwesomeIcon 
+                                                        name="thermometer-1"
+                                                        color={theme.colors.dark[1]}
+                                                    />
                                                 </View>
                                                 <AppTypography
                                                     size={TypographySize.xs}
+                                                    textColor={theme.colors.dark[10]}
                                                 >
                                                     Temperature
                                                 </AppTypography>
@@ -100,6 +98,15 @@ const AlertSection = () => {
                     }
                 </Flex>
             </ScrollView>
+            <Flex
+                paddingHorizontal={sizes.marginSM}
+            >
+                <AppTypography
+                    textColor={theme.colors.blue.blue3}
+                >
+                    See more...
+                </AppTypography>
+            </Flex>
         </Flex>
     )
 }
