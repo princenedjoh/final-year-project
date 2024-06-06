@@ -70,7 +70,7 @@ export const Title = ({
         <AppTypography
             size={size ?? TypographySize.md2}
             bold={bold ?? TypographyBold.md}
-            textColor={textColor ?? theme.colors.main.primary}
+            textColor={textColor ?? theme.colors.main.text.head}
         >
             {children}
         </AppTypography>

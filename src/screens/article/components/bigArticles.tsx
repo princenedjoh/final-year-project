@@ -8,8 +8,13 @@ import AppTypography from "../../../styles/components/appTypography"
 import { TypographyBold, TypographySize } from "../../../styles/components/types"
 import { images } from "../../../assets/assets"
 import Profilename from "../../../components/profilename/profilename"
+import { NavigationProp } from "@react-navigation/native"
 
-const BigArticles = () => {
+const BigArticles = ({
+    navigation
+} : {
+    navigation : NavigationProp<any>
+}) => {
     return (
         <ScrollView
             horizontal
@@ -33,6 +38,7 @@ const BigArticles = () => {
                                     image={images.profile1}
                                 />
                                 <LargeCard 
+                                    navigation={navigation}
                                     width={300}
                                 />
                             </Flex>

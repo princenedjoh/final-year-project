@@ -1,11 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Navigation from './src/navigation/navigation';
-import MainStack from './src/navigation/MainStack';
+import { StyleSheet } from 'react-native';
+import { ToastProvider } from 'react-native-toast-notifications'
+import MainStack from './src/navigation/stacks/MainStack';
+import { AuthProvider } from './src/context/authcontext';
 
 export default function App() {
   return (
-    <MainStack />
+    <ToastProvider>
+      <AuthProvider>
+        <MainStack />
+      </AuthProvider>
+    </ToastProvider>
   );
 }
 

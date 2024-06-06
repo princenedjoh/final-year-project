@@ -4,6 +4,8 @@ export const images = {
     bg2 : require('./dev/bg2.png'),
     bg3 : require('./dev/bg3.jpg'),
     bg4 : require('./dev/bg4.jpg'),
+    bg5 : require('./dev/bg5.jpg'),
+    bg6 : require('./dev/bg6.jpg'),
 }
 
 export const satellites = {

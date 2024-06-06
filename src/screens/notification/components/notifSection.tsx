@@ -5,6 +5,7 @@ import { Title } from "../../../styles/components/appTypography"
 import NotifCard from "./notifCard"
 import Hr from "../../../styles/components/hr"
 import theme from "../../../styles/theme"
+import NotifCard2 from "./notifCard2"
 
 const NotifSection = () => {
 
@@ -18,7 +19,7 @@ const NotifSection = () => {
         >
             <Flex
                 direction="column"
-                gap={10}
+                gap={20}
             >
                 <Title textColor={theme.colors.main.primary}>
                     Today
@@ -29,14 +30,14 @@ const NotifSection = () => {
                             <Flex 
                                 key={index}
                                 direction="column"
-                                gap={10}
+                                gap={20}
                             >
-                                <NotifCard 
-                                    key={index}
-                                />
+                                <NotifCard />
+                                <Hr marginLeft={55}/>
+                                <NotifCard2 />
                                 {
                                     index < data.length - 1 &&
-                                    <Hr/>
+                                    <Hr marginLeft={55}/>
                                 }
                             </Flex>
                         )
@@ -57,14 +58,14 @@ const NotifSection = () => {
                             <Flex 
                                 key={index}
                                 direction="column"
-                                gap={10}
+                                gap={20}
                             >
-                                <NotifCard 
-                                    key={index}
-                                />
+                                <NotifCard />
+                                <Hr marginLeft={55}/>
+                                <NotifCard2 />
                                 {
                                     index < data.length - 1 &&
-                                    <Hr/>
+                                    <Hr marginLeft={55}/>
                                 }
                             </Flex>
                         )

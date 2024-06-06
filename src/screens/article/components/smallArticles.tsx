@@ -5,9 +5,13 @@ import { Title } from "../../../styles/components/appTypography"
 import SmallCard from "../../../components/article card/smallCard"
 import { useState } from "react"
 import Hr from "../../../styles/components/hr"
-import { useNavigation } from "@react-navigation/native"
+import { NavigationProp, useNavigation } from "@react-navigation/native"
 
-const SmallArticles = () => {
+const SmallArticles = ({
+    navigation
+} : {
+    navigation : NavigationProp<any>
+}) => {
 
     const [data, setData] = useState([1,2,3,4,5,6])
     const navigate = useNavigation()
@@ -29,7 +33,9 @@ const SmallArticles = () => {
                             direction="column"
                             gap={10}
                         >
-                            <SmallCard />
+                            <SmallCard 
+                                navigation={navigation}
+                            />
                             {
                                 index < data.length - 1 &&
                                 <Hr 

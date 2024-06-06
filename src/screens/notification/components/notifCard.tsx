@@ -1,3 +1,5 @@
+import { images, satellites } from "../../../assets/assets"
+import ImageBG from "../../../components/imgbg/imgbg"
 import AppTypography, { Title } from "../../../styles/components/appTypography"
 import Flex from "../../../styles/components/flex"
 import { TypographyBold, TypographySize } from "../../../styles/components/types"
@@ -6,20 +8,52 @@ import theme from "../../../styles/theme"
 const NotifCard = () => {
     return (
         <Flex
-            direction="column"
+            align="center"
+            gap={6}
         >
-            <AppTypography
-                size={TypographySize.xs}
-                textColor={theme.colors.main.text.light}
+            <ImageBG
+                source={satellites.modis}
+                resizeMode="contain"
+                bgcolor='white'
+                width={50}
+                height={50}
+                rounded={100}
             >
-                12th March, 2024
-            </AppTypography>
-            <AppTypography
-                size={TypographySize.sm2}
-                bold={TypographyBold.md}
+                
+            </ImageBG>
+            <Flex
+                direction="column"
+                gap={2}
+                flex={1}
             >
-                Temperature rises by 40% in one at Accra
-            </AppTypography>
+                <Flex
+                    width={'auto'}
+                >
+                    <AppTypography
+                        size={TypographySize.xs}
+                        textColor={theme.colors.main.text.light}
+                    >
+                        12th March, 2024
+                    </AppTypography>
+                </Flex>
+                <AppTypography
+                    textColor={theme.colors.main.text.head}
+                    bold={TypographyBold.md}
+                >
+                    MODIS satellite 
+                    <AppTypography
+                        textColor={theme.colors.main.text.head}
+                    >
+                       {' '} made a post:
+                    </AppTypography>
+                </AppTypography>
+                <AppTypography
+                    numberOfLines={2}
+                >
+                    SCIENCE A strong earthquake rocked Nepal early Saturday, 
+                    destroying buildings, damaging historic temples...
+                </AppTypography>
+            </Flex>
         </Flex>
     )
 }

@@ -8,70 +8,82 @@ import theme from "../../../styles/theme"
 import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import Severity from "./severity"
 import { getSeverityColor } from "../../../utils/getSeverityColor"
+import { TouchableHighlight } from "react-native"
+import { NavigationProp } from "@react-navigation/native"
+import { screenNames } from "../../../constants/screennames"
 
-const AlertCard = () => {
+const AlertCard = ({
+    navigation
+} : {
+    navigation : NavigationProp<any>
+}) => {
     return (
-        <Flex
-            align="center"
-            gap={6}
+        <TouchableHighlight
+            onPress={()=>navigation.navigate(screenNames.alertDetails)}
+            underlayColor={'none'}
         >
-            <ImageBG
-                source={images.bg3}
-                width={80}
-                height={80}
-            >
-                
-            </ImageBG>
             <Flex
-                direction="column"
-                gap={1}
-                flex={1}
+                align="center"
+                gap={6}
             >
-                <Flex
-                    align="center"
-                    gap={10}
+                <ImageBG
+                    source={images.bg3}
+                    width={80}
+                    height={80}
                 >
+                    
+                </ImageBG>
+                <Flex
+                    direction="column"
+                    gap={1}
+                    flex={1}
+                >
+                    <Flex
+                        align="center"
+                        gap={10}
+                    >
+                        <AppTypography
+                            size={TypographySize.xs}
+                            bold={TypographyBold.md}
+                            textColor={getSeverityColor('critical')}
+                        >
+                            Temperature
+                        </AppTypography>
+                        <AwesomeIcon 
+                            name='map' 
+                            color={theme.colors.main.primary}
+                            size={10}
+                        />
+                        <Severity severity="critical" />
+                    </Flex>
                     <AppTypography
-                        size={TypographySize.xs}
+                        size={TypographySize.md2}
+                        textColor={theme.colors.main.text.head}
                         bold={TypographyBold.md}
-                        textColor={getSeverityColor('critical')}
+                        numberOfLines={1}
                     >
-                        Temperature
+                        Temperature rises by 40% in one at Accra
                     </AppTypography>
-                    <AwesomeIcon 
-                        name='map' 
-                        color={theme.colors.main.primary}
-                        size={10}
-                    />
-                    <Severity severity="critical" />
-                </Flex>
-                <AppTypography
-                    size={TypographySize.md2}
-                    textColor={theme.colors.main.text.head}
-                    bold={TypographyBold.md}
-                    numberOfLines={1}
-                >
-                    Temperature rises by 40% in one at Accra
-                </AppTypography>
-                <AppTypography
-                    numberOfLines={2}
-                >
-                    SCIENCE A strong earthquake rocked Nepal early Saturday, 
-                    destroying buildings, damaging historic temples...
-                </AppTypography>
-                <Flex
-                    width={'auto'}
-                    marginTop={3}
-                >
                     <AppTypography
-                        size={TypographySize.xs}
-                        textColor={theme.colors.main.text.light}
+                        numberOfLines={2}
                     >
-                        12th March, 2024
+                        SCIENCE A strong earthquake rocked Nepal early Saturday, 
+                        destroying buildings, damaging historic temples...
                     </AppTypography>
+                    <Flex
+                        width={'auto'}
+                        marginTop={3}
+                    >
+                        <AppTypography
+                            size={TypographySize.xs}
+                            textColor={theme.colors.main.text.light}
+                        >
+                            12th March, 2024
+                        </AppTypography>
+                    </Flex>
                 </Flex>
             </Flex>
-        </Flex>
+        </TouchableHighlight>
     )
 }
 

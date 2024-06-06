@@ -1,10 +1,12 @@
 import { DimensionValue, ImageResizeMode, ImageSourcePropType } from "react-native"
 import { ReactNode } from 'react';
+import { NavigationProp } from "@react-navigation/native";
 
 export type headerType = {
     title : string,
     message? : string,
     displayProfile? : boolean
+    navigation : NavigationProp<any>
 }
 
 export type searchbarprops = {
@@ -12,8 +14,8 @@ export type searchbarprops = {
 }
 
 export type imageBgsProps = {
-    width? : number,
-    height? : number,
+    width? : DimensionValue,
+    height? : DimensionValue,
     source : ImageSourcePropType,
     rounded? : number,
     children? : ReactNode,

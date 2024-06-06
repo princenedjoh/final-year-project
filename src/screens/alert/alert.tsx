@@ -6,8 +6,13 @@ import Flex from "../../styles/components/flex"
 import { sizes } from "../../utils/sizes"
 import Chips from "./components/chips"
 import AlertsSection from "./components/alertsSection"
+import { NavigationProp } from "@react-navigation/native"
 
-const Alert = () => {
+const Alert = ({
+    navigation
+} : {
+    navigation : NavigationProp<any>
+}) => {
     return (
         <Safescroll>
             <Flex
@@ -23,11 +28,14 @@ const Alert = () => {
                     <Header
                         title="Alerts"
                         displayProfile
+                        navigation={navigation}
                     />
                     <Searchbar/>
                 </Flex>
                 <Chips />
-                <AlertsSection />
+                <AlertsSection 
+                    navigation={navigation}
+                />
             </Flex>
         </Safescroll>
     )

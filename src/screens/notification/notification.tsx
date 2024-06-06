@@ -1,3 +1,4 @@
+import { NavigationProp } from "@react-navigation/native"
 import Header from "../../components/header/header"
 import Safescroll from "../../components/safescroll"
 import Searchbar from "../../components/searchbar"
@@ -5,7 +6,11 @@ import Flex from "../../styles/components/flex"
 import { sizes } from "../../utils/sizes"
 import NotifSection from "./components/notifSection"
 
-const Notification = () => {
+const Notification = ({
+    navigation
+} : {
+    navigation : NavigationProp<any>
+}) => {
     return (
         <Safescroll>
             <Flex
@@ -20,6 +25,7 @@ const Notification = () => {
                 >
                     <Header
                         title="Notfication"
+                        navigation={navigation}
                     />
                 </Flex>
                 <NotifSection />

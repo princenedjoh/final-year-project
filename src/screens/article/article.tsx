@@ -6,8 +6,13 @@ import { sizes } from "../../utils/sizes"
 import SmallArticles from "./components/smallArticles"
 import BigArticles from "./components/bigArticles"
 import Suggestions from "./components/suggestions"
+import { NavigationProp } from "@react-navigation/native"
 
-const Article = () => {
+const Article = ({
+    navigation
+} : {
+    navigation : NavigationProp<any>
+}) => {
     return (
         <Safescroll>
             <Flex
@@ -21,6 +26,7 @@ const Article = () => {
                     gap={4}
                 >
                     <Header
+                        navigation={navigation}
                         title="Articles"
                         displayProfile
                     />
@@ -32,9 +38,13 @@ const Article = () => {
                 >
                     <Suggestions />
                     <Flex marginTop={-3}>
-                        <BigArticles />
+                        <BigArticles 
+                            navigation={navigation}
+                        />
                     </Flex>
-                    <SmallArticles />
+                    <SmallArticles 
+                        navigation={navigation}
+                    />
                 </Flex>
             </Flex>
         </Safescroll>

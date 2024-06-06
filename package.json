@@ -9,15 +9,22 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@maptiler/client": "^1.8.1",
+    "@react-native-async-storage/async-storage": "^1.23.1",
     "@react-navigation/bottom-tabs": "^6.5.19",
     "@react-navigation/native": "^6.1.16",
     "@react-navigation/native-stack": "^6.9.25",
+    "@rnmapbox/maps": "^10.1.19",
+    "axios": "^1.6.8",
     "expo": "~50.0.13",
+    "expo-linear-gradient": "^12.7.2",
     "expo-status-bar": "~1.11.1",
     "react": "18.2.0",
     "react-icons": "^5.0.1",
     "react-native": "0.73.5",
-    "react-native-vector-icons": "^10.0.3"
+    "react-native-toast-notifications": "^3.4.0",
+    "react-native-vector-icons": "^10.0.3",
+    "rn-bottom-drawer": "^1.4.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

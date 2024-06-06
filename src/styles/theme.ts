@@ -18,11 +18,11 @@ const colors = {
 const theme = {
     colors : {
         main : {
-            primary : "#9772AE",
+            primary : "#029202",
             text : {
-                head : colors.dark[2],
-                body : colors.dark[5],
-                light : colors.dark[7]
+                head : colors.dark[1],
+                body : colors.dark[4],
+                light : colors.dark[6]
             },
         },
 

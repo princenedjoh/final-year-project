@@ -5,8 +5,13 @@ import { sizes } from "../../../utils/sizes"
 import AlertCard from "./alertCard"
 import Hr from "../../../styles/components/hr"
 import theme from "../../../styles/theme"
+import { NavigationProp } from "@react-navigation/native"
 
-const AlertsSection = () => {
+const AlertsSection = ({
+    navigation
+} : {
+    navigation : NavigationProp<any>
+}) => {
 
     const [data, setData] = useState([1,2,3])
 
@@ -29,6 +34,7 @@ const AlertsSection = () => {
                         >
                             <AlertCard 
                                 key={index}
+                                navigation={navigation}
                             />
                             {
                                 index < data.length - 1 &&
@@ -54,6 +60,7 @@ const AlertsSection = () => {
                         >
                             <AlertCard 
                                 key={index}
+                                navigation={navigation}
                             />
                             {
                                 index < data.length - 1 &&

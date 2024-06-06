@@ -1,60 +1,69 @@
-import { ImageBackground, StyleSheet, View } from "react-native"
+import { ImageBackground, StyleSheet, TouchableOpacity, View } from "react-native"
 import theme from "../../styles/theme"
 import Flex from "../../styles/components/flex"
 import AppTypography from "../../styles/components/appTypography"
 import { TypographyBold, TypographySize } from "../../styles/components/types"
 import { images } from "../../assets/assets"
 import ImageBG from "../imgbg/imgbg"
+import { NavigationProp } from "@react-navigation/native"
+import { screenNames } from "../../constants/screennames"
 
 const LargeCard = ({
     width,
-    height
+    height,
+    navigation
 } : {
     width? : number,
-    height? : number
+    height? : number,
+    navigation : NavigationProp<any>
 }) => {
     return (
-        <Flex
-            direction="column"
-            width={width}
+        <TouchableOpacity
+            activeOpacity={0.9}
+            onPress={()=>navigation.navigate(screenNames.articlePost)}
         >
-            <ImageBG 
-                source={images.bg2}
-                width={width}
-                height={height}
-            >
-                
-            </ImageBG>
             <Flex
                 direction="column"
-                gap={1}
+                width={width}
             >
-                <AppTypography
-                    size={TypographySize.md2}
-                    textColor={theme.colors.main.text.head}
-                    bold={TypographyBold.md}
+                <ImageBG 
+                    source={images.bg2}
+                    width={width}
+                    height={height}
                 >
-                    Quake Devastates Nepal
-                </AppTypography>
-                <AppTypography
-                    numberOfLines={2}
-                >
-                    SCIENCE A strong earthquake rocked Nepal early Saturday, 
-                    destroying buildings, damaging historic temples...
-                </AppTypography>
+                    
+                </ImageBG>
                 <Flex
-                    width={'auto'}
-                    marginTop={3}
+                    direction="column"
+                    gap={1}
                 >
                     <AppTypography
-                        size={TypographySize.xs}
-                        textColor={theme.colors.main.text.light}
+                        size={TypographySize.md2}
+                        textColor={theme.colors.main.text.head}
+                        bold={TypographyBold.md}
                     >
-                        12th March, 2024
+                        Quake Devastates Nepal
                     </AppTypography>
+                    <AppTypography
+                        numberOfLines={2}
+                    >
+                        SCIENCE A strong earthquake rocked Nepal early Saturday, 
+                        destroying buildings, damaging historic temples...
+                    </AppTypography>
+                    <Flex
+                        width={'auto'}
+                        marginTop={3}
+                    >
+                        <AppTypography
+                            size={TypographySize.xs}
+                            textColor={theme.colors.main.text.light}
+                        >
+                            12th March, 2024
+                        </AppTypography>
+                    </Flex>
                 </Flex>
             </Flex>
-        </Flex>
+        </TouchableOpacity>
     )
 }
 
