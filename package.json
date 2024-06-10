@@ -22,6 +22,7 @@
     "react": "18.2.0",
     "react-icons": "^5.0.1",
     "react-native": "0.73.5",
+    "react-native-modals": "^0.22.3",
     "react-native-toast-notifications": "^3.4.0",
     "react-native-vector-icons": "^10.0.3",
     "rn-bottom-drawer": "^1.4.3"

@@ -4,42 +4,21 @@ import AppTypography from "../../../styles/components/appTypography"
 import theme from "../../../styles/theme"
 import ProfileItems from "./profileItems"
 import Flex from "../../../styles/components/flex"
-import Button from "../../../components/button/button"
 import { TypographyBold, TypographySize } from "../../../styles/components/types"
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useContext, useState } from "react"
 import { AuthContext } from "../../../context/authcontext"
 import { useNavigation } from '@react-navigation/native';
 import { useToast } from "react-native-toast-notifications"
-import { retrieveRefreshToken } from "../../../context/asyncStorage"
 import { profileItemsType } from "./profileItem"
+import { getAllArticles, getCurrentDocApi, getRef, repoAPI } from "../../../api/prismic"
+import axios from "axios"
 
 const Drawer = ({
     userInfo
 } : {
     userInfo : profileItemsType[]
 }) => {
-    const navigation = useNavigation();
-    const toast = useToast()
-
-    const { setToken, setRefreshToken, setIsLoggedIn } = useContext(AuthContext)
-    const [logoutLoading, setLogoutLoading] = useState(false)
-    const logout = () => {
-        try {
-            setLogoutLoading(true)
-            setToken(undefined)
-            setRefreshToken(undefined)
-            setIsLoggedIn(false)
-            toast.show('Logged out successful',{
-                placement : 'top'
-            })
-            setLogoutLoading(false)
-            navigation.goBack()
-        } catch (error) {
-            console.log(error)
-            setLogoutLoading(false)
-        }
-    }
 
     return (
         <View
@@ -95,39 +74,6 @@ const Drawer = ({
                             />
                         </Flex>
                     }
-                    <Flex
-                        paddingHorizontal={20}
-                        justify="center"
-                    >
-                        {
-                            logoutLoading ?
-                            <ActivityIndicator
-                                color={theme.colors.main.primary} 
-                                size={'small'}
-                            />
-                            :
-                            <TouchableOpacity
-                                onPress={logout}
-                            >
-                                <Flex
-                                    align="center"
-                                    justify="center"
-                                >
-                                    <FontAwesome
-                                        name="power-off" 
-                                        color={theme.colors.red.red3}
-                                        size={TypographySize.sm}
-                                    />
-                                    <AppTypography
-                                        textColor={theme.colors.red.red3}
-                                        bold={TypographyBold.md2}
-                                    >
-                                        Logout
-                                    </AppTypography>
-                                </Flex>
-                            </TouchableOpacity>
-                        }
-                    </Flex>
                 </Flex>
             </ScrollView>
         </View>

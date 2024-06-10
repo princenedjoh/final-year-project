@@ -42,3 +42,12 @@ export type paddingMarginTypes = {
 }
 
 export type severityTypes = 'normal' | 'severe' | 'critical'
+
+export type articleTypes = {
+    navigation : NavigationProp<any>
+    title : string,
+    description : string,
+    date : Date,
+    coverImageURL : ImageSourcePropType
+    full_name1 : string
+}

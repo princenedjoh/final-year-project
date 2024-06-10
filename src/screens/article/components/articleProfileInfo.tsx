@@ -5,15 +5,20 @@ import { images } from "../../../assets/assets"
 import AppTypography from "../../../styles/components/appTypography"
 import { TypographyBold, TypographySize } from "../../../styles/components/types"
 import theme from "../../../styles/theme"
+import getDate from "../../../utils/getDate"
 
 const ArticleProfileInfo = ({
     displayProfile,
     color,
-    dateColor
+    dateColor,
+    name,
+    date
 } : {
     displayProfile? : boolean,
     color? : string,
     dateColor? : string
+    name : string,
+    date : Date
 }) => {
     return (
         <Flex
@@ -34,13 +39,12 @@ const ArticleProfileInfo = ({
                     size={TypographySize.md}
                     textColor={color ?? theme.colors.main.text.head}
                 >
-                    Prince Nedjoh
+                    {name}
                 </AppTypography>
                 <AppTypography
-                    textColor={dateColor ?? theme.colors.main.text.light}
                     size={TypographySize.xs}
                 >
-                    25th March, 1995
+                    {getDate(date)}
                 </AppTypography>
             </Flex>
         </Flex>

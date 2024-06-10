@@ -9,10 +9,13 @@ import { TypographyBold, TypographySize } from "../../../styles/components/types
 import { images } from "../../../assets/assets"
 import Profilename from "../../../components/profilename/profilename"
 import { NavigationProp } from "@react-navigation/native"
+import { articleTypes } from "../../../utils/types"
 
 const BigArticles = ({
+    articles,
     navigation
 } : {
+    articles : Omit<articleTypes, 'navigation'>[]
     navigation : NavigationProp<any>
 }) => {
     return (
@@ -26,7 +29,7 @@ const BigArticles = ({
                 gap={15}
             >
                 {
-                    [1,2,3,4,5].map((items, index : number) => {
+                    articles.map((item : any, index : number) => {
                         return (
                             <Flex
                                 direction="column"
@@ -39,6 +42,11 @@ const BigArticles = ({
                                 />
                                 <LargeCard 
                                     navigation={navigation}
+                                    title = {item.data.title[0].text}
+                                    description={item.data.content[0].text}
+                                    date={new Date(item.data.date)}
+                                    coverImageURL={{uri : item.data.cover_image.url}}
+                                    full_name1={item.data.full_name1}
                                     width={300}
                                 />
                             </Flex>

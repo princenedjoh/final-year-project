@@ -1,4 +1,4 @@
-import { ImageBackground, StyleSheet, TouchableOpacity, View } from "react-native"
+import { ImageBackground, ImageSourcePropType, StyleSheet, TouchableOpacity, View } from "react-native"
 import theme from "../../styles/theme"
 import Flex from "../../styles/components/flex"
 import AppTypography from "../../styles/components/appTypography"
@@ -7,23 +7,35 @@ import { images } from "../../assets/assets"
 import ImageBG from "../imgbg/imgbg"
 import { NavigationProp } from "@react-navigation/native"
 import { screenNames } from "../../constants/screennames"
+import { months } from "../../utils/constants"
+import { articleTypes } from "../../utils/types"
 
 const SmallCard = ({
-    navigation
-} : {
-    navigation : NavigationProp<any>
-}) => {
+    navigation,
+    title,
+    description,
+    date,
+    coverImageURL,
+    full_name1,
+} : articleTypes) => {
+    console.log('cover', coverImageURL)
     return (
         <TouchableOpacity
             activeOpacity={0.9}
-            onPress={()=>navigation.navigate(screenNames.articlePost)}
+            onPress={()=>navigation.navigate(screenNames.articlePost, {
+                title,
+                description,
+                date,
+                coverImageURL,
+                full_name1
+            })}
         >
             <Flex
                 align="center"
                 gap={6}
             >
                 <ImageBG 
-                    source={images.bg1}
+                    source={coverImageURL}
                     width={80}
                     height={80}
                 >
@@ -39,13 +51,12 @@ const SmallCard = ({
                         textColor={theme.colors.main.text.head}
                         bold={TypographyBold.md}
                     >
-                        Quake Devastates Nepal
+                        {title}
                     </AppTypography>
                     <AppTypography
                         numberOfLines={2}
                     >
-                        SCIENCE A strong earthquake rocked Nepal early Saturday, 
-                        destroying buildings, damaging historic temples...
+                        {description}
                     </AppTypography>
                     <Flex
                         width={'auto'}
@@ -53,9 +64,9 @@ const SmallCard = ({
                     >
                         <AppTypography
                             size={TypographySize.xs}
-                            textColor={theme.colors.main.text.light}
+                            bold={TypographyBold.md}
                         >
-                            12th March, 2024
+                            {months[date.getMonth()]} {date.getDay()}, {date.getFullYear()}
                         </AppTypography>
                     </Flex>
                 </Flex>

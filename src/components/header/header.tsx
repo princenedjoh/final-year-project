@@ -47,21 +47,15 @@ const Header = ({
                     </AppTypography>
                 </Flex>
                 {
-                    displayProfile && isLoggedIn ?
+                    displayProfile &&
                     <TouchableOpacity
-                        onPress={()=>navigation.navigate(screenNames.profile)}
+                        onPress={()=>navigation.navigate(screenNames.settings)}
                     >
                         <Image
                             style={style.profileImage}
                             source={images.profile1}
                         ></Image>
                     </TouchableOpacity>
-                    : displayProfile &&
-                    <Button
-                        onPress={()=>navigation.navigate(screenNames.login)}
-                    >
-                        Login
-                    </Button>
                 }
             </Flex>
         </Flex>

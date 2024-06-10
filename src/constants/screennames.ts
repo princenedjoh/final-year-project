@@ -9,5 +9,6 @@ export enum screenNames {
     profile = 'Profile',
     missionPost = 'Mission Post',
     login = 'Login',
-    register = 'Register'
+    register = 'Register',
+    settings = 'Settings'
 }

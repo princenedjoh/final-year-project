@@ -1,6 +1,5 @@
 import { ImageBackground, StyleSheet, View } from "react-native"
 import theme from "../../styles/theme"
-import { images } from "../../assets/assets"
 import { imageBgsProps } from "../../utils/types"
 
 const ImageBG = ({

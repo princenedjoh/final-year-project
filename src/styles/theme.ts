@@ -11,7 +11,8 @@ const colors = {
         7 : '#A2A2A2',
         8 : '#C2C2C2',
         9 : "#DDDDDD",
-        10 : '#F0F0F0'
+        10 : '#F0F0F0',
+        11 : '#f5f5f5'
     }
 }
 
@@ -37,6 +38,7 @@ const theme = {
             8 : colors.dark[8],
             9 : colors.dark[9],
             10 : colors.dark[10],
+            11 : colors.dark[11],
         },
 
         gray : {

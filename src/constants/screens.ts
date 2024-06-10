@@ -10,6 +10,7 @@ import MissionPost from "../screens/missions/screens/mission post/missionPost"
 import { screenNames } from "./screennames"
 import Login from "../screens/login/login"
 import Register from "../screens/register/register"
+import Settings from "../screens/settings/settings"
 
 const sn = screenNames
 const screens = {
@@ -56,7 +57,11 @@ const screens = {
     register : {
         name : sn.register,
         component : Register
-    }
+    },
+    settings : {
+        name : sn.settings,
+        component : Settings
+    },
 }
 
 const s = screens
@@ -67,7 +72,8 @@ export const subScreens = [
     s.profile,
     s.missionPost,
     s.login,
-    s.register
+    s.register,
+    s.settings
 ]
 
 export default screens

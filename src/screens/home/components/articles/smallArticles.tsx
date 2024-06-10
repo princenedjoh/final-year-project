@@ -1,13 +1,14 @@
-import { StyleSheet, TouchableHighlight, TouchableOpacity } from "react-native"
+import { ActivityIndicator, StyleSheet, TouchableHighlight, TouchableOpacity } from "react-native"
 import theme from "../../../../styles/theme"
 import Flex from "../../../../styles/components/flex"
 import { sizes } from "../../../../utils/sizes"
 import AppTypography, { Title } from "../../../../styles/components/appTypography"
 import SmallCard from "../../../../components/article card/smallCard"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Hr from "../../../../styles/components/hr"
 import { NavigationProp } from "@react-navigation/native"
 import { screenNames } from "../../../../constants/screennames"
+import { getAllArticles } from "../../../../api/prismic"
 
 const SmallArticles = ({
     navigation
@@ -15,7 +16,17 @@ const SmallArticles = ({
     navigation : NavigationProp<any>
 }) => {
 
-    const [data, setData] = useState([1,2,3,4,5,6])
+    const [data, setData] = useState<any>([])
+    const [dataResponse, setResponse] = useState()
+    const getArticles = async () => {
+        const response = await getAllArticles()
+        setData(response.results)
+        setResponse(dataResponse)
+    }
+
+    useEffect(()=>{
+        getArticles()
+    }, [])
 
     return (
         <Flex
@@ -28,7 +39,17 @@ const SmallArticles = ({
                 Articles
             </Title>
             {
-                data.map((item, index : number) => {
+                data.length < 0 ?
+                <Flex
+                    justify="center"
+                >
+                    <ActivityIndicator
+                        color={theme.colors.main.primary} 
+                        size={'small'}
+                    />
+                </Flex>
+                :
+                data.map((item : any, index : number) => {
                     return (
                         <TouchableHighlight
                             key={index}
@@ -39,8 +60,13 @@ const SmallArticles = ({
                                 direction="column"
                                 gap={10}
                             >
-                                <SmallCard 
+                                <SmallCard
                                     navigation={navigation}
+                                    title = {item.data.title[0].text}
+                                    description={item.data.content[0].text}
+                                    date={new Date(item.data.date)}
+                                    coverImageURL={{uri : item.data.cover_image.url}}
+                                    full_name1={item.data.full_name1}
                                 />
                                 {
                                     index < data.length - 1 &&
@@ -65,13 +91,5 @@ const SmallArticles = ({
         </Flex>
     )
 }
-
-const style = StyleSheet.create({
-    profileImage : {
-        borderRadius : 100,
-        width : 20,
-        height : 20
-    }
-})
 
 export default SmallArticles

@@ -7,16 +7,24 @@ import { images } from "../../assets/assets"
 import ImageBG from "../imgbg/imgbg"
 import { NavigationProp } from "@react-navigation/native"
 import { screenNames } from "../../constants/screennames"
+import { articleTypes } from '../../utils/types';
+import getDate from "../../utils/getDate"
 
-const LargeCard = ({
-    width,
-    height,
-    navigation
-} : {
+interface largCardTyes extends articleTypes {
     width? : number,
     height? : number,
-    navigation : NavigationProp<any>
-}) => {
+}
+
+const LargeCard = ({
+    navigation,
+    title,
+    description,
+    date,
+    coverImageURL,
+    full_name1,
+    width,
+    height,
+} : largCardTyes) => {
     return (
         <TouchableOpacity
             activeOpacity={0.9}
@@ -27,7 +35,7 @@ const LargeCard = ({
                 width={width}
             >
                 <ImageBG 
-                    source={images.bg2}
+                    source={coverImageURL}
                     width={width}
                     height={height}
                 >
@@ -42,13 +50,12 @@ const LargeCard = ({
                         textColor={theme.colors.main.text.head}
                         bold={TypographyBold.md}
                     >
-                        Quake Devastates Nepal
+                        {title}
                     </AppTypography>
                     <AppTypography
                         numberOfLines={2}
                     >
-                        SCIENCE A strong earthquake rocked Nepal early Saturday, 
-                        destroying buildings, damaging historic temples...
+                        {description}
                     </AppTypography>
                     <Flex
                         width={'auto'}
@@ -58,7 +65,7 @@ const LargeCard = ({
                             size={TypographySize.xs}
                             textColor={theme.colors.main.text.light}
                         >
-                            12th March, 2024
+                            {getDate(date)}
                         </AppTypography>
                     </Flex>
                 </Flex>

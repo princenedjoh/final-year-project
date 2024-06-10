@@ -13,7 +13,7 @@ const MainStack = () => {
             return (
               <Stack.Screen 
                 name={item.name} 
-                component={item.component} 
+                component={item.component}
                 key={index}
               />
             )

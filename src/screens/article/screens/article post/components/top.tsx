@@ -8,7 +8,11 @@ import { TypographyBold, TypographySize } from "../../../../../styles/components
 import theme from "../../../../../styles/theme"
 import Bookmark from "./bookmark"
 
-const Top = () => {
+const Top = ({
+    title
+} : {
+    title : string
+}) => {
     return (
         <View
             style={{
