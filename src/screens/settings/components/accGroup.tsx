@@ -18,6 +18,19 @@ const AccGroup = () => {
                 size={12}
                 />
         },
+        {
+            title : "Saved",
+            icon : <FontAwesome
+                name="bookmark"
+                size={18}
+                color={theme.colors.dark[4]}
+            />,
+            right : <AntIcon
+                color={theme.colors.main.text.light}
+                name="right"
+                size={12}
+                />
+        },
     ]
 
     return (

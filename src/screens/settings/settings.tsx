@@ -41,7 +41,7 @@ const Settings = ({
                     paddingHorizontal={sizes.marginSM}
                 >
                     <Profile navigation={navigation}/>
-                    <NotifGroup />
+                    <NotifGroup navigation={navigation}/>
                     <AccGroup />
                     {
                         isLoggedIn &&

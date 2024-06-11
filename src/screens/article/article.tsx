@@ -9,36 +9,46 @@ import Suggestions from "./components/suggestions"
 import { NavigationProp } from "@react-navigation/native"
 import { useEffect, useState } from "react"
 import { getAllArticles } from "../../api/prismic"
+import SmallCardSkeleton from "../../components/article card/smallCardSkeleton"
+import LargeCardSkeleton from "../../components/article card/largeCardSkeleton"
 
 const Article = ({
     navigation
 } : {
     navigation : NavigationProp<any>
 }) => {
-    const [data, setData] = useState<any>([])
-    const [smallArticles, setSmallArticles] = useState<any[]>([])
-    const [largeArticles, setLargeArticles] = useState<any[]>([])
-    const [dataResponse, setResponse] = useState()
+    const [data, setData] = useState<any[]>([])
+    const [smallArticles, setSmallArticles] = useState<'loading' | any[]>([])
+    const [largeArticles, setLargeArticles] = useState<'loading' | any[]>([])
 
     const getArticles = async () => {
         const response = await getAllArticles()
         setData(response.results)
-        setResponse(dataResponse)
-        splitArticles()
     }
 
     const splitArticles = () => {
         if(data.length >= 5){
-            const smallArticles = data.splice(0,3)
-            const largeArticles = data.splice(0,3)
-            setSmallArticles([...smallArticles])
-            setLargeArticles([...largeArticles])
+            const smallArticlesCopy = data.splice(0,3)
+            const largeArticlesCopy = data.splice(3)
+            smallArticlesCopy.length === 0 
+                ? setSmallArticles([])
+                : setSmallArticles([...smallArticlesCopy])
+            largeArticlesCopy.length === 0
+            ? setLargeArticles([])
+            : setLargeArticles([...largeArticlesCopy])
         } else {
+            setLargeArticles([])
             setSmallArticles(data)
         }
     }
 
     useEffect(()=>{
+        splitArticles()
+    }, [data])
+
+    useEffect(()=>{
+        setLargeArticles('loading')
+        setSmallArticles('loading')
         getArticles()
     }, [])
 
@@ -63,24 +73,30 @@ const Article = ({
                 </Flex>
                 <Flex
                     direction="column"
-                    gap={0}
+                    gap={8}
                 >
                     <Suggestions />
                     {
-                        largeArticles.length > 0 &&
+                        largeArticles.length > 0 && largeArticles !== 'loading' ?
                         <Flex marginTop={-3}>
                             <BigArticles 
                                 navigation={navigation}
                                 articles={largeArticles}
                             />
                         </Flex>
+                        : largeArticles === 'loading' &&
+                        <LargeCardSkeleton />
                     }
                     {
-                        smallArticles.length > 0 &&
+                        smallArticles.length > 0 && smallArticles !== 'loading' ?
                         <SmallArticles 
                             navigation={navigation}
                             articles={smallArticles}
                         />
+                        : smallArticles === 'loading' &&
+                        [1,2,3,4].map((item, index) => (
+                            <SmallCardSkeleton key={index}/>
+                        ))
                     }
                 </Flex>
             </Flex>

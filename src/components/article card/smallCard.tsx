@@ -18,14 +18,13 @@ const SmallCard = ({
     coverImageURL,
     full_name1,
 } : articleTypes) => {
-    console.log('cover', coverImageURL)
     return (
         <TouchableOpacity
             activeOpacity={0.9}
             onPress={()=>navigation.navigate(screenNames.articlePost, {
                 title,
                 description,
-                date,
+                date : date.toString(),
                 coverImageURL,
                 full_name1
             })}

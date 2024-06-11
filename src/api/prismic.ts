@@ -23,6 +23,5 @@ export const getCurrentDocApi = async () => {
 export const getAllArticles = async () : Promise<any> => {
     const api = await getCurrentDocApi()
     const response = await axios.get(api)
-    console.log(response.data)
     return response.data
 }

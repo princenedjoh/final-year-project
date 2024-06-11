@@ -1,13 +1,14 @@
 import { StyleSheet } from "react-native"
 import Flex from "../../../styles/components/flex"
 import { sizes } from "../../../utils/sizes"
-import { Title } from "../../../styles/components/appTypography"
+import AppTypography, { Title } from "../../../styles/components/appTypography"
 import SmallCard from "../../../components/article card/smallCard"
 import { useEffect, useState } from "react"
 import Hr from "../../../styles/components/hr"
 import { NavigationProp, useNavigation } from "@react-navigation/native"
 import { getAllArticles } from "../../../api/prismic"
 import { articleTypes } from "../../../utils/types"
+import SmallCardSkeleton from "../../../components/article card/smallCardSkeleton"
 
 const SmallArticles = ({
     articles,
@@ -20,7 +21,7 @@ const SmallArticles = ({
         <Flex
             paddingHorizontal={sizes.marginSM}
             direction="column"
-            gap={10}
+            gap={4}
         >
             <Title>
                 Latest

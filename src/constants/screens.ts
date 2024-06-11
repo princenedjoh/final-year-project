@@ -11,6 +11,8 @@ import { screenNames } from "./screennames"
 import Login from "../screens/login/login"
 import Register from "../screens/register/register"
 import Settings from "../screens/settings/settings"
+import AlertSettings from "../screens/settings/screens/alert settings/alertsSettings"
+import NotificationSettings from "../screens/settings/screens/notifications settings/notificationsSettings"
 
 const sn = screenNames
 const screens = {
@@ -62,6 +64,14 @@ const screens = {
         name : sn.settings,
         component : Settings
     },
+    alertSettings : {
+        name : sn.alertSettings,
+        component : AlertSettings
+    },
+    notificationSettings : {
+        name : sn.notificationSettings,
+        component : NotificationSettings
+    }
 }
 
 const s = screens
@@ -73,7 +83,9 @@ export const subScreens = [
     s.missionPost,
     s.login,
     s.register,
-    s.settings
+    s.settings,
+    s.alertSettings,
+    s.notificationSettings
 ]
 
 export default screens

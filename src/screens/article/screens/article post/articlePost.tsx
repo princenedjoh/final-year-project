@@ -39,7 +39,7 @@ const ArticlePost = ({route} : any) => {
                 >
                     <ArticleProfileInfo 
                         name={full_name1}
-                        date={date}
+                        date={new Date(date)}
                     />
                     <AppTypography
                         size={TypographySize.sm2}

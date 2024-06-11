@@ -10,5 +10,7 @@ export enum screenNames {
     missionPost = 'Mission Post',
     login = 'Login',
     register = 'Register',
-    settings = 'Settings'
+    settings = 'Settings',
+    alertSettings = 'Alert Settings',
+    notificationSettings = 'Notification settings'
 }

@@ -9,6 +9,7 @@ import { NavigationProp } from "@react-navigation/native"
 import { screenNames } from "../../constants/screennames"
 import { articleTypes } from '../../utils/types';
 import getDate from "../../utils/getDate"
+import Profilename from "../profilename/profilename"
 
 interface largCardTyes extends articleTypes {
     width? : number,
@@ -28,12 +29,22 @@ const LargeCard = ({
     return (
         <TouchableOpacity
             activeOpacity={0.9}
-            onPress={()=>navigation.navigate(screenNames.articlePost)}
+            onPress={()=>navigation.navigate(screenNames.articlePost, {
+                title,
+                description,
+                date : date.toString(),
+                coverImageURL,
+                full_name1
+            })}
         >
             <Flex
                 direction="column"
                 width={width}
             >
+                <Profilename
+                    name={full_name1}
+                    image={images.profile1}
+                />
                 <ImageBG 
                     source={coverImageURL}
                     width={width}

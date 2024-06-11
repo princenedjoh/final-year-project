@@ -12,6 +12,7 @@ import SmallArticles from "./components/articles/smallArticles"
 import Safescroll from "../../components/safescroll"
 import { NavigationProp, useNavigation } from "@react-navigation/native"
 import axios from "axios"
+import BigArticles from "../article/components/bigArticles"
 
 const Home = ({
     navigation
@@ -40,17 +41,9 @@ const Home = ({
             <Flex
                 direction="column"
             >
-                <Satellites 
-                    navigation={navigation}
-                />
+                <Satellites navigation={navigation}/>
+                <ArticleFeature navigation={navigation}/>
                 <AlertSection navigation={navigation}/>
-                {/* <ArticleFeature />
-                <Flex
-                    paddingHorizontal={sizes.marginSM}
-                >
-                    <Hr />
-                </Flex> */}
-                <SmallArticles navigation={navigation}/>
             </Flex>
         </Safescroll>
     )

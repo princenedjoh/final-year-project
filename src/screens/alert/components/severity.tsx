@@ -3,16 +3,18 @@ import { severityTypes } from "../../../utils/types"
 import { getSeverityColor } from "../../../utils/getSeverityColor"
 
 const Severity = ({
-    severity
+    severity,
+    size
 } : {
-    severity? : severityTypes
+    severity? : severityTypes,
+    size? : number
 }) => {
 
     return (
         <View
             style={{
-                width : 7,
-                height : 7,
+                width : size ?? 7,
+                height : size ?? 7,
                 borderRadius : 100,
                 backgroundColor : getSeverityColor(severity)
             }}

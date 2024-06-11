@@ -48,7 +48,7 @@ const Group = ({
                     ...{
                         width : '100%',
                         borderRadius : 10,
-                        backgroundColor : theme.colors.dark[10],
+                        backgroundColor : theme.colors.dark[11],
                     }
                 }}
             >

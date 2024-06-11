@@ -57,8 +57,7 @@ const Satellites = ({
             <Flex 
                 gap={17}
                 marginHorizontal={sizes.marginSM}
-                marginVertical={10}
-                marginBottom={15}
+                marginTop={10}
             >
                 {
                     satelliteslist.map((item, index : number) => {

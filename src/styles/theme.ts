@@ -12,7 +12,7 @@ const colors = {
         8 : '#C2C2C2',
         9 : "#DDDDDD",
         10 : '#F0F0F0',
-        11 : '#f5f5f5'
+        11 : '#f2f2f2'
     }
 }
 

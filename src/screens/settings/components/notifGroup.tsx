@@ -2,8 +2,14 @@ import Group from "../../../components/settings/group"
 import theme from "../../../styles/theme"
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AntIcon from 'react-native-vector-icons/AntDesign';
+import { NavigationProp } from "@react-navigation/native";
+import { screenNames } from "../../../constants/screennames";
 
-const NotifGroup = () => {
+const NotifGroup = ({
+    navigation
+} : {
+    navigation : NavigationProp<any>
+}) => {
     const options = [
         {
             title : "Alerts",
@@ -16,7 +22,8 @@ const NotifGroup = () => {
                 color={theme.colors.main.text.light}
                 name="right"
                 size={12}
-                />
+                />,
+            onPress : ()=>navigation.navigate(screenNames.alertSettings)
         },
         {
             title : "Notification",
@@ -29,7 +36,8 @@ const NotifGroup = () => {
                 color={theme.colors.main.text.light}
                 name="right"
                 size={12}
-                />
+                />,
+            onPress : ()=>navigation.navigate(screenNames.notificationSettings)
         },
     ]
 

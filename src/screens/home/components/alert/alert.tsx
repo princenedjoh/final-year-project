@@ -7,6 +7,8 @@ import { useState } from "react";
 import { NavigationProp } from "@react-navigation/native";
 import AlertContainer from "./alertContainer";
 import { screenNames } from "../../../../constants/screennames";
+import AlertCard from "../../../alert/components/alertCard";
+import Hr from "../../../../styles/components/hr";
 
 const AlertSection = ({
     navigation
@@ -14,7 +16,7 @@ const AlertSection = ({
     navigation : NavigationProp<any>
 }) => {
 
-    const [data, setData] = useState([1,2,3,4,5])
+    const [data, setData] = useState([1,2,3])
 
     return (
         <Flex
@@ -25,30 +27,38 @@ const AlertSection = ({
                 paddingHorizontal={sizes.marginSM}
                 align="center"
             >
-            <Title>
-                Alerts
-            </Title>
+                <Title>
+                    Alerts
+                </Title>
             </Flex>
-            <ScrollView
-                showsHorizontalScrollIndicator={false}
-                horizontal
+            <Flex
+                direction="column"
+                paddingHorizontal={sizes.marginSM}
+                gap={8}
             >
-                <Flex
-                    marginHorizontal={sizes.marginSM}
-                    gap={8}
-                >
-                    {
-                        data.map((item, index : number) => {
-                            return (
-                                <AlertContainer 
-                                    navigation={navigation}
-                                    key={index}
+                {
+                data.map((items, index : number) => {
+                    return (
+                        <Flex 
+                            key={index}
+                            direction="column"
+                            gap={10}
+                        >
+                            <AlertCard 
+                                key={index}
+                                navigation={navigation}
+                            />
+                            {
+                                index < data.length - 1 &&
+                                <Hr
+                                    marginLeft={85}
                                 />
-                            )
-                        })
-                    }
-                </Flex>
-            </ScrollView>
+                            }
+                        </Flex>
+                    )
+                })
+            }
+            </Flex>
             <Flex
                 paddingHorizontal={sizes.marginSM}
             >

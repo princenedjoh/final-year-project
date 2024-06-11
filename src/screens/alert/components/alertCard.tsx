@@ -8,7 +8,7 @@ import theme from "../../../styles/theme"
 import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import Severity from "./severity"
 import { getSeverityColor } from "../../../utils/getSeverityColor"
-import { TouchableHighlight } from "react-native"
+import { TouchableHighlight, TouchableOpacity } from "react-native"
 import { NavigationProp } from "@react-navigation/native"
 import { screenNames } from "../../../constants/screennames"
 
@@ -18,9 +18,8 @@ const AlertCard = ({
     navigation : NavigationProp<any>
 }) => {
     return (
-        <TouchableHighlight
+        <TouchableOpacity
             onPress={()=>navigation.navigate(screenNames.alertDetails)}
-            underlayColor={'none'}
         >
             <Flex
                 align="center"
@@ -68,7 +67,7 @@ const AlertCard = ({
                         numberOfLines={2}
                     >
                         SCIENCE A strong earthquake rocked Nepal early Saturday, 
-                        destroying buildings, damaging historic temples...
+                        destroying buildings, damaging historic temples
                     </AppTypography>
                     <Flex
                         width={'auto'}
@@ -83,7 +82,7 @@ const AlertCard = ({
                     </Flex>
                 </Flex>
             </Flex>
-        </TouchableHighlight>
+        </TouchableOpacity>
     )
 }
 
