@@ -32,7 +32,7 @@ const Register = ({
 
     const toast = useToast()
 
-    const handleLogin = async () => {
+    const handleregister = async () => {
         try {
             setLoading(true)
             const result = await publicAPI.post('users/add/', {
@@ -46,6 +46,7 @@ const Register = ({
                 type : 'success',
                 placement : 'top'
             })
+            navigation.navigate(screenNames.login)
             setLoading(false)
             console.log(result.data)
         } catch (error : any) {
@@ -84,7 +85,7 @@ const Register = ({
                             Hey there 👋, Welcome!
                         </AppTypography>
                         <AppTypography>
-                            Login to continue
+                            Register to continue
                         </AppTypography>
                     </Flex>
                     <Flex
@@ -207,7 +208,7 @@ const Register = ({
                                 height : 50
                             }}
                             rounded={7}
-                            onPress={handleLogin}
+                            onPress={handleregister}
                             loading={loading}
                         >
                             Register

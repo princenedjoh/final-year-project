@@ -1,4 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { retrieveIsUserLoggedin, retrieveRefreshToken, retrieveToken } from "./asyncStorage";
+import logout from "../utils/logout";
 
 interface AuthContextType {
     isLoggedIn: boolean;
@@ -25,31 +27,45 @@ export const AuthContext = createContext<AuthContextType>({
   
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-    const [token, setToken] = useState<string>()
-    const [refreshToken, setRefreshToken] = useState<string>()
+  const setUserInfo = async () => {
+    const isUserLoggedin = await retrieveIsUserLoggedin()
+    const token = await retrieveToken()
+    const refreshToken = await retrieveRefreshToken()
+    setIsLoggedIn(Boolean(isUserLoggedin))
+    setToken(token)
+    setRefreshToken(refreshToken)
+  }
 
-    const handleLogin = () => {
-      setIsLoggedIn(true);
-    };
-  
-    const handleLogout = () => {
-      setIsLoggedIn(false);
-    };
-  
-    return (
-      <AuthContext.Provider value={{ 
-        isLoggedIn, 
-        handleLogin, 
-        setIsLoggedIn, 
-        handleLogout,
-        token,
-        setToken,
-        refreshToken,
-        setRefreshToken
-       }}>
-        {children}
-      </AuthContext.Provider>
-    );
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [token, setToken] = useState<string>()
+  const [refreshToken, setRefreshToken] = useState<string>()
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
   };
+
+  const handleLogout = async () => {
+    await logout()
+    setUserInfo()
+  };
+
+  useEffect(()=>{
+    setUserInfo()
+  },[])
+
+  return (
+    <AuthContext.Provider value={{ 
+      isLoggedIn, 
+      handleLogin, 
+      setIsLoggedIn, 
+      handleLogout,
+      token,
+      setToken,
+      refreshToken,
+      setRefreshToken
+      }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
   

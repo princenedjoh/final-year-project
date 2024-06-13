@@ -1,5 +1,5 @@
 import { NavigationProp } from "@react-navigation/native"
-import { Image, TouchableOpacity, View } from "react-native"
+import { ActivityIndicator, Image, TouchableOpacity, View } from "react-native"
 import theme from "../../../styles/theme"
 import Flex from "../../../styles/components/flex"
 import AppTypography from "../../../styles/components/appTypography"
@@ -9,15 +9,47 @@ import { sizes } from "../../../utils/sizes"
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import { screenNames } from "../../../constants/screennames"
 import Button from "../../../components/button/button"
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { AuthContext } from "../../../context/authcontext"
+import { protectedAPI } from "../../../api/api"
+import { retrieveIsUserLoggedin } from "../../../context/asyncStorage"
 
 const Profile = ({
     navigation
 } : {
     navigation : NavigationProp<any>
 }) => {
-    const { isLoggedIn } = useContext(AuthContext)
+    const {isLoggedIn, handleLogout} = useContext(AuthContext)
+    const [userData, setUserData] = useState<{title : string, content : string}[]>([])
+    const [userInfo, setUserInfo] = useState()
+
+    const getUserInfo = async () => {
+        try {
+            const response = await protectedAPI.get('users/get/')
+            setUserInfo(response)
+        } catch (error : any) {
+            console.log(error)
+            if (error.message == 'Request failed with status code 401')
+                handleLogout()
+        }
+    }
+
+    useEffect(()=>{
+        if(isLoggedIn)
+            getUserInfo()
+    }, [isLoggedIn])
+
+    useEffect(()=>{
+        if(userInfo){
+            const userDataCopy = []
+            userDataCopy.push({title : 'username', content : userInfo['username']})
+            userDataCopy.push({title : 'First Name', content : userInfo['first_name']})
+            userDataCopy.push({title : 'Last Name', content : userInfo['last_name']})
+            userDataCopy.push({title : 'Email', content : userInfo['email']})
+            userDataCopy.push({title : 'Gender', content : userInfo['gender']})
+            setUserData([...userDataCopy])
+        }
+    }, [userInfo])
 
     return (
         !isLoggedIn ?
@@ -46,49 +78,69 @@ const Profile = ({
                 backgroundColor : theme.colors.dark[10]
             }}
         >
-            <Flex
-                justify="space-between"
-                paddingHorizontal={sizes.marginSM}
-                align="center"
-            >
+            {
+                userInfo ?
                 <Flex
-                    width={'auto'}
+                    justify="space-between"
+                    paddingHorizontal={sizes.marginSM}
                     align="center"
-                    gap={0}
                 >
-                    <Image
-                        style={{
-                            borderRadius : 100,
-                            width : 50,
-                            height : 50,
-                            marginRight : 10
-                        }}
-                        source={images.profile1}
-                    ></Image>
                     <Flex
-                        direction="column"
                         width={'auto'}
+                        align="center"
                         gap={0}
                     >
-                        <AppTypography
-                            bold={TypographyBold.md2}
-                            size={TypographySize.md}
+                        <Image
+                            style={{
+                                borderRadius : 100,
+                                width : 50,
+                                height : 50,
+                                marginRight : 10
+                            }}
+                            source={images.profile1}
+                        ></Image>
+                        <Flex
+                            direction="column"
+                            width={'auto'}
+                            gap={0}
                         >
-                            Prince Nedjoh
-                        </AppTypography>
-                        <AppTypography
-                            size={TypographySize.xs}
-                        >
-                            princenedjoh5@gmail.com
-                        </AppTypography>
+                            <Flex>
+                                <AppTypography
+                                    bold={TypographyBold.md2}
+                                    size={TypographySize.md}
+                                >
+                                    {userInfo && userInfo['first_name']}
+                                </AppTypography>
+                                <AppTypography
+                                    bold={TypographyBold.md2}
+                                    size={TypographySize.md}
+                                >
+                                    {userInfo && userInfo['last_name']}
+                                </AppTypography>
+                            </Flex>
+                            <AppTypography
+                                size={TypographySize.xs}
+                            >
+                                {userInfo && userInfo['email']}
+                            </AppTypography>
+                        </Flex>
                     </Flex>
+                    <AntIcon 
+                        color={theme.colors.main.text.light}
+                        name="right"
+                        size={15}
+                    />
                 </Flex>
-                <AntIcon 
-                    color={theme.colors.main.text.light}
-                    name="right"
-                    size={15}
-                />
-            </Flex>
+                :
+                <Flex
+                    justify="center"
+                >
+                    <ActivityIndicator
+                        color={theme.colors.main.primary} 
+                        size={'small'}
+                    />
+                </Flex>
+            }
         </TouchableOpacity>
     )
 }

@@ -12,31 +12,30 @@ import { TypographyBold } from "../../styles/components/types";
 
 const Confirmation = ({
     isVisible,
-    setIsVisible
+    setIsVisible,
+    onConfirm,
+    onCancel,
+    title,
+    description
 } : {
     isVisible : boolean,
-    setIsVisible : React.Dispatch<React.SetStateAction<boolean>>
+    setIsVisible : React.Dispatch<React.SetStateAction<boolean>>,
+    onConfirm? : ()=>void,
+    onCancel? : ()=>void
+    title? : string
+    description? : string
 }) => {
     const navigation = useNavigation();
     const toast = useToast()
-
     const { setToken, setRefreshToken, setIsLoggedIn } = useContext(AuthContext)
-    const [logoutLoading, setLogoutLoading] = useState(false)
-    const logout = () => {
-        try {
-            setLogoutLoading(true)
-            setToken(undefined)
-            setRefreshToken(undefined)
-            setIsLoggedIn(false)
-            toast.show('Logged out successful',{
-                placement : 'top'
-            })
-            setLogoutLoading(false)
-            navigation.goBack()
-        } catch (error) {
-            console.log(error)
-            setLogoutLoading(false)
-        }
+
+    const handleCancel = () => {
+        setIsVisible(false)
+        onCancel && onCancel()
+    }
+    const handelConfirm = () => {
+        setIsVisible(false)
+        onConfirm && onConfirm()
     }
 
     return (
@@ -79,11 +78,11 @@ const Confirmation = ({
                             <AppTypography
                                 bold={TypographyBold.md}
                             >
-                                Confirmation!
+                                {title ?? 'Confirmation!'}
                             </AppTypography>
                         </Flex>
                         <AppTypography>
-                            Are you sure you want to Logout?
+                            {description ?? 'Are you sure you want to Logout?'}
                         </AppTypography>
                     </Flex>
                     <Divider
@@ -93,15 +92,20 @@ const Confirmation = ({
                         }}
                     />
                     <Flex>
-                        <Flex
-                            justify="center"
-                            flex={1}
+                        <TouchableOpacity
+                            style={{
+                                height : 45,
+                                width : '100%',
+                                display : 'flex',
+                                flex :  1,
+                            }}
+                            onPress={handleCancel}
                         >
-                            <TouchableOpacity
-                                style={{
-                                    paddingVertical : 10
-                                }}
-                                onPress={()=>setIsVisible(false)}
+                            <Flex
+                                justify="center"
+                                flex={1}
+                                height={'100%'}
+                                align="center"
                             >
                                 <AppTypography
                                     bold={TypographyBold.md}
@@ -109,8 +113,8 @@ const Confirmation = ({
                                 >
                                     Cancel
                                 </AppTypography>
-                            </TouchableOpacity>
-                        </Flex>
+                            </Flex>
+                        </TouchableOpacity>
                         <View
                             style={{
                                 width : 1,
@@ -120,15 +124,20 @@ const Confirmation = ({
                         >
 
                         </View>
-                        <Flex
-                            justify="center"
-                            flex={1}
+                        <TouchableOpacity
+                            style={{
+                                height : 40,
+                                width : '100%',
+                                display : 'flex',
+                                flex :  1,
+                            }}
+                            onPress={handelConfirm}
                         >
-                            <TouchableOpacity
-                                style={{
-                                    paddingVertical : 10
-                                }}
-                                onPress={logout}
+                            <Flex
+                                justify="center"
+                                flex={1}
+                                height={'100%'}
+                                align="center"
                             >
                                 <AppTypography
                                     bold={TypographyBold.md}
@@ -136,8 +145,8 @@ const Confirmation = ({
                                 >
                                     Yes
                                 </AppTypography>
-                            </TouchableOpacity>
-                        </Flex>
+                            </Flex>
+                        </TouchableOpacity>
                     </Flex>
                 </View>
             </View>

@@ -1,4 +1,4 @@
-import { DimensionValue, ImageResizeMode, ImageSourcePropType } from "react-native"
+import { DimensionValue, ImageResizeMode, ImageSourcePropType, StyleProp, ViewStyle } from "react-native"
 import { ReactNode } from 'react';
 import { NavigationProp } from "@react-navigation/native";
 
@@ -7,6 +7,7 @@ export type headerType = {
     message? : string,
     displayProfile? : boolean
     navigation : NavigationProp<any>
+    right? : ReactNode
 }
 
 export type searchbarprops = {
@@ -22,6 +23,7 @@ export type imageBgsProps = {
     resizeMode? : ImageResizeMode,
     bgcolor? : string,
     flex? : number
+    style? : StyleProp<ViewStyle>
 }
 
 export type paddingMarginTypes = {

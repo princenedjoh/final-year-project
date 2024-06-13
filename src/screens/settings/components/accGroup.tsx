@@ -1,9 +1,15 @@
+import { NavigationProp } from "@react-navigation/native";
 import Group from "../../../components/settings/group"
+import { screenNames } from "../../../constants/screennames";
 import theme from "../../../styles/theme"
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-const AccGroup = () => {
+const AccGroup = ({
+    navigation
+} : {
+    navigation : NavigationProp<any>
+}) => {
     const options = [
         {
             title : "Account",
@@ -16,7 +22,8 @@ const AccGroup = () => {
                 color={theme.colors.main.text.light}
                 name="right"
                 size={12}
-                />
+                />,
+            onPress : ()=>navigation.navigate(screenNames.accountSettings)
         },
         {
             title : "Saved",
@@ -29,7 +36,8 @@ const AccGroup = () => {
                 color={theme.colors.main.text.light}
                 name="right"
                 size={12}
-                />
+                />,
+            onPress : ()=>navigation.navigate(screenNames.savedSettings)
         },
     ]
 

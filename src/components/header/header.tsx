@@ -14,7 +14,8 @@ const Header = ({
     title,
     message,
     displayProfile,
-    navigation
+    navigation,
+    right
 } : headerType) => {
     const { token, refreshToken, isLoggedIn } = useContext(AuthContext)
 
@@ -46,17 +47,26 @@ const Header = ({
                         {title}
                     </AppTypography>
                 </Flex>
-                {
-                    displayProfile &&
-                    <TouchableOpacity
-                        onPress={()=>navigation.navigate(screenNames.settings)}
-                    >
-                        <Image
-                            style={style.profileImage}
-                            source={images.profile1}
-                        ></Image>
-                    </TouchableOpacity>
-                }
+                <Flex
+                    width={'auto'}
+                >
+                    {right}
+                    {
+                        displayProfile &&
+                        <TouchableOpacity
+                            onPress={()=>navigation.navigate(screenNames.settings)}
+                            style={{
+                                backgroundColor : theme.colors.dark[9],
+                                borderRadius : 100
+                            }}
+                        >
+                            <Image
+                                style={style.profileImage}
+                                source={images.profile1}
+                            ></Image>
+                        </TouchableOpacity>
+                    }
+                </Flex>
             </Flex>
         </Flex>
     )

@@ -15,3 +15,9 @@ export const satellites = {
     noaa : require('./satellites/noaa.png'),
     sentinel : require('./satellites/sentinel.png')
 }
+
+export const onboarding = {
+    image1 : require('./onboarding/image1.png'),
+    image2 : require('./onboarding/image2.png'),
+    image3 : require('./onboarding/image3.png'),
+}

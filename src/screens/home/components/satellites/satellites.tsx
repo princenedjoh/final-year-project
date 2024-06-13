@@ -9,6 +9,7 @@ import { TypographyBold } from "../../../../styles/components/types"
 import { NavigationProp } from "@react-navigation/native"
 import { screenNames } from "../../../../constants/screennames"
 import axios from "axios"
+import theme from "../../../../styles/theme"
 
 const Satellites = ({
     navigation
@@ -82,6 +83,9 @@ const Satellites = ({
                                         rounded={100}
                                         resizeMode="contain"
                                         bgcolor="white"
+                                        style={{
+                                            backgroundColor : theme.colors.dark[10]
+                                        }}
                                     >
 
                                     </ImageBG>

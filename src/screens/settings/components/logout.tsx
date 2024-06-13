@@ -14,8 +14,12 @@ import Flex from "../../../styles/components/flex";
 import Divider from "../../../components/divider/divider";
 import { TypographyBold } from "../../../styles/components/types";
 import Confirmation from "../../../components/modal/confirmation";
+import logout from "../../../utils/logout";
 
 const Logout = () => {
+    const toast = useToast()
+    const navigation = useNavigation()
+    const {handleLogout} = useContext(AuthContext)
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [logoutLoading, setLogoutLoading] = useState(false)
     const options = [
@@ -42,6 +46,14 @@ const Logout = () => {
         },
     ]
 
+    const handleUserLogout = async () => {
+        await handleLogout()
+        toast.show('Logged out successful',{
+            placement : 'top'
+        })
+        navigation.goBack()
+    }
+
     return (
         <>
             <Group 
@@ -50,6 +62,7 @@ const Logout = () => {
             <Confirmation 
                 isVisible={isModalVisible}
                 setIsVisible={setIsModalVisible}
+                onConfirm={handleUserLogout}
             />
         </>
     )

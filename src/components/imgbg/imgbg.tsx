@@ -10,10 +10,11 @@ const ImageBG = ({
     children,
     resizeMode,
     bgcolor,
-    flex
+    flex,
+    style
 } : imageBgsProps) => {
 
-    const style = StyleSheet.create({
+    const mainstyle = StyleSheet.create({
         imagebackground : {
             width : '100%',
             height : '100%',
@@ -39,7 +40,7 @@ const ImageBG = ({
                 >
                 <ImageBackground
                     source={source}
-                    style={style.imagebackground}
+                    style={[style, mainstyle.imagebackground]}
                     resizeMode={resizeMode}
                 >
                     {children}

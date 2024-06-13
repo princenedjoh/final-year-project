@@ -7,7 +7,7 @@ import ReceiveGroup from "./components/receiveGroup"
 import Header from "../../../../components/header/header"
 import NaturalDisasterGroup from "./components/naturalGroup"
 import EnvironmentalGroup from "./components/environmentaGroup"
-import ResetGroup from "./components/resetGroup"
+import ResetGroup from "../../components/resetGroup"
 
 const AlertSettings = ({
     navigation
@@ -31,8 +31,8 @@ const AlertSettings = ({
                         title="Alerts"
                     />
                     <ReceiveGroup />
-                    <NaturalDisasterGroup />
-                    <EnvironmentalGroup />
+                    <NaturalDisasterGroup navigation={navigation}/>
+                    <EnvironmentalGroup navigation={navigation}/>
                     <ResetGroup />
                 </Flex>
             </Flex>

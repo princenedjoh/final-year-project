@@ -14,6 +14,9 @@ const ProfileInfoTop = ({
     displayProfile? : boolean,
     color? : string,
     dateColor? : string
+    firstname : string,
+    lastname : string
+    email : string
 }) => {
     return (
         <Flex

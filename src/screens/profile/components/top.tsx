@@ -9,7 +9,15 @@ import theme from "../../../styles/theme"
 import Edit from "./edit"
 import ProfileInfoTop from "./profileInfoTop"
 
-const Top = () => {
+const Top = ({
+    firstname,
+    lastname,
+    email
+} : {
+    firstname : string,
+    lastname : string
+    email : string
+}) => {
     return (
         <View
             style={{
@@ -38,7 +46,11 @@ const Top = () => {
                         marginHorizontal : sizes.marginSM
                     }}
                 >
-                    <ProfileInfoTop />
+                    <ProfileInfoTop 
+                        firstname={firstname}
+                        lastname={lastname}
+                        email={email}
+                    />
                 </View>
             </LinearGradient>
         </View>

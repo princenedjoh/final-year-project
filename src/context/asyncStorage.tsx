@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const storeToken = async (token : string) => {
   try {
     await AsyncStorage.setItem('token', token);
+    setIsUserLoggedin()
   } catch (error) {
     console.error('Error storing token:', error);
   }
@@ -19,26 +20,25 @@ export const storeRefreshToken = async (refreshToken : string) => {
 export const retrieveToken = async () => {
   try {
     const token = await AsyncStorage.getItem('token');
-    return token;
+    return token ?? undefined;
   } catch (error) {
     console.error('Error retrieving token:', error);
-    return null;
   }
 };
 
 export const retrieveRefreshToken = async () => {
     try {
       const token = await AsyncStorage.getItem('refreshToken');
-      return token;
+      return token ?? undefined;
     } catch (error) {
       console.error('Error retrieving refresh token:', error);
-      return null;
     }
 };
 
 export const removeToken = async () => {
   try {
     await AsyncStorage.removeItem('token');
+    unsetIsUserLoggedin()
   } catch (error) {
     console.error('Error removing token:', error);
   }
@@ -49,5 +49,31 @@ export const removeRefreshToken = async () => {
       await AsyncStorage.removeItem('refreshToken');
     } catch (error) {
       console.error('Error removing refresh token:', error);
+    }
+  };
+
+export const setIsUserLoggedin = async () => {
+  try {
+    await AsyncStorage.setItem('isUserLoggedin', 'true');
+    console.log(await AsyncStorage.getItem('isUserLoggedin'))
+  } catch (error) {
+    console.error('Error setting user loggdin:', error);
+  }
+};
+
+export const retrieveIsUserLoggedin = async () => {
+  try {
+    const response = await AsyncStorage.getItem('isUserLoggedin');
+    return response;
+  } catch (error) {
+    console.error('Error retrieving isUserLoggedin:', error);
+  }
+};
+
+  export const unsetIsUserLoggedin = async () => {
+    try {
+      await AsyncStorage.removeItem('isUserLoggedin');
+    } catch (error) {
+      console.error('Error unsetting user loggdin:', error);
     }
   };

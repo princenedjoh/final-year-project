@@ -47,7 +47,11 @@ const Profile = ({
             direction="column"
             gap={12}
         >
-            <Top />
+            <Top 
+                firstname={userInfo ? userInfo['first_name'] : ''}
+                lastname={userInfo ? userInfo['last_name'] : ''}
+                email={userInfo ? userInfo['email'] : ''}
+            />
             <Drawer 
                 userInfo={userData}
             />

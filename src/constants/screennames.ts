@@ -12,5 +12,21 @@ export enum screenNames {
     register = 'Register',
     settings = 'Settings',
     alertSettings = 'Alert Settings',
-    notificationSettings = 'Notification settings'
+    notificationSettings = 'Notification settings',
+    earhQuakeSettings = 'Earth Quake Settings',
+    locationSettings = 'Location Settings',
+    magnitudeSettings = 'Magnitude Settings',
+    depthSettings = 'Depth Settings',
+    floodSettings = 'Flood Settings',
+    wildfireSettings = 'Wildfire Settings',
+    HurricaneSettings = 'Hurricane Settings',
+    airQualitySettings = 'Air Quality Settings',
+    waterQualitySettings = 'Water Quality Settings',
+    landslidesSettings = 'Landslide Settings',
+    droughtSettings = 'Drought Settings',
+    accountSettings = 'Account Settings',
+    savedSettings = 'Saved Settings',
+    savedArticlesSettings = 'Saved Articles Settings',
+    savedAlertSettings = 'Saved Alerts Settings',
+    onBoarding = 'onBoarding'
 }

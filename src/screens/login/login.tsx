@@ -161,7 +161,7 @@ const Login = ({
                                 Dont't have an account?
                             </AppTypography>
                             <TouchableOpacity
-                                onPress={()=>navigation.navigate(screenNames.register)}
+                                onPress={()=>navigation.navigate(screenNames.onBoarding)}
                             >
                                 <AppTypography
                                     bold={TypographyBold.md}

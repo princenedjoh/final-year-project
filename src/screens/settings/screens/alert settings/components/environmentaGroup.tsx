@@ -1,8 +1,14 @@
+import { NavigationProp } from "@react-navigation/native";
 import Group from "../../../../../components/settings/group";
+import { screenNames } from "../../../../../constants/screennames";
 import theme from "../../../../../styles/theme";
 import AntIcon from 'react-native-vector-icons/AntDesign';
 
-const EnvironmentalGroup = () => {
+const EnvironmentalGroup = ({
+    navigation
+} : {
+    navigation : NavigationProp<any>
+}) => {
     const options = [
         {
             title : "Air quality",
@@ -10,7 +16,8 @@ const EnvironmentalGroup = () => {
                 color={theme.colors.main.text.light}
                 name="right"
                 size={12}
-                />
+                />,
+            onPress : ()=>navigation.navigate(screenNames.airQualitySettings)
         },
         {
             title : "Water quality",
@@ -18,7 +25,8 @@ const EnvironmentalGroup = () => {
                 color={theme.colors.main.text.light}
                 name="right"
                 size={12}
-                />
+                />,
+            onPress : ()=>navigation.navigate(screenNames.waterQualitySettings)
         },
         {
             title : "Landslides",
@@ -26,7 +34,8 @@ const EnvironmentalGroup = () => {
                 color={theme.colors.main.text.light}
                 name="right"
                 size={12}
-                />
+                />,
+            onPress : ()=>navigation.navigate(screenNames.landslidesSettings)
         },
         {
             title : "Drought",
@@ -34,7 +43,8 @@ const EnvironmentalGroup = () => {
                 color={theme.colors.main.text.light}
                 name="right"
                 size={12}
-                />
+                />,
+            onPress : ()=>navigation.navigate(screenNames.droughtSettings)
         },
     ]
 

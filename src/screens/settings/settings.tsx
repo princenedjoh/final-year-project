@@ -42,7 +42,7 @@ const Settings = ({
                 >
                     <Profile navigation={navigation}/>
                     <NotifGroup navigation={navigation}/>
-                    <AccGroup />
+                    <AccGroup navigation={navigation}/>
                     {
                         isLoggedIn &&
                         <Logout />

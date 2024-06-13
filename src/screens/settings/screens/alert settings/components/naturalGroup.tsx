@@ -1,8 +1,14 @@
+import { NavigationProp } from "@react-navigation/native";
 import Group from "../../../../../components/settings/group";
 import theme from "../../../../../styles/theme";
 import AntIcon from 'react-native-vector-icons/AntDesign';
+import { screenNames } from "../../../../../constants/screennames";
 
-const NaturalDisasterGroup = () => {
+const NaturalDisasterGroup = ({
+    navigation
+} : {
+    navigation : NavigationProp<any>
+}) => {
     const options = [
         {
             title : "Earth quakes",
@@ -10,7 +16,8 @@ const NaturalDisasterGroup = () => {
                 color={theme.colors.main.text.light}
                 name="right"
                 size={12}
-                />
+                />,
+            onPress : ()=>navigation.navigate(screenNames.earhQuakeSettings)
         },
         {
             title : "Floods",
@@ -18,7 +25,8 @@ const NaturalDisasterGroup = () => {
                 color={theme.colors.main.text.light}
                 name="right"
                 size={12}
-                />
+                />,
+            onPress : ()=>navigation.navigate(screenNames.floodSettings)
         },
         {
             title : "Wild fires",
@@ -26,7 +34,8 @@ const NaturalDisasterGroup = () => {
                 color={theme.colors.main.text.light}
                 name="right"
                 size={12}
-                />
+                />,
+            onPress : ()=>navigation.navigate(screenNames.wildfireSettings)
         },
         {
             title : "Hurricanes",
@@ -34,7 +43,8 @@ const NaturalDisasterGroup = () => {
                 color={theme.colors.main.text.light}
                 name="right"
                 size={12}
-                />
+                />,
+            onPress : ()=>navigation.navigate(screenNames.HurricaneSettings)
         },
     ]
 

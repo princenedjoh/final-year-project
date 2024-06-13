@@ -7,6 +7,10 @@ const Bookmark = () => {
 
     const [bookmarked, setBookmarked] = useState<Boolean>(false)
 
+    const handleBookmark = () => {
+        setBookmarked(!bookmarked)
+    }
+
     return (
         <View
                 style={{
@@ -21,7 +25,7 @@ const Bookmark = () => {
             >
                 <TouchableOpacity
                     activeOpacity={0.5}
-                    onPress={() => setBookmarked(!bookmarked)}
+                    onPress={handleBookmark}
                 >
                     <View
                         style={{
