@@ -34,7 +34,10 @@
     "react-native-skeleton-content-nonexpo": "^1.0.13",
     "react-native-toast-notifications": "^3.4.0",
     "react-native-vector-icons": "^10.1.0",
-    "rn-bottom-drawer": "^1.4.3"
+    "rn-bottom-drawer": "^1.4.3",
+    "expo-notifications": "~0.28.9",
+    "expo-device": "~6.0.2",
+    "expo-constants": "~16.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
