@@ -9,6 +9,7 @@ import RelatedAlerts from "./components/relatedAlerts"
 import AlertsSection from "../components/alertsSection"
 import AlertCard from "../components/alertCard"
 import { View } from "react-native"
+import Drawer from "../../../components/drawer/drawer"
 
 const AlertDetails = ({
     navigation
@@ -16,36 +17,39 @@ const AlertDetails = ({
     navigation : NavigationProp<any>
 }) => {
     return (
-        <Safescroll>
-            <Flex
-                direction="column"
-                gap={12}
-            >
+        <>
+            <Safescroll>
                 <Flex
                     direction="column"
-                    paddingHorizontal={sizes.marginSM}
-                    marginTop={10}
-                    gap={4}
+                    gap={12}
                 >
-                    <Header
-                        navigation={navigation}
-                        title="Alert Detail"
-                    />
-                </Flex>
-                <Flex
-                    direction="column"
-                    gap={8}
-                >
-                    <Info />
-                    <Content />
                     <Flex
-                        marginTop={20}
+                        direction="column"
+                        paddingHorizontal={sizes.marginSM}
+                        marginTop={10}
+                        gap={4}
                     >
-                        <RelatedAlerts navigation={navigation}/>
+                        <Header
+                            navigation={navigation}
+                            title="Alert Detail"
+                        />
+                    </Flex>
+                    <Flex
+                        direction="column"
+                        gap={8}
+                    >
+                        <Info />
+                        <Content />
+                        <Flex
+                            marginTop={20}
+                        >
+                            <RelatedAlerts navigation={navigation}/>
+                        </Flex>
                     </Flex>
                 </Flex>
-            </Flex>
-        </Safescroll>
+            </Safescroll>
+            <Drawer />
+        </>
     )
 }
 

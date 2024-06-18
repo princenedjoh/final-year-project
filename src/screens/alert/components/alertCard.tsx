@@ -19,7 +19,7 @@ const AlertCard = ({
 }) => {
     return (
         <TouchableOpacity
-            onPress={()=>navigation.navigate(screenNames.alertDetails)}
+            onPress={()=>navigation.navigate(screenNames.earthquakeDetails)}
         >
             <Flex
                 align="center"

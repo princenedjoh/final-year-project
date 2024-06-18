@@ -72,7 +72,7 @@ const Header = ({
     )
 }
 
-const style = StyleSheet.create({
+export const style = StyleSheet.create({
     profileImage : {
         borderRadius : 100,
         width : 35,

@@ -1,4 +1,4 @@
-import { TouchableOpacity, DimensionValue, ActivityIndicator } from 'react-native';
+import { TouchableOpacity, DimensionValue, ActivityIndicator, ViewStyle, StyleProp } from 'react-native';
 import AppTypography from "../../styles/components/appTypography"
 import theme from "../../styles/theme"
 import { screenNames } from "../../constants/screennames"
@@ -12,7 +12,8 @@ const Button = ({
     rounded,
     paddingVertical,
     loading,
-    size
+    size,
+    style
 } : {
     children : ReactNode,
     onPress? : ()=>void,
@@ -23,11 +24,12 @@ const Button = ({
         height? : DimensionValue,
         width? : DimensionValue
     }
+    style? : StyleProp<ViewStyle>
 }) => {
     return (
         <TouchableOpacity
             onPress={onPress}
-            style={{
+            style={[{
                 borderRadius : rounded ?? 1000,
                 backgroundColor : theme.colors.main.primary,
                 paddingHorizontal : 15,
@@ -36,7 +38,7 @@ const Button = ({
                 width : size?.width,
                 justifyContent : "center",
                 alignItems : "center"
-            }}
+            }, style]}
         >
             <AppTypography
                 textColor="white"

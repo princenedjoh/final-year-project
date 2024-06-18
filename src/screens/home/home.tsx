@@ -13,6 +13,9 @@ import Safescroll from "../../components/safescroll"
 import { NavigationProp, useNavigation } from "@react-navigation/native"
 import axios from "axios"
 import BigArticles from "../article/components/bigArticles"
+import Push from "../../components/push/push"
+import Divider from "../../components/divider/divider"
+import theme from "../../styles/theme"
 
 const Home = ({
     navigation
@@ -21,6 +24,12 @@ const Home = ({
 }) => {
 
     const navigate = useNavigation()
+    const HomeDivider = <Divider 
+        size={{
+            height : 5
+        }}
+        color={theme.colors.dark[11]}
+    />
     
     return (
         <Safescroll>
@@ -40,9 +49,12 @@ const Home = ({
             </Flex>
             <Flex
                 direction="column"
+                gap={20}
             >
                 <Satellites navigation={navigation}/>
+                {HomeDivider}
                 <ArticleFeature navigation={navigation}/>
+                {HomeDivider}
                 <AlertSection navigation={navigation}/>
             </Flex>
         </Safescroll>

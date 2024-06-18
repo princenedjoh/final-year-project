@@ -29,6 +29,7 @@ import SavedSettings from "../screens/settings/screens/saved/savedSettings"
 import SavedAlertSettings from "../screens/settings/screens/saved/screens/saved alerts/alerts"
 import SavedArticlesSettings from "../screens/settings/screens/saved/screens/saved articles/articles"
 import OnBoarding from "../screens/onboarding/onboarding"
+import EarthquakeDetails from "../screens/details/earthquake/earthquake"
 
 const sn = screenNames
 const screens = {
@@ -152,6 +153,10 @@ const screens = {
         name : sn.onBoarding,
         component : OnBoarding
     },
+    earthquakeDetails : {
+        name : sn.earthquakeDetails,
+        component : EarthquakeDetails
+    },
 }
 
 const s = screens
@@ -180,7 +185,8 @@ export const subScreens = [
     s.savedSettings,
     s.accountSettings,
     s.savedAlertSettings,
-    s.savedArticlesSettings
+    s.savedArticlesSettings,
+    s.earthquakeDetails
 ]
 
 export default screens
