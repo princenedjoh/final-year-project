@@ -85,25 +85,6 @@ const Top = () => {
                     </AppTypography>
                 </Flex>
             </Flex>
-            <Button
-                size={{
-                    height : 35
-                }}
-                style={{
-                    shadowColor: theme.colors.main.primary,
-                    shadowOffset: { width: 0, height: 3 },
-                    shadowOpacity: 0.2,
-                    shadowRadius: 10,
-                }}
-            >
-                <AppTypography
-                    size={TypographySize.xs}
-                    textColor="white"
-                    bold={TypographyBold.md2}
-                >
-                    View Event
-                </AppTypography>
-            </Button>
         </Flex>
     )
 }

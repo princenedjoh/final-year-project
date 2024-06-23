@@ -33,7 +33,7 @@ const Drawer = ({
         onChange={onChange}
         snapPoints={['10%', '50%', '85%' ]}
         index={1}
-        overDragResistanceFactor={5}
+        overDragResistanceFactor={3}
         style={{
             elevation : 100,
             shadowColor: 'black',
@@ -41,15 +41,15 @@ const Drawer = ({
             shadowOpacity: 0.5,
             shadowRadius: 20,
         }}
-        {...props}
         backgroundStyle={{
             backgroundColor : `#ffffff${hexOpacity(0)}`
         }}
+        {...props}
       >
         <View
             style={{
                 width:'100%',
-                height:'100%',
+                height:'150%',
                 backgroundColor : `#ffffff${hexOpacity(80)}`,
                 borderRadius : 30,
                 overflow : 'hidden',

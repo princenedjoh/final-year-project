@@ -1,6 +1,6 @@
 import { StyleProp, View, ViewStyle } from "react-native";
-import theme from "../../../../styles/theme"
-import { hexOpacity } from "../../../../utils/hexOpacity"
+import theme from "../../../styles/theme"
+import { hexOpacity } from "../../../utils/hexOpacity"
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { ReactNode } from "react";
 

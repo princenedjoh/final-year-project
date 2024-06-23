@@ -1,18 +1,20 @@
 import { Image, TouchableOpacity, View } from "react-native"
-import AppTypography from "../../../../styles/components/appTypography"
-import { sizes } from "../../../../utils/sizes"
-import { hexOpacity } from "../../../../utils/hexOpacity"
+import AppTypography from "../../../styles/components/appTypography"
+import { sizes } from "../../../utils/sizes"
+import { hexOpacity } from "../../../utils/hexOpacity"
 import { BlurView } from "expo-blur"
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import theme from "../../../../styles/theme"
+import theme from "../../../styles/theme"
 import { NavigationProp, useNavigation } from "@react-navigation/native"
-import { screenNames } from "../../../../constants/screennames"
-import { images } from "../../../../assets/assets"
+import { screenNames } from "../../../constants/screennames"
+import { images } from "../../../assets/assets"
 
 const TopControls = ({
-    navigation
+    navigation,
+    menuOnpress
 } : {
     navigation : NavigationProp<any>
+    menuOnpress? : ()=>void
 }) => {
     return (
         <View
@@ -82,7 +84,7 @@ const TopControls = ({
                         backgroundColor : `#ffffff${hexOpacity(50)}`,
                         overflow : 'hidden',
                     }}
-                    onPress={()=>navigation.navigate(screenNames.settings)}
+                    onPress={menuOnpress ? menuOnpress : ()=>navigation.navigate(screenNames.earhQuakeSettings)}
                 >
                     <BlurView
                         intensity={20} 

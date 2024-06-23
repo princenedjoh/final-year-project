@@ -1,6 +1,6 @@
 import { Fragment, ReactNode } from "react"
 import Flex from "../../../../styles/components/flex"
-import IconContainer from "./iconContainer"
+import IconContainer from "../../components/iconContainer"
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';

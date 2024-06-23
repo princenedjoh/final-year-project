@@ -24,19 +24,24 @@ const Top = () => {
     }, [])
     return (
         <Flex
-            justify="space-between"
+            direction="column"
             align="center"
         >
+            <AppTypography
+                bold={TypographyBold.md2}
+                size={TypographySize.md}
+            >
+                M 6.0 - 23 km SW of Accra
+            </AppTypography>
             <Flex
                 width={'auto'}
                 align="center"
-                gap={4}
-                flex={1}
+                gap={8}
             >
                 <View
                     style={{
-                        width : 35,
-                        height : 35,
+                        width : 25,
+                        height : 25,
                         borderRadius : 100,
                         elevation : 100,
                         shadowColor: 'black',
@@ -54,56 +59,24 @@ const Top = () => {
                             display : 'flex',
                             justifyContent : 'center',
                             alignItems : 'center',
-                            borderRadius : 5
+                            borderRadius : 100
                         }}
                     >
                         {
                             iso &&
                             <CountryFlag 
                                 isoCode={iso}
-                                size={35}
+                                size={25}
                             />
                         }
                     </View>
                 </View>
-                <Flex
-                    width={'auto'}
-                    direction="column"
-                    gap={1}
-                    paddingLeft={5}
-                >
-                    <AppTypography
-                        bold={TypographyBold.md2}
-                        size={TypographySize.md}
-                    >
-                        Ghana
-                    </AppTypography>
-                    <AppTypography
-                        bold={TypographyBold.sm2}
-                    >
-                        M 6.0 - 23 km SW of Accra
-                    </AppTypography>
-                </Flex>
-            </Flex>
-            <Button
-                size={{
-                    height : 35
-                }}
-                style={{
-                    shadowColor: theme.colors.main.primary,
-                    shadowOffset: { width: 0, height: 3 },
-                    shadowOpacity: 0.2,
-                    shadowRadius: 10,
-                }}
-            >
                 <AppTypography
-                    size={TypographySize.xs}
-                    textColor="white"
-                    bold={TypographyBold.md2}
+                    bold={TypographyBold.sm2}
                 >
-                    View Event
+                    Ghana
                 </AppTypography>
-            </Button>
+            </Flex>
         </Flex>
     )
 }

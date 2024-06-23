@@ -1,6 +1,6 @@
 import MapView from "react-native-maps"
-import Flex from "../../../../styles/components/flex"
-import { sizes } from "../../../../utils/sizes"
+import Flex from "../../../styles/components/flex"
+import { sizes } from "../../../utils/sizes"
 
 const Map = () => {
     return (
