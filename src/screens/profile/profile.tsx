@@ -12,17 +12,22 @@ const Profile = ({
 } : {
     navigation : NavigationProp<any>
 }) => {
-    const { isLoggedIn } = useContext(AuthContext)
+    const { isLoggedIn, handleLogout } = useContext(AuthContext)
     const [userData, setUserData] = useState<{title : string, content : string}[]>([])
     const [userInfo, setUserInfo] = useState()
 
+    const handleLogoutAndNavigation = () => {
+        handleLogout()
+        navigation.goBack()
+    }
+
     const getUserInfo = async () => {
-        try {
-            const response = await protectedAPI.get('users/get/')
-            setUserInfo(response)
-        } catch (error) {
-            console.log(error)
-        }
+        const {response, error} = await protectedAPI.get('users/get/')
+        response 
+            ? setUserInfo(response)
+            : error?.message === 'unauthorized' 
+            ? handleLogoutAndNavigation()
+            : null
     }
 
     useEffect(()=>{

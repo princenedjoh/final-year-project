@@ -55,7 +55,6 @@ export const removeRefreshToken = async () => {
 export const setIsUserLoggedin = async () => {
   try {
     await AsyncStorage.setItem('isUserLoggedin', 'true');
-    console.log(await AsyncStorage.getItem('isUserLoggedin'))
   } catch (error) {
     console.error('Error setting user loggdin:', error);
   }

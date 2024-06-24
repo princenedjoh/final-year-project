@@ -1,12 +1,6 @@
 import { NavigationProp } from "@react-navigation/native"
-import Safescroll from "../../../../../../../../components/safescroll"
-import Flex from "../../../../../../../../styles/components/flex"
-import { sizes } from "../../../../../../../../utils/sizes"
-import Header from "../../../../../../../../components/header/header"
-import ResetGroup from "../../../../../../components/resetGroup"
 import { useEffect, useState } from "react"
 import SaveSettings from "../../../../../../components/rightHeaderScreen"
-import LabeledInput from "../../../../../../components/labeledInput"
 import Input from "../../../../../../../../components/input/input"
 
 const MagnitudeSettings = ({

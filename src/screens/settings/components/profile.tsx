@@ -24,14 +24,12 @@ const Profile = ({
     const [userInfo, setUserInfo] = useState()
 
     const getUserInfo = async () => {
-        try {
-            const response = await protectedAPI.get('users/get/')
-            setUserInfo(response)
-        } catch (error : any) {
-            console.log(error)
-            if (error.message == 'Request failed with status code 401')
-                handleLogout()
-        }
+        const {response, error} = await protectedAPI.get('users/get/')
+        response 
+            ? setUserInfo(response)
+            : error?.message === 'unauthorized' 
+            ? handleLogout()
+            : null
     }
 
     useEffect(()=>{

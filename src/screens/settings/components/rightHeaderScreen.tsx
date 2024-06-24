@@ -26,12 +26,16 @@ const RightHeaderScreen = ({
     command? : string
 }) => {
     const [showloader, setShowloader] = useState(false)
-    const handleSave = () => {
-        setShowloader(true)
-        setTimeout(() => {
-            setShowloader(false)
-        }, 1000);
-        onSave && onSave()
+    const handleSave = async () => {
+        if(unsavedChanges){
+            try {
+                setShowloader(true)
+                onSave && await onSave()
+                setShowloader(false)
+            } catch (error) {
+                setShowloader(false)
+            }
+        }
     }
 
     return (

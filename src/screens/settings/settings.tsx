@@ -41,11 +41,13 @@ const Settings = ({
                     paddingHorizontal={sizes.marginSM}
                 >
                     <Profile navigation={navigation}/>
-                    <NotifGroup navigation={navigation}/>
-                    <AccGroup navigation={navigation}/>
                     {
                         isLoggedIn &&
-                        <Logout />
+                        <>
+                            <NotifGroup navigation={navigation}/>
+                            <AccGroup navigation={navigation}/>
+                            <Logout />
+                        </>
                     }
                 </Flex>
             </Flex>

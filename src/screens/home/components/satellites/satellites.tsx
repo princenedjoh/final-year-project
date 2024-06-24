@@ -44,7 +44,6 @@ const Satellites = ({
     const get = async () => {
         try {
             const result = await axios.get("http://100.66.3.129:8000")
-            console.log(result.data)
         } catch (error : any) {
             console.log(error)
         }

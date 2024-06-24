@@ -15,7 +15,7 @@ import { useToast } from "react-native-toast-notifications";
 import { publicAPI } from "../../api/api"
 import { screenNames } from "../../constants/screennames"
 import { AuthContext } from "../../context/authcontext"
-import { retrieveToken, storeRefreshToken, storeToken } from "../../context/asyncStorage"
+import { retrieveToken, setIsUserLoggedin, storeRefreshToken, storeToken } from "../../context/asyncStorage"
 
 const Login = ({
     navigation
@@ -27,22 +27,26 @@ const Login = ({
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
-    const { setToken, setRefreshToken, token, setIsLoggedIn } = useContext(AuthContext)
+    const { setToken, setRefreshToken, token, setIsLoggedIn, handleLogout } = useContext(AuthContext)
 
     const toast = useToast()
     const login = async () => {
-        const response = await publicAPI.post('users/login/', {
+        const {response, error} = await publicAPI.post('users/login/', {
             username : username,
             password : password
         })
-        setTokens(response.access, response.refresh)
+        if(response)
+            setTokens(response.access, response.refresh)
+        if(error)
+            handleLogout()
     }
-    const setTokens = (token : string, refreshToken : string) => {
+    const setTokens = async (token : string, refreshToken : string) => {
         setToken(token)
         setRefreshToken(refreshToken)
         setIsLoggedIn(true)
-        storeToken(token)
-        storeRefreshToken(refreshToken)
+        await storeToken(token)
+        await storeRefreshToken(refreshToken)
+        await setIsUserLoggedin()
     }
 
     const handleLogin = async () => {
@@ -51,14 +55,14 @@ const Login = ({
             await login()
             toast.show('Login successful!', {
                 type : 'success',
-                placement : 'top'
+                placement : 'bottom'
             })
             setLoading(false)
             navigate.goBack()
         } catch (error : any) {
             toast.show(error.message, {
                 type : 'danger',
-                placement : 'top'
+                placement : 'bottom'
             })
             setLoading(false)
         }
