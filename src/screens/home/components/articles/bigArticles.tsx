@@ -37,7 +37,6 @@ const ArticleFeature = ({
         <BigArticleSkeleton />
         :
         <Flex
-            paddingVertical={sizes.marginSM}
             direction="column"
             gap={4}
         >

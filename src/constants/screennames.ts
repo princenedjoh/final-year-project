@@ -28,5 +28,8 @@ export enum screenNames {
     savedSettings = 'Saved Settings',
     savedArticlesSettings = 'Saved Articles Settings',
     savedAlertSettings = 'Saved Alerts Settings',
-    onBoarding = 'onBoarding'
+    onBoarding = 'onBoarding',
+    earthquakeDetails = 'Earthquake Details',
+    floodDetails = 'Flood Details',
+    airQuality = 'Air Quality'
 }

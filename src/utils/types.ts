@@ -53,3 +53,16 @@ export type articleTypes = {
     coverImageURL : ImageSourcePropType
     full_name1 : string
 }
+
+export type alertDataTypes = {
+    category : string,
+    date : Date,
+    data : string,
+    description : string,
+    id : number,
+    read : boolean, 
+    severity : string,
+    title : string,
+    user : string,
+    image : any
+}

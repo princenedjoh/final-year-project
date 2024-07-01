@@ -1,18 +1,11 @@
 import { NavigationProp } from "@react-navigation/native"
-import Safescroll from "../../../../../../../../components/safescroll"
-import Flex from "../../../../../../../../styles/components/flex"
-import { sizes } from "../../../../../../../../utils/sizes"
-import Header from "../../../../../../../../components/header/header"
-import ResetGroup from "../../../../../../components/resetGroup"
-import Input from "../../../../../../../../components/input/input"
 import { useEffect, useState } from "react"
-import { TouchableOpacity } from "react-native"
-import AppTypography from "../../../../../../../../styles/components/appTypography"
-import theme from "../../../../../../../../styles/theme"
-import { TypographyBold, TypographySize } from "../../../../../../../../styles/components/types"
-import OverlayActivityIndicator from "../../../../../../../../components/overlayActivityIndicator/overlayActivityIndicator"
 import LabeledInput from "../../../../../../components/labeledInput"
 import SaveSettings from "../../../../../../components/rightHeaderScreen"
+import { retrieveEarthquakeLocationSettings } from "../../../../../../../../context/settingsStorage"
+import { updateEarthquakeLocation } from "../../../../../../../../api/apis/settings"
+import { useToast } from "react-native-toast-notifications"
+import { getAndStoreSettings } from "../../../../../../../../utils/onStartup"
 
 const LocationSettings = ({
     navigation
@@ -24,6 +17,7 @@ const LocationSettings = ({
     const [longitude, setLongitude] = useState('5.4')
     const [savedLatitude, setSavedLatitude] = useState('5.4')
     const [latitude, setLatitude] = useState('5.4')
+    const toast = useToast()
     useEffect(()=>{
         if(
             longitude !== savedLongitude
@@ -35,24 +29,53 @@ const LocationSettings = ({
         }
     },[
         longitude,
-        savedLongitude,
         latitude,
         savedLatitude,
+        savedLongitude
     ])
 
     const setValues = () => {
-        longitude !== savedLongitude
-        ? setSavedLongitude(longitude)
-        : latitude !== savedLatitude
-        ? setSavedLatitude(latitude)
-        : null
+        if(longitude !== savedLongitude)
+            setSavedLongitude(longitude)
+        if(latitude !== savedLatitude)
+            setSavedLatitude(latitude)
     }
+
+    const handleSave = async () => {
+        const {response, error} = await updateEarthquakeLocation(`${longitude},${latitude}`)
+        if(response){
+            await getAndStoreSettings()
+            setValues()
+            toast.show('Settings Saved successful!', {
+                type : 'success',
+                placement : 'bottom'
+            })
+        }
+        if(error)
+            toast.show('Error saving settings', {
+                type : 'danger',
+                placement : 'bottom'
+            })
+    }
+
+    const getLocation = async () => {
+        const location = await retrieveEarthquakeLocationSettings()
+        const locationSplit = location.value.split(',')
+        setLongitude(locationSplit[0])
+        setLatitude(locationSplit[1])
+        setSavedLongitude(locationSplit[0])
+        setSavedLatitude(locationSplit[1])
+    }
+
+    useEffect(()=>{
+        getLocation()
+    },[])
 
     return (
         <SaveSettings
             navigation={navigation}
             unsavedChanges={unsavedChanges}
-            onSave={setValues}
+            onSave={handleSave}
             title="Location"
         >
             <LabeledInput 

@@ -1,7 +1,15 @@
 import axios from "axios";
 import { baseURL } from "../constants/api";
 import { retrieveToken } from "../context/asyncStorage";
+import logout from "../utils/logout";
 
+export interface apiResponseType {
+  response? : any,
+  error? : {
+    message : string,
+    detail? : string
+  }
+}
 class ProtectedAPI {
     baseURL
     constructor(baseURL: string) {
@@ -10,27 +18,55 @@ class ProtectedAPI {
       }
       this.baseURL = baseURL;
     }
-    get = async (url : string, params? : any) => {
-      const token = await retrieveToken()
-      const headers = {
-        Authorization: `Bearer ${token}`
+    get = async (url : string, params? : any) : Promise<apiResponseType> => {
+      try {
+        const token = await retrieveToken()
+        const headers = {
+          Authorization: `Bearer ${token}`
+        }
+        const result = await axios.get(`${this.baseURL}${url}`, {
+            params,
+            headers
+        },)
+        return {response : result.data}
+      } catch (error : any) {
+        console.log(error)
+        return {error : {message : 'unauthorized', detail : error}}
       }
-      const result = await axios.get(`${this.baseURL}${url}`, {
-          params,
-          headers
-      },)
-      return result.data
     }
 
-    post = async (url : string, body? : any) => {
-      const token = await retrieveToken()
-      const headers = {
-        Authorization: `Bearer ${token}`
+    post = async (url : string, body? : any, params? : any) : Promise<apiResponseType> => {
+      try {
+        const token = await retrieveToken()
+        const headers = {
+          Authorization: `Bearer ${token}`
+        }
+        const result = await axios.post(`${this.baseURL}${url}`, body, {
+            headers,
+            params
+        })
+        return {response : result.data}
+      } catch (error : any) {
+        console.log(error)
+        return {error : {message : 'unauthorized', detail : error}}
       }
-      const result = await axios.post(`${this.baseURL}${url}`, body, {
-          headers
-      })
-      return result.data
+    }
+
+    update = async (url : string, body? : any, params? : any) : Promise<apiResponseType> => {
+      try {
+        const token = await retrieveToken()
+        const headers = {
+          Authorization: `Bearer ${token}`
+        }
+        const result = await axios.patch(`${this.baseURL}${url}`, body, {
+            headers,
+            params
+        })
+        return {response : result.data}
+      } catch (error : any) {
+        console.log(error)
+        return {error : {message : 'unauthorized', detail : error}}
+      }
     }
 }
 
@@ -43,14 +79,24 @@ class PublicAPI {
       this.baseURL = baseURL;
     }
   
-    get = async (url: string, params?: any): Promise<any> => {
-      const response = await axios.get(`${this.baseURL}${url}`, { params });
-      return response.data;
+    get = async (url: string, params?: any) : Promise<apiResponseType> => {
+      try {
+        const response = await axios.get(`${this.baseURL}${url}`, { params });
+        return {response : response.data}
+      } catch (error : any) {
+        console.log(error)
+        return {error : {message : 'unauthorized', detail : error}}
+      }
     };
   
-    post = async (url: string, body?: any): Promise<any> => {
-      const response = await axios.post(`${this.baseURL}${url}`, body);
-      return response.data;
+    post = async (url: string, body?: any, params? : any) : Promise<apiResponseType> => {
+      try {
+        const response = await axios.post(`${this.baseURL}${url}`, body, {params});
+        return {response : response.data}
+      } catch (error : any) {
+        console.log(error)
+        return {error : {message : 'unauthorized', detail : error}}
+      }
     };
   }
 

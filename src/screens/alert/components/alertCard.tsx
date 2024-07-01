@@ -11,27 +11,54 @@ import { getSeverityColor } from "../../../utils/getSeverityColor"
 import { TouchableHighlight, TouchableOpacity } from "react-native"
 import { NavigationProp } from "@react-navigation/native"
 import { screenNames } from "../../../constants/screennames"
+import getDate, { getRelativeTime } from "../../../utils/getDate"
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { alertDataTypes } from "../../../utils/types"
 
 const AlertCard = ({
-    navigation
+    navigation,
+    data
 } : {
-    navigation : NavigationProp<any>
+    navigation : NavigationProp<any>,
+    data : alertDataTypes
 }) => {
     return (
         <TouchableOpacity
-            onPress={()=>navigation.navigate(screenNames.alertDetails)}
+            onPress={
+                data.category === 'earthquake'
+                    ? ()=>navigation.navigate(screenNames.earthquakeDetails, {id : data.id})
+                    : ()=>navigation.navigate(screenNames.earthquakeDetails, {id : data.id})
+            }
         >
             <Flex
                 align="center"
                 gap={6}
             >
-                <ImageBG
-                    source={images.bg3}
-                    width={80}
-                    height={80}
-                >
-                    
-                </ImageBG>
+                {
+                    data.image ?
+                    <ImageBG
+                        source={data.image}
+                        width={80}
+                        height={80}
+                    >
+                        
+                    </ImageBG>
+                    :
+                    <Flex
+                        width={80}
+                        height={80}
+                        justify="center"
+                        align="center"
+                        background={theme.colors.dark[11]}
+                        rounded={5}
+                    >
+                        <MaterialIcons 
+                            name="crisis-alert"
+                            size={30}
+                            color={theme.colors.red.red4}
+                        />
+                    </Flex>
+                }
                 <Flex
                     direction="column"
                     gap={1}
@@ -46,7 +73,7 @@ const AlertCard = ({
                             bold={TypographyBold.md}
                             textColor={getSeverityColor('critical')}
                         >
-                            Temperature
+                            {data.category}
                         </AppTypography>
                         <AwesomeIcon 
                             name='map' 
@@ -61,13 +88,12 @@ const AlertCard = ({
                         bold={TypographyBold.md}
                         numberOfLines={1}
                     >
-                        Temperature rises by 40% in one at Accra
+                        {data.title}
                     </AppTypography>
                     <AppTypography
                         numberOfLines={2}
                     >
-                        SCIENCE A strong earthquake rocked Nepal early Saturday, 
-                        destroying buildings, damaging historic temples
+                        {data.description}
                     </AppTypography>
                     <Flex
                         width={'auto'}
@@ -75,9 +101,10 @@ const AlertCard = ({
                     >
                         <AppTypography
                             size={TypographySize.xs}
+                            bold={TypographyBold.md}
                             textColor={theme.colors.main.text.light}
                         >
-                            12th March, 2024
+                            {getRelativeTime(new Date(data.date))}
                         </AppTypography>
                     </Flex>
                 </Flex>

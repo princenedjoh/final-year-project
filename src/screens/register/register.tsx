@@ -33,23 +33,23 @@ const Register = ({
     const toast = useToast()
 
     const handleregister = async () => {
-        try {
-            setLoading(true)
-            const result = await publicAPI.post('users/add/', {
-                username,
-                password,
-                first_name : firstname,
-                last_name : lastname,
-                email
-            })
+        setLoading(true)
+        const {response, error} = await publicAPI.post('users/add/', {
+            username,
+            password,
+            first_name : firstname,
+            last_name : lastname,
+            email
+        })
+        if(response){
             toast.show('Registration Successful', {
                 type : 'success',
                 placement : 'top'
             })
             navigation.navigate(screenNames.login)
             setLoading(false)
-            console.log(result.data)
-        } catch (error : any) {
+        }
+        if(error){
             toast.show(error.message, {
                 type : 'danger',
                 placement : 'top'

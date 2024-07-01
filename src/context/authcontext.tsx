@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { retrieveIsUserLoggedin, retrieveRefreshToken, retrieveToken } from "./asyncStorage";
 import logout from "../utils/logout";
+import { protectedAPI } from "../api/api";
 
 interface AuthContextType {
     isLoggedIn: boolean;
@@ -27,6 +28,13 @@ export const AuthContext = createContext<AuthContextType>({
   
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const checkTokenValidity = async () => {
+    const {response, error} = await protectedAPI.get('/users/get/')
+    if(response)
+      return setUserInfo()
+    await logout()
+  }
+
   const setUserInfo = async () => {
     const isUserLoggedin = await retrieveIsUserLoggedin()
     const token = await retrieveToken()
@@ -50,7 +58,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   useEffect(()=>{
-    setUserInfo()
+    checkTokenValidity()
   },[])
 
   return (

@@ -1,5 +1,5 @@
 import { Animated, View, StyleSheet, RegisteredStyle, ViewStyle, StyleProp } from 'react-native';
-import { useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 import theme from '../../styles/theme';
 
 const pulseAnimation = new Animated.Value(1);
@@ -15,9 +15,11 @@ const styles = StyleSheet.create({
 });
 
 const Skeleton = ({
-    style
+    style,
+    children
 } : {
     style? : StyleProp<ViewStyle>
+    children? : ReactNode
 }) => {
     useEffect(() => {
         const animation = Animated.sequence([
@@ -40,7 +42,7 @@ const Skeleton = ({
 
   return (
     <Animated.View style={[styles.container, style]}>
-
+      {children}
     </Animated.View>
   );
 };
