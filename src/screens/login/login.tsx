@@ -35,10 +35,16 @@ const Login = ({
             username : username,
             password : password
         })
-        if(response)
+        console.log({response, error})
+        if(response){
             setTokens(response.access, response.refresh)
-        if(error)
+            return {response}
+        }
+        if(error){
             handleLogout()
+            return {error}
+        }
+        return {error : 'Failed to login'}
     }
     const setTokens = async (token : string, refreshToken : string) => {
         setToken(token)
@@ -50,22 +56,24 @@ const Login = ({
     }
 
     const handleLogin = async () => {
-        try {
-            setLoading(true)
-            await login()
+        setLoading(true)
+        const {response, error} = await login()
+        if(response){
             toast.show('Login successful!', {
                 type : 'success',
                 placement : 'bottom'
             })
-            setLoading(false)
             navigate.goBack()
-        } catch (error : any) {
-            toast.show(error.message, {
+            return setLoading(false)
+        }
+        if(error){
+            toast.show('something happened', {
                 type : 'danger',
                 placement : 'bottom'
             })
-            setLoading(false)
+            return setLoading(false)
         }
+        setLoading(false)
     }
 
     return (

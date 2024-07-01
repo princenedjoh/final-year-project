@@ -29,7 +29,8 @@ const Home = ({
     />
 
     useEffect(()=>{
-        onStartup()
+        if(isLoggedIn)
+            onStartup()
       }, [isLoggedIn])
     
     return (

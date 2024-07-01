@@ -10,12 +10,23 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Divider from "../../../../components/divider/divider";
 import theme from "../../../../styles/theme";
 import { hexOpacity } from "../../../../utils/hexOpacity";
+import { alertDataTypes } from "../../../../utils/types";
 
-const MoreDetails = () => {
+const MoreDetails = ({
+    alertData
+} : {
+    alertData : alertDataTypes
+}) => {
+    const place = JSON.parse(alertData.data).place
+    const coordinates = JSON.parse(alertData.data).coordinates
+    const mmi = JSON.parse(alertData.data).mmi
+
+    console.log(coordinates)
+
     const details = [
         {
             title : 'Coordinate',
-            description : 'Lon: -74.5392, Lat: -15.9192, Radius: 19.917',
+            description : coordinates ? `Lon: ${coordinates[0] ?? 'N/A'}; Lat: ${coordinates[1] ?? 'N/A'}; Radius: ${coordinates[2] ?? 'N/A'}` : 'N/A',
             icon : <FontAwesome5
                 name="drafting-compass"
                 color={'white'}
@@ -25,7 +36,7 @@ const MoreDetails = () => {
         },
         {
             title : 'Location',
-            description : 'M 6.0 - 23 km SW of Accra',
+            description : place ?? 'N/A',
             icon : <FontAwesome5
                 name="location-arrow"
                 color={'white'}
@@ -34,8 +45,8 @@ const MoreDetails = () => {
             color : "#93866D"
         },
         {
-            title : 'mmi',
-            description : '6.736',
+            title : 'Modified Mercalli Intensity (MMI) ',
+            description : mmi ?? 'N/A',
             icon : <FontAwesome5
                 name="map"
                 color={'white'}
@@ -72,12 +83,23 @@ const MoreDetails = () => {
                                 <AppTypography>
                                     {item.title}
                                 </AppTypography>
-                                <AppTypography
-                                    bold={TypographyBold.md2}
-                                    size={TypographySize.sm2}
-                                >
-                                    {item.description}
-                                </AppTypography>
+                                {
+                                    item.description === 'N/A' ?
+                                    <AppTypography
+                                        bold={TypographyBold.md2}
+                                        textColor={theme.colors.main.text.light}
+                                        size={TypographySize.sm2}
+                                    >
+                                        {item.description}
+                                    </AppTypography>
+                                    :
+                                    <AppTypography
+                                        bold={TypographyBold.md2}
+                                        size={TypographySize.sm2}
+                                    >
+                                        {item.description}
+                                    </AppTypography>
+                                }
                             </Flex>
                         </Flex>
                         {

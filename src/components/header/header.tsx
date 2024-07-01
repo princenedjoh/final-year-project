@@ -9,6 +9,7 @@ import { screenNames } from "../../constants/screennames"
 import Button from "../button/button"
 import { useContext, useState } from "react"
 import { AuthContext } from "../../context/authcontext"
+import Profile from "./components/profile"
 
 const Header = ({
     title,
@@ -53,31 +54,12 @@ const Header = ({
                     {right}
                     {
                         displayProfile &&
-                        <TouchableOpacity
-                            onPress={()=>navigation.navigate(screenNames.settings)}
-                            style={{
-                                backgroundColor : theme.colors.dark[9],
-                                borderRadius : 100
-                            }}
-                        >
-                            <Image
-                                style={style.profileImage}
-                                source={images.profile1}
-                            ></Image>
-                        </TouchableOpacity>
+                        <Profile navigation={navigation}/>
                     }
                 </Flex>
             </Flex>
         </Flex>
     )
 }
-
-export const style = StyleSheet.create({
-    profileImage : {
-        borderRadius : 100,
-        width : 35,
-        height : 35
-    }
-})
 
 export default Header

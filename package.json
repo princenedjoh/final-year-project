@@ -21,6 +21,7 @@
     "@react-navigation/native-stack": "^6.9.25",
     "@rnmapbox/maps": "^10.1.19",
     "axios": "^1.6.8",
+    "dayjs": "^1.11.11",
     "expo": "^51.0.14",
     "expo-blur": "~13.0.2",
     "expo-constants": "~16.0.2",
@@ -41,6 +42,7 @@
     "react-native-skeleton-content": "^1.0.28",
     "react-native-toast-notifications": "^3.4.0",
     "react-native-vector-icons": "^10.1.0",
+    "relative-time": "^1.0.0",
     "rn-bottom-drawer": "^1.4.3"
   },
   "devDependencies": {

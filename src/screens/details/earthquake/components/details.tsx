@@ -5,42 +5,77 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Divider from "../../../../components/divider/divider";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { hexOpacity } from "../../../../utils/hexOpacity";
+import { alertDataTypes } from "../../../../utils/types";
+import getDate, { getRelativeTime, getTime } from "../../../../utils/getDate";
 
-const Details = () => {
-    const details = [
-        {
-            title : 'JUN 20, 2024',
-            description : '20:08 UTC',
-            icon : <MaterialIcons
-                name="date-range"
-                color={'white'}
-                size={20}
-            />,
-            color : "#919191"
-        },
-        {
-            title : '4.5 ml',
-            description : 'Magnitude',
-            icon : <Ionicons
-                name="pulse-sharp"
-                color={'white'}
-                size={20}
-            />,
-            color : "#936D6D"
-        },
-        {
-            title : '10 km',
-            description : 'Depth',
-            icon : <MaterialCommunityIcons
-                name="signal-distance-variant"
-                color={'white'}
-                size={20}
-            />,
-            color : "#6D8793"
-        },
-    ]
+const Details = ({
+    alertData
+} : {
+    alertData : alertDataTypes
+}) => {
+    const [details, setDetails] = useState<any>([])
+
+    const setAlertData = () => {
+        const details = []
+        const magnitude = JSON.parse(alertData.data).mag
+        const time = JSON.parse(alertData.data).mag
+        const sig = JSON.parse(alertData.data).mag
+        const depth = JSON.parse(alertData.data).depth
+
+        if(magnitude)
+            if(time)
+                details.push({
+                    title : getDate(new Date(time), {shortmonth : true}),
+                    description : `${getTime(new Date(time))} UTC`,
+                    icon : <MaterialIcons
+                        name="date-range"
+                        color={'white'}
+                        size={20}
+                    />,
+                    color : "#919191"
+                })
+            details.push({
+                title : `${magnitude} ml`,
+                description : 'Magnitude',
+                icon : <Ionicons
+                    name="pulse-sharp"
+                    color={'white'}
+                    size={20}
+                />,
+                color : "#936D6D"
+            })
+        if(depth){
+            details.push({
+                title : `${depth} km`,
+                description : 'Depth',
+                icon : <MaterialCommunityIcons
+                    name="signal-distance-variant"
+                    color={'white'}
+                    size={20}
+                />,
+                color : "#6D8793"
+            })
+        } else if(sig) {
+            details.push({
+                title : `${sig} km`,
+                description : 'Sig',
+                icon : <MaterialCommunityIcons
+                    name="signal-distance-variant"
+                    color={'white'}
+                    size={20}
+                />,
+                color : "#6D8793"
+            })
+        }
+
+        setDetails(details)
+    }
+
+    useEffect(()=>{
+        setAlertData()
+    },[])
 
     return (
         <Flex
@@ -53,7 +88,7 @@ const Details = () => {
             rounded={10}
         >
             {
-                details.map((item, index : number) => (
+                details.map((item : any, index : number) => (
                     <Fragment
                         key={index}
                     >
