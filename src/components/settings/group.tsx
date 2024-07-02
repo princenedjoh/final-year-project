@@ -44,12 +44,12 @@ const Group = ({
             }
             <View
                 style={{
-                    ...(style as object || {}),
                     ...{
                         width : '100%',
                         borderRadius : 10,
                         backgroundColor : theme.colors.dark[11],
-                    }
+                    },
+                    ...(style as object || {}),
                 }}
             >
                 <Flex

@@ -1,6 +1,7 @@
 import { DimensionValue, ImageResizeMode, ImageSourcePropType, StyleProp, ViewStyle } from "react-native"
 import { ReactNode } from 'react';
 import { NavigationProp } from "@react-navigation/native";
+import { screenNames } from '../constants/screennames';
 
 export type headerType = {
     title : string,
@@ -66,3 +67,10 @@ export type alertDataTypes = {
     user : string,
     image : any
 }
+
+export type RootStackParamList = {
+    screenName : string
+    TargetScreen: { 
+        screenType: "card" | "modal" | "transparentModal" | "containedModal" | "containedTransparentModal" | "fullScreenModal" | "formSheet" | undefined
+     };
+};

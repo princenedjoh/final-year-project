@@ -31,5 +31,8 @@ export enum screenNames {
     onBoarding = 'onBoarding',
     earthquakeDetails = 'Earthquake Details',
     floodDetails = 'Flood Details',
-    airQuality = 'Air Quality'
+    airQuality = 'Air Quality',
+    weather = 'Weather',
+    humidity = 'Humidity',
+    dewPoint = 'Dew Point'
 }

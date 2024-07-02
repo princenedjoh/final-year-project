@@ -53,7 +53,7 @@ const ArticleFeature = ({
             >
                 <Flex
                     gap={8}
-                    paddingLeft={sizes.marginSM}
+                    paddingHorizontal={sizes.marginSM}
                 >
                     {
                         data.length < 0 ?
@@ -83,13 +83,8 @@ const ArticleFeature = ({
                                             date={new Date(item.data.date)}
                                             coverImageURL={{uri : item.data.cover_image.url}}
                                             full_name1={item.data.full_name1}
+                                            width={sizes.screenWidth - sizes.screenWidth/5}
                                         />
-                                        {
-                                            index < data.length - 1 &&
-                                            <Hr
-                                                marginLeft={85}
-                                            />
-                                        }
                                     </Flex>
                                 </TouchableOpacity>
                             )
@@ -99,6 +94,7 @@ const ArticleFeature = ({
             </ScrollView>
             <Flex
                 paddingLeft={sizes.marginSM}
+                marginTop={10}
             >
                 <TouchableOpacity
                     onPress={()=>navigation.navigate(screenNames.article)}

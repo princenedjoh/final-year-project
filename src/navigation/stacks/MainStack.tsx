@@ -5,7 +5,9 @@ import { subScreens } from "../../constants/screens";
 import OnBoarding from "../../screens/onboarding/onboarding";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Profile from "../../components/header/components/profile";
-const Stack = createNativeStackNavigator();
+import { RootStackParamList } from "../../utils/types";
+
+const Stack = createNativeStackNavigator<any>();
 const MainStack = () => {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -33,6 +35,12 @@ const MainStack = () => {
                   name={item.name} 
                   component={item.component}
                   key={index}
+                  options={({ route }) => ({
+                    presentation: route.params?.screenType,
+                    headerShown : route.params?.headerShown ?? false,
+                    headerTransparent : true,
+                    headerBlurEffect : 'regular',
+                  })}
                 />
               )
             })

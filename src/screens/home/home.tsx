@@ -12,6 +12,7 @@ import theme from "../../styles/theme"
 import { useContext, useEffect } from "react"
 import { onStartup } from "../../utils/onStartup"
 import { AuthContext } from "../../context/authcontext"
+import Weather from "./components/weather/weather"
 
 const Home = ({
     navigation
@@ -54,6 +55,8 @@ const Home = ({
                 gap={20}
             >
                 <Satellites navigation={navigation}/>
+                {HomeDivider}
+                <Weather navigation={navigation}/>
                 {HomeDivider}
                 <ArticleFeature navigation={navigation}/>
                 {HomeDivider}
