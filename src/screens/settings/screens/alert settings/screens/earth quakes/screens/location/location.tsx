@@ -60,11 +60,15 @@ const LocationSettings = ({
 
     const getLocation = async () => {
         const location = await retrieveEarthquakeLocationSettings()
-        const locationSplit = location.value.split(',')
-        setLongitude(locationSplit[0])
-        setLatitude(locationSplit[1])
-        setSavedLongitude(locationSplit[0])
-        setSavedLatitude(locationSplit[1])
+        if(location?.length > 0){
+            const locationSplit = location.value.split(',')
+            setLongitude(locationSplit[0])
+            setLatitude(locationSplit[1])
+            setSavedLongitude(locationSplit[0])
+            setSavedLatitude(locationSplit[1])
+        } else {
+            console.log('location is empty')
+        }
     }
 
     useEffect(()=>{

@@ -49,7 +49,7 @@ export type severityTypes = 'normal' | 'severe' | 'critical'
 export type articleTypes = {
     navigation : NavigationProp<any>
     title : string,
-    description : string,
+    description : any,
     date : Date,
     coverImageURL : ImageSourcePropType
     full_name1 : string

@@ -9,9 +9,11 @@ import theme from "../../../../../styles/theme"
 import Bookmark from "./bookmark"
 
 const Top = ({
-    title
+    title,
+    coverImage
 } : {
-    title : string
+    title : string,
+    coverImage? : string
 }) => {
     return (
         <View
@@ -21,7 +23,7 @@ const Top = ({
                 height : 0.3 * sizes.screenHeight
         }}>
             <ImageBG
-                source={images.bg6}
+                source={coverImage ?? images.bg6}
                 resizeMode="cover"
                 rounded={0}
                 height={'100%'}
@@ -47,7 +49,7 @@ const Top = ({
                             bold={TypographyBold.md2}
                             textColor={theme.colors.dark[10]}
                         >
-                            Aticle
+                            Article
                         </Title>
                     </View>
                 </View>
@@ -62,8 +64,7 @@ const Top = ({
                         textColor={theme.colors.dark[10]}
                         size={TypographySize.lg2}
                     >
-                        Linear clouds crisscrossed the 
-                        Pacific Ocean 
+                        {title}
                     </Title>
                 </View>
             </LinearGradient>

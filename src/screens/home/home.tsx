@@ -9,10 +9,18 @@ import Safescroll from "../../components/safescroll"
 import { NavigationProp, useNavigation } from "@react-navigation/native"
 import Divider from "../../components/divider/divider"
 import theme from "../../styles/theme"
-import { useContext, useEffect } from "react"
+import { useCallback, useContext, useEffect, useState } from "react"
 import { onStartup } from "../../utils/onStartup"
 import { AuthContext } from "../../context/authcontext"
 import Weather from "./components/weather/weather"
+import { RefreshControl } from 'react-native';
+
+export const HomeDivider = <Divider 
+    size={{
+        height : 5
+    }}
+    color={theme.colors.dark[11]}
+/>
 
 const Home = ({
     navigation
@@ -21,13 +29,13 @@ const Home = ({
 }) => {
 
     const {isLoggedIn} = useContext(AuthContext)
+    const [refreshing, setRefreshing] = useState(false)
     const navigate = useNavigation()
-    const HomeDivider = <Divider 
-        size={{
-            height : 5
-        }}
-        color={theme.colors.dark[11]}
-    />
+
+    const onRefresh = () => {
+        setRefreshing(true);
+        setTimeout(() => setRefreshing(false), 2000)
+    }
 
     useEffect(()=>{
         if(isLoggedIn)
@@ -35,7 +43,11 @@ const Home = ({
       }, [isLoggedIn])
     
     return (
-        <Safescroll>
+        <Safescroll
+            refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+        >
             <Flex
                 direction="column"
                 paddingHorizontal={sizes.marginSM}
@@ -54,13 +66,13 @@ const Home = ({
                 direction="column"
                 gap={20}
             >
-                <Satellites navigation={navigation}/>
+                <Satellites refreshing={refreshing} navigation={navigation}/>
                 {HomeDivider}
-                <Weather navigation={navigation}/>
+                <Weather refreshing={refreshing} navigation={navigation}/>
                 {HomeDivider}
-                <ArticleFeature navigation={navigation}/>
+                <ArticleFeature refreshing={refreshing} navigation={navigation}/>
                 {HomeDivider}
-                <AlertSection navigation={navigation}/>
+                <AlertSection refreshing={refreshing} navigation={navigation}/>
             </Flex>
         </Safescroll>
     )

@@ -10,9 +10,11 @@ import SmallWeatherCard from "./components/smallCard"
 import MidWeatherCard from "./components/midWeatherCard"
 
 const Weather = ({
-    navigation
+    navigation,
+    refreshing
 } : {
     navigation : NavigationProp<any>
+    refreshing? : boolean
 }) => {
     return (
         <Flex

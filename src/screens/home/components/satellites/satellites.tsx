@@ -12,9 +12,11 @@ import axios from "axios"
 import theme from "../../../../styles/theme"
 
 const Satellites = ({
-    navigation
+    navigation,
+    refreshing
 } : {
     navigation : NavigationProp<any>
+    refreshing? : boolean
 }) => {
 
     const [data, setData] = useState([1,2,3,4,5,6,7,8])

@@ -11,6 +11,8 @@ import { useEffect, useState } from "react"
 import { getAllArticles } from "../../api/prismic"
 import SmallCardSkeleton from "../../components/article card/smallCardSkeleton"
 import LargeCardSkeleton from "../../components/article card/largeCardSkeleton"
+import { RefreshControl } from "react-native"
+import { HomeDivider } from "../home/home"
 
 const Article = ({
     navigation
@@ -20,6 +22,12 @@ const Article = ({
     const [data, setData] = useState<any[]>([])
     const [smallArticles, setSmallArticles] = useState<'loading' | any[]>([])
     const [largeArticles, setLargeArticles] = useState<'loading' | any[]>([])
+    const [refreshing, setRefreshing] = useState(false)
+
+    const onRefresh = () => {
+        setRefreshing(true);
+        setTimeout(() => setRefreshing(false), 2000)
+    }
 
     const getArticles = async () => {
         const response = await getAllArticles()
@@ -27,9 +35,9 @@ const Article = ({
     }
 
     const splitArticles = () => {
-        if(data.length >= 5){
-            const smallArticlesCopy = data.splice(0,3)
-            const largeArticlesCopy = data.splice(3)
+        if(data.length >= 4){
+            const smallArticlesCopy = [...data].splice(data.length - 3)
+            const largeArticlesCopy = [...data].splice(0, data.length >= 6 ? 2 : data.length - 3)
             smallArticlesCopy.length === 0 
                 ? setSmallArticles([])
                 : setSmallArticles([...smallArticlesCopy])
@@ -52,8 +60,20 @@ const Article = ({
         getArticles()
     }, [])
 
+    useEffect(()=>{
+        if(refreshing){
+            setLargeArticles(refreshing ? 'loading' : "loading")
+            setSmallArticles(refreshing ? 'loading' : "loading")
+            getArticles()
+        }
+    }, [refreshing])
+
     return (
-        <Safescroll>
+        <Safescroll
+            refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+    >
             <Flex
                 direction="column"
                 gap={12}
@@ -73,9 +93,10 @@ const Article = ({
                 </Flex>
                 <Flex
                     direction="column"
-                    gap={8}
+                    gap={20}
                 >
                     <Suggestions />
+                    {HomeDivider}
                     {
                         largeArticles.length > 0 && largeArticles !== 'loading' ?
                         <Flex marginTop={-3}>
@@ -86,6 +107,10 @@ const Article = ({
                         </Flex>
                         : largeArticles === 'loading' &&
                         <LargeCardSkeleton />
+                    }
+                    {
+                        largeArticles.length > 0 && largeArticles !== 'loading' &&
+                        HomeDivider
                     }
                     {
                         smallArticles.length > 0 && smallArticles !== 'loading' ?

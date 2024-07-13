@@ -23,7 +23,7 @@ const SmallCard = ({
             activeOpacity={0.9}
             onPress={()=>navigation.navigate(screenNames.articlePost, {
                 title,
-                description,
+                description : description,
                 date : date.toString(),
                 coverImageURL,
                 full_name1
@@ -55,7 +55,7 @@ const SmallCard = ({
                     <AppTypography
                         numberOfLines={2}
                     >
-                        {description}
+                        {description && JSON.parse(description)[0].text}
                     </AppTypography>
                     <Flex
                         width={'auto'}

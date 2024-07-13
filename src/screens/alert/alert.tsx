@@ -7,17 +7,28 @@ import { sizes } from "../../utils/sizes"
 import Chips from "./components/chips"
 import AlertsSection from "./components/alertsSection"
 import { NavigationProp } from "@react-navigation/native"
+import { RefreshControl } from "react-native"
 
 const Alert = ({
     navigation
 } : {
     navigation : NavigationProp<any>
 }) => {
+    const [refreshing, setRefreshing] = useState(false)
+    const onRefresh = () => {
+        setRefreshing(true);
+        setTimeout(() => setRefreshing(false), 2000)
+    }
     return (
-        <Safescroll>
+        <Safescroll
+            refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+        >
             <Flex
                 direction="column"
                 gap={12}
+                paddingBottom={20}
             >
                 <Flex
                     direction="column"
@@ -35,6 +46,7 @@ const Alert = ({
                 <Chips />
                 <AlertsSection 
                     navigation={navigation}
+                    refreshing={refreshing}
                 />
             </Flex>
         </Safescroll>

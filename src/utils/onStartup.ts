@@ -11,6 +11,7 @@ export const getAndStoreSettings = async () => {
         const isUserLoggedin = await retrieveIsUserLoggedin();
         if (isUserLoggedin) {
             const {response : allSettings, error} = await getAllSettings();
+            console.log({allSettings})
             if (allSettings && Array.isArray(allSettings)) {
                 const allSettingsString = JSON.stringify(allSettings);
                 await AsyncStorage.setItem("settings", allSettingsString);

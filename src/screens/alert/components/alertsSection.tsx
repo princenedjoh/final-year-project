@@ -11,9 +11,11 @@ import { AuthContext } from "../../../context/authcontext"
 import SmallCardSkeleton from "../../../components/article card/smallCardSkeleton"
 
 const AlertsSection = ({
-    navigation
+    navigation,
+    refreshing
 } : {
-    navigation : NavigationProp<any>
+    navigation : NavigationProp<any>,
+    refreshing? : boolean
 }) => {
     const {isLoggedIn} = useContext(AuthContext)
     const [alerts, setAlerts] = useState<'loading' | null | any[]>('loading')
@@ -32,6 +34,13 @@ const AlertsSection = ({
         if(isLoggedIn)
             getAlerts()
     }, [isLoggedIn])
+
+    useEffect(()=>{
+        if(refreshing){
+            setAlerts(refreshing ? 'loading' : "loading")
+            getAlerts()
+        }
+    }, [refreshing])
 
     return (
         <>

@@ -14,9 +14,11 @@ import { protectedAPI } from "../../../../api/api";
 import SmallCardSkeleton from "../../../../components/article card/smallCardSkeleton";
 
 const AlertSection = ({
-    navigation
+    navigation,
+    refreshing
 } : {
     navigation : NavigationProp<any>
+    refreshing? : boolean
 }) => {
     const {isLoggedIn} = useContext(AuthContext)
     const [alerts, setAlerts] = useState<'loading' | null | any[]>('loading')
@@ -35,6 +37,14 @@ const AlertSection = ({
         if(isLoggedIn)
             getAlerts()
     }, [isLoggedIn])
+
+    useEffect(()=>{
+        if(refreshing){
+            setAlerts(refreshing ? 'loading' : "loading")
+            getAlerts()
+        }
+    }, [refreshing])
+
     return (
         <Flex
             direction="column"
@@ -74,7 +84,8 @@ const AlertSection = ({
                                         id : item.id,
                                         read : item.read,
                                         severity : item.severity,
-                                        user : item.user
+                                        user : item.user,
+                                        image : item.image
                                     }}
                                 />
                                 {

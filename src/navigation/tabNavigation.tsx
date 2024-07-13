@@ -22,7 +22,7 @@ const TabNavigation = () => {
             component={screens.home.component} 
             options={{
               headerShown: false,
-              tabBarIcon : ({color})=> <Foundation name='home' size={27} color={color}/>
+              tabBarIcon : ({color})=> <Foundation name='home' size={27} color={color}/>,
             }}
           />
           <Tab.Screen 

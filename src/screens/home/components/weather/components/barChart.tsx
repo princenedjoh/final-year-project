@@ -28,6 +28,7 @@ const Barchart = ({
                 data={barData}
                 yAxisThickness={0}
                 xAxisThickness={0}
+                isAnimated
             />
         </View>
     );
