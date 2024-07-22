@@ -15,7 +15,7 @@ export const getCountryFromCoordinates = async (lon: number, lat: number): Promi
     const data = response.data;
     return data.address && data.address.country ? data.address.country : null;
   } catch (error) {
-    console.error('Error fetching country from coordinates:', error);
+    console.log('Error fetching country from coordinates:', error);
     return null;
   }
 }

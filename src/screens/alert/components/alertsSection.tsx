@@ -37,7 +37,6 @@ const AlertsSection = ({
 
     useEffect(()=>{
         if(refreshing){
-            setAlerts(refreshing ? 'loading' : "loading")
             getAlerts()
         }
     }, [refreshing])
@@ -54,7 +53,7 @@ const AlertsSection = ({
                 </Title> */}
                 {
                     alerts !== 'loading' && alerts !== null &&
-                    alerts.map((item : any, index : number) => {
+                    alerts.reverse().map((item : any, index : number) => {
                         return (
                             <Flex 
                                 key={index}

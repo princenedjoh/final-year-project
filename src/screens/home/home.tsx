@@ -14,6 +14,7 @@ import { onStartup } from "../../utils/onStartup"
 import { AuthContext } from "../../context/authcontext"
 import Weather from "./components/weather/weather"
 import { RefreshControl } from 'react-native';
+import Push from "../../components/push/push"
 
 export const HomeDivider = <Divider 
     size={{
@@ -74,6 +75,7 @@ const Home = ({
                 {HomeDivider}
                 <AlertSection refreshing={refreshing} navigation={navigation}/>
             </Flex>
+            <Push />
         </Safescroll>
     )
 }

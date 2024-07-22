@@ -13,12 +13,13 @@ import { NavigationProp } from "@react-navigation/native"
 import { screenNames } from "../../../constants/screennames"
 import getDate, { getRelativeTime } from "../../../utils/getDate"
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { alertDataTypes } from "../../../utils/types"
+import { alertDataTypes, severityTypes } from "../../../utils/types"
 import { useEffect, useState } from "react"
 import { getCountryFromCoordinates, getCountrynameandIso } from "../../../utils/getCountryFromCordinates"
 import Divider from "../../../components/divider/divider"
 import axios from "axios"
 import Flag from "./flag"
+import { getCategoryColor } from "../../../utils/getCategoryColor"
 
 const AlertCard = ({
     navigation,
@@ -47,6 +48,8 @@ const AlertCard = ({
             onPress={
                 data.category === 'earthquake'
                     ? ()=>navigation.navigate(screenNames.earthquakeDetails, {id : data.id})
+                    : data.category === 'water'
+                    ? ()=>navigation.navigate(screenNames.floodDetails, {id : data.id})
                     : ()=>navigation.navigate(screenNames.earthquakeDetails, {id : data.id})
             }
         >
@@ -79,7 +82,7 @@ const AlertCard = ({
                             <MaterialIcons 
                                 name="crisis-alert"
                                 size={30}
-                                color={theme.colors.red.red4}
+                                color={getCategoryColor(data.category)}
                             />
                         }
                     </Flex>
@@ -96,7 +99,7 @@ const AlertCard = ({
                         <AppTypography
                             size={TypographySize.xs}
                             bold={TypographyBold.md}
-                            textColor={getSeverityColor('critical')}
+                            textColor={getCategoryColor(data.category)}
                         >
                             {data.category}
                         </AppTypography>
@@ -105,7 +108,7 @@ const AlertCard = ({
                             color={theme.colors.main.primary}
                             size={10}
                         />
-                        <Severity severity="critical" />
+                        <Severity severity={data.severity as severityTypes} />
                     </Flex>
                     <AppTypography
                         size={TypographySize.md2}

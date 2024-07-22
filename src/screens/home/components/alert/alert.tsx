@@ -23,6 +23,11 @@ const AlertSection = ({
     const {isLoggedIn} = useContext(AuthContext)
     const [alerts, setAlerts] = useState<'loading' | null | any[]>('loading')
 
+    if(Array.isArray(alerts)){
+        alerts.reverse()
+        alerts.length = 5
+    }
+
     const getAlerts = async () => {
         setAlerts('loading')
         const {response : alerts, error : alertsError} = await protectedAPI.get('/alert/get/')

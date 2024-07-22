@@ -13,10 +13,10 @@ const LocationSettings = ({
     navigation : NavigationProp<any>
 }) => {
     const [unsavedChanges, setUnsavedChanges] = useState(false)
-    const [savedLongitude, setSavedLongitude] = useState('5.4')
-    const [longitude, setLongitude] = useState('5.4')
-    const [savedLatitude, setSavedLatitude] = useState('5.4')
-    const [latitude, setLatitude] = useState('5.4')
+    const [savedLongitude, setSavedLongitude] = useState<string>('')
+    const [longitude, setLongitude] = useState<string>('')
+    const [savedLatitude, setSavedLatitude] = useState<string>('')
+    const [latitude, setLatitude] = useState<string>('')
     const toast = useToast()
     useEffect(()=>{
         if(
@@ -60,7 +60,7 @@ const LocationSettings = ({
 
     const getLocation = async () => {
         const location = await retrieveEarthquakeLocationSettings()
-        if(location?.length > 0){
+        if(location){
             const locationSplit = location.value.split(',')
             setLongitude(locationSplit[0])
             setLatitude(locationSplit[1])
