@@ -4,6 +4,8 @@ export const getCategoryColor = (category : string) => {
             return 'orange'
         case 'water':
             return 'royalblue'
+        case 'atmosphere':
+            return 'magenta'
     
         default:
             break;

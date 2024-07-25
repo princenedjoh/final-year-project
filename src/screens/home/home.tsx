@@ -15,6 +15,7 @@ import { AuthContext } from "../../context/authcontext"
 import Weather from "./components/weather/weather"
 import { RefreshControl } from 'react-native';
 import Push from "../../components/push/push"
+import { getWeather } from "../../api/apis/weather"
 
 export const HomeDivider = <Divider 
     size={{
@@ -41,7 +42,7 @@ const Home = ({
     useEffect(()=>{
         if(isLoggedIn)
             onStartup()
-      }, [isLoggedIn])
+    }, [isLoggedIn])
     
     return (
         <Safescroll

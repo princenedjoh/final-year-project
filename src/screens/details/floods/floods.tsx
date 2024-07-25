@@ -21,7 +21,6 @@ const FloodDetails = ({
     navigation : NavigationProp<any>
     route? : any
 }) => {
-    console.log('hello floods')
     const navigate = useNavigation()
     const [alerts, setAlerts] = useState<'loading' | null | any>('loading')
     let [alertData, setAlertData] = useState<any>()

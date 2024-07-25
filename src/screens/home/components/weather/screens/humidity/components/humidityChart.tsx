@@ -1,13 +1,17 @@
 import { TouchableOpacity, View } from "react-native"
 import Barchart from "../../../components/barChart"
 import Flex from "../../../../../../../styles/components/flex"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import theme from "../../../../../../../styles/theme"
 import { hexOpacity } from "../../../../../../../utils/hexOpacity"
 import AppTypography from "../../../../../../../styles/components/appTypography"
 import { TypographyBold } from "../../../../../../../styles/components/types"
+import { barDataItem } from "react-native-gifted-charts"
+import { getWeather } from "../../../../../../../api/apis/weather"
 
 const HumidityChart = () => {
+    const [humidity, setHumidity] = useState<barDataItem[]>()
+    let daily : any = []
     const [predictions, setPredictions] = useState([
         {
             name : 'Predictions',
@@ -18,6 +22,37 @@ const HumidityChart = () => {
             active : false,
         }
     ])
+
+    const getweather = async () => {
+        const {response, error} = await getWeather()
+        if(response){
+            const {daily : dailyTimeline} = response.timelines
+            daily = dailyTimeline
+            getHumidity()
+        }
+        if(error)
+            console.log(error)
+    }
+
+    const getHumidity = () => {
+        const data = daily.map((item : any, index : number) => {
+            return {
+                date : item.time,
+                humidity : item.values.humidityAvg
+            }
+        })
+        const humidityChartData : barDataItem[] = data.map((item : any, index : number) => ({
+            value: item.humidity as number, 
+            label: 'M', 
+            frontColor: index % 2 === 0 ? `${theme.colors.main.primary}${hexOpacity(60)}` : 'lightgray'
+        }))
+        console.log({humidityChartData})
+        setHumidity(humidityChartData)
+    }
+
+    useEffect(()=>{
+        getweather()
+    },[])
 
     return (
         <Flex
@@ -49,7 +84,7 @@ const HumidityChart = () => {
                     ))
                 }
             </Flex>
-            <Barchart />
+            <Barchart barchartData={humidity}/>
         </Flex>
     )
 }

@@ -7,21 +7,52 @@ import Button from "../../../../components/button/button"
 import CountryFlag from "react-native-country-flag";
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { alertDataTypes } from "../../../../utils/types"
+import { getCountryFromCoordinates } from "../../../../utils/getCountryFromCordinates"
 
-const Top = () => {
+const Top = ({
+    alertData
+} : {
+    alertData : alertDataTypes
+}) => {
     const [iso, setiso] = useState<string>()
-    const getCountries = async () => {
+    const [countryName, setCountryName] = useState<string | null>()
+    const [location, setLocation] = useState<string | null>()
+    const place = JSON.parse(alertData.data).place
+    const coordinates = JSON.parse(alertData.data).coordinates
+
+    const getCountryIso = async (countryName : string) => {
         try {
-            const response = await axios.get('https://restcountries.com/v3.1/name/ghana')
+            const response = await axios.get(`https://restcountries.com/v3.1/name/${countryName}`)
             setiso(response.data[0].cca2)
         } catch (error) {
             console.log(error)
         }
     }
 
+    const getLocation = async () => {
+        try {
+            const response = await axios.get(`https://api.openweathermap.org/geo/1.0/reverse?lat=${coordinates[1]}&lon=${coordinates[0]}&appid=12d9154b1f1c1178b34d1b238de0b6f4`)
+            console.log(response.data)
+            setLocation(`${response.data[0].name}${response.data[0].local_names.ru ? `, ${response.data[0].local_names.ru}` : ""}`)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const getCountryName = async () => {
+        const name = await getCountryFromCoordinates(coordinates[0], coordinates[1])
+        name && setCountryName(name)
+        name && getCountryIso(name)
+        return name
+    }
+
     useEffect(()=>{
-        getCountries()
+        getCountryName()
+        getLocation()
+        console.log({location})
     }, [])
+
     return (
         <Flex
             direction="column"
@@ -31,7 +62,7 @@ const Top = () => {
                 bold={TypographyBold.md2}
                 size={TypographySize.md}
             >
-                M 6.0 - 23 km SW of Accra
+                {location}
             </AppTypography>
             <Flex
                 width={'auto'}
@@ -74,7 +105,7 @@ const Top = () => {
                 <AppTypography
                     bold={TypographyBold.sm2}
                 >
-                    Ghana
+                    {countryName}
                 </AppTypography>
             </Flex>
         </Flex>

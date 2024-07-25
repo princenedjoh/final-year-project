@@ -54,6 +54,7 @@ const ArticlePost = ({route} : any) => {
                                 <AppTypography
                                     size={TypographySize.sm2}
                                     lineHeight={25}
+                                    key={index}
                                 >
                                     {item.text}
                                 </AppTypography>

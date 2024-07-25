@@ -2,13 +2,14 @@ import { View } from "react-native";
 import { BarChart, barDataItem } from "react-native-gifted-charts";
 import theme from "../../../../../styles/theme";
 import { hexOpacity } from "../../../../../utils/hexOpacity";
+import Skeleton from "../../../../../components/skeleton/skeleton";
         
 const Barchart = ({
     barchartData
 } : {
-    barchartData? : barDataItem
+    barchartData? : barDataItem[]
 }) => {
-    const barData = [
+    const barData : barDataItem[] | undefined = [
         {value: 2.50, label: 'M'},
         {value: 5.00, label: 'T', frontColor: `${theme.colors.main.primary}${hexOpacity(60)}`},
         {value: 7.45, label: 'W', frontColor: `${theme.colors.main.primary}${hexOpacity(60)}`},
@@ -20,16 +21,27 @@ const Barchart = ({
     
     return (
         <View>
-            <BarChart
-                barWidth={22}
-                noOfSections={3}
-                barBorderRadius={4}
-                frontColor="lightgray"
-                data={barData}
-                yAxisThickness={0}
-                xAxisThickness={0}
-                isAnimated
-            />
+            {
+                !barchartData ?
+                <Skeleton 
+                    style={{
+                        width : '100%',
+                        height : 200,
+                        backgroundColor : theme.colors.dark[9]
+                    }}
+                />
+                :
+                <BarChart
+                    barWidth={24}
+                    noOfSections={3}
+                    barBorderRadius={4}
+                    frontColor="lightgray"
+                    data={barchartData ?? barData}
+                    yAxisThickness={0}
+                    xAxisThickness={0}
+                    isAnimated
+                />
+            }
         </View>
     );
 };

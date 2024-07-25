@@ -79,7 +79,7 @@ const SmallWeatherCard = ({
                     bold={TypographyBold.md}
                     numberOfLines={2}
                 >
-                    The dew point is 74 deg right now
+                    The Humidity is 78% right now
                 </AppTypography>
             </Flex>
         </TouchableOpacity>

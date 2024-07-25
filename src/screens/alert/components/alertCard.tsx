@@ -50,6 +50,8 @@ const AlertCard = ({
                     ? ()=>navigation.navigate(screenNames.earthquakeDetails, {id : data.id})
                     : data.category === 'water'
                     ? ()=>navigation.navigate(screenNames.floodDetails, {id : data.id})
+                    : data.category === 'atmosphere'
+                    ? ()=>navigation.navigate(screenNames.airQuality, {id : data.id})
                     : ()=>navigation.navigate(screenNames.earthquakeDetails, {id : data.id})
             }
         >
@@ -144,7 +146,7 @@ const AlertCard = ({
                         <AppTypography
                             size={TypographySize.xs}
                             bold={TypographyBold.md}
-                            textColor={theme.colors.main.primary}
+                            textColor={getCategoryColor(data.category)}
                             numberOfLines={1}
                         >
                             {countryName ?? place}

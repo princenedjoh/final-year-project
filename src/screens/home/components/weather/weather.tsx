@@ -1,11 +1,6 @@
 import { NavigationProp } from "@react-navigation/native"
 import Flex from "../../../../styles/components/flex"
-import { View } from "react-native"
 import { sizes } from "../../../../utils/sizes"
-import theme from "../../../../styles/theme"
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import AppTypography from "../../../../styles/components/appTypography"
-import { TypographyBold, TypographySize } from "../../../../styles/components/types"
 import SmallWeatherCard from "./components/smallCard"
 import MidWeatherCard from "./components/midWeatherCard"
 
@@ -16,6 +11,9 @@ const Weather = ({
     navigation : NavigationProp<any>
     refreshing? : boolean
 }) => {
+
+    //cannot use weather api because of request limits
+
     return (
         <Flex
             paddingHorizontal={sizes.marginSM}
