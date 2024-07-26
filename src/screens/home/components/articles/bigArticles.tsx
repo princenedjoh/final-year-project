@@ -26,7 +26,8 @@ const ArticleFeature = ({
     const [dataResponse, setResponse] = useState()
     const getArticles = async () => {
         const response = await getAllArticles()
-        setData(response.results)
+        const filteredData = response.results.filter((item : any, index : number) => item.type === 'article')
+        setData(filteredData)
         setResponse(dataResponse)
     }
 

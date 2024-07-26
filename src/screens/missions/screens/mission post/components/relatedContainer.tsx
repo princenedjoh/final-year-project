@@ -11,14 +11,20 @@ import { NavigationProp } from "@react-navigation/native"
 import { screenNames } from "../../../../../constants/screennames"
 
 const RelatedContainer = ({
-    navigation
+    navigation,
+    post
 } : {
-    navigation : NavigationProp<any>
+    navigation : NavigationProp<any>,
+    post : any
 }) => {
     return (
         <TouchableOpacity
             activeOpacity={0.8}
-            onPress={()=>navigation.navigate(screenNames.missionPost)}
+            onPress={()=>navigation.navigate(screenNames.missionPost, {
+                title : post.title,
+                body : post.body,
+                image : post.image
+            })}
         >
             <Flex>
                 <View
@@ -28,7 +34,7 @@ const RelatedContainer = ({
                     height : 150
                 }}>
                     <ImageBG
-                        source={images.bg6}
+                        source={{uri : post.image}}
                         resizeMode="cover"
                         rounded={5}
                         height={'100%'}
@@ -69,8 +75,7 @@ const RelatedContainer = ({
                                 <Title
                                     textColor={theme.colors.dark[10]}
                                 >
-                                    Linear clouds crisscrossed the 
-                                    Pacific Ocean 
+                                    {post.title}
                                 </Title>
                             </Flex>
                         </View>

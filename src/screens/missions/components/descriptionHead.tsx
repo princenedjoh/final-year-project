@@ -4,6 +4,7 @@ import AppTypography from "../../../styles/components/appTypography"
 import { TypographyBold } from "../../../styles/components/types"
 import theme from "../../../styles/theme"
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import { useEffect } from "react"
 
 export interface itemsTypes {
     description: string;
@@ -15,12 +16,14 @@ const DescriptionHead = ({
     open,
     setItems,
     items,
-    index
+    index,
+    title
 } : {
     open : boolean,
-    items : itemsTypes[],
+    items : any[],
     setItems : React.Dispatch<React.SetStateAction<itemsTypes[]>>,
-    index : number
+    index : number,
+    title : string
 }) => {
 
     const setActive = () => {
@@ -53,7 +56,7 @@ const DescriptionHead = ({
                     <AppTypography
                         bold={TypographyBold.md2}
                     >
-                        {items[index].title}
+                        {title}
                     </AppTypography>
                     <AntDesign 
                         name="caretright"

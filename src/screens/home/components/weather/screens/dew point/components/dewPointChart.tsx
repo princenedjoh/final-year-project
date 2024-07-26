@@ -8,6 +8,7 @@ import AppTypography from "../../../../../../../styles/components/appTypography"
 import { TypographyBold } from "../../../../../../../styles/components/types"
 import { barDataItem } from "react-native-gifted-charts"
 import { getWeather } from "../../../../../../../api/apis/weather"
+import getDayInitial from "../../../../../../../utils/getDayInitial"
 
 const DewPointChart = () => {
     const [dewpoint, setDewpoint] = useState<barDataItem[]>()
@@ -43,7 +44,7 @@ const DewPointChart = () => {
         })
         const dewpointChartData : barDataItem[] = data.map((item : any, index : number) => ({
             value: item.dewpoint as number, 
-            label: getDayInitial(item.date), 
+            label: getDayInitial(new Date(item.date)), 
             frontColor: index % 2 === 0 ? `${theme.colors.main.primary}${hexOpacity(60)}` : 'lightgray'
         }))
         setDewpoint(dewpointChartData)

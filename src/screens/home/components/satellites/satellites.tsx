@@ -1,6 +1,6 @@
 import { ScrollView, TouchableHighlight } from "react-native"
 import Flex from "../../../../styles/components/flex"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { sizes } from "../../../../utils/sizes"
 import { satellites } from "../../../../assets/assets"
 import ImageBG from "../../../../components/imgbg/imgbg"
@@ -10,6 +10,8 @@ import { NavigationProp } from "@react-navigation/native"
 import { screenNames } from "../../../../constants/screennames"
 import axios from "axios"
 import theme from "../../../../styles/theme"
+import { getPrismicData } from "../../../../api/prismic"
+import SatelliteSkeleton from "./components/satelliteSkeleton"
 
 const Satellites = ({
     navigation,
@@ -18,38 +20,64 @@ const Satellites = ({
     navigation : NavigationProp<any>
     refreshing? : boolean
 }) => {
+    const [missionData, setMissionData] = useState<'loading' | any>('loading')
 
-    const [data, setData] = useState([1,2,3,4,5,6,7,8])
-    const satelliteslist = [
-        {
-            name : 'MODIS',
-            image : satellites.modis
-        },
-        {
-            name : 'Sentinel',
-            image : satellites.sentinel
-        },
-        {
-            name : 'GEOS',
-            image : satellites.geos
-        },
-        {
-            name : 'Landsat',
-            image : satellites.landsat
-        },
-        {
-            name : 'NOAA',
-            image : satellites.noaa
-        }
-    ]
-
-    const get = async () => {
-        try {
-            const result = await axios.get("http://100.66.3.129:8000")
-        } catch (error : any) {
-            console.log(error)
-        }
+    const getData = async () => {
+        const data = await getPrismicData()
+        const filteredData = data.results.filter((item : any, index : number) => item.type === 'satellite_missions')
+        if(filteredData)
+            setAllMissionsData(filteredData)
     }
+
+    const setAllMissionsData = (data : any) => {
+        console.log({name : data[3].data.name[0].text})
+        const filteredData = data.map((item : any, index : number) => ({
+            name : item.data.name[0].text,
+            image : item.data.logo_image.url,
+            descriptionData : [
+                {
+                    name : 'Agencies',
+                    value : item.data.agencies.map((item : any)=> item.agencies1),
+                    active : true
+                },
+                {
+                    name : 'Satellites',
+                    value : item.data.satellites.map((item : any)=> item.satellites1),
+                    active : true
+                },
+                {
+                    name : 'Sensors',
+                    value : item.data.sensors.map((item : any)=> item.sensors1),
+                    active : true
+                },
+                {
+                    name : 'Products',
+                    value : item.data.products.map((item : any)=> item.products1),
+                    active : true
+                },
+                {
+                    name : 'Goals',
+                    value : item.data.goals,
+                    active : true
+                }
+            ],
+            description : item.data.description[0]?.text,
+            date : item.data.date_launched,
+            coordinates : item.data.coordinates,
+        }))
+        setMissionData(filteredData)
+    }
+
+    useEffect(()=>{
+        if(refreshing){
+            setMissionData(refreshing ? 'loading' : "loading")
+            getData()
+        }
+    }, [refreshing])
+
+    useEffect(()=>{
+        getData()
+    },[])
 
     return (
         <ScrollView
@@ -62,14 +90,15 @@ const Satellites = ({
                 marginTop={10}
             >
                 {
-                    satelliteslist.map((item, index : number) => {
+                    missionData !== 'loading'
+                    ?
+                    missionData.map((item : any, index : number) => {
                         return (
                             <TouchableHighlight
                                 key={index}
                                 underlayColor={'none'}
                                 onPress={()=>{
-                                    get()
-                                    return navigation.navigate(screenNames.missions)
+                                    return navigation.navigate(screenNames.missions, {data : item})
                                 }}
                             >
                                 <Flex
@@ -78,14 +107,14 @@ const Satellites = ({
                                     width={'auto'}
                                 >
                                     <ImageBG
-                                        source={item.image}
+                                        source={{uri : item.image}}
                                         width={60}
                                         height={60}
                                         rounded={100}
                                         resizeMode="contain"
                                         bgcolor="white"
                                         style={{
-                                            backgroundColor : theme.colors.dark[10]
+                                            backgroundColor : 'white'
                                         }}
                                     >
 
@@ -99,6 +128,8 @@ const Satellites = ({
                             </TouchableHighlight>
                         )
                     })
+                    :
+                    <SatelliteSkeleton />
                 }
             </Flex>
         </ScrollView>

@@ -9,13 +9,28 @@ import { hexOpacity } from "../../../../../utils/hexOpacity";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { NavigationProp } from "@react-navigation/native";
 import { screenNames } from "../../../../../constants/screennames";
+import Skeleton from "../../../../../components/skeleton/skeleton";
 
 const MidWeatherCard = ({
-    navigation
+    navigation,
+    value
 } : {
     navigation : NavigationProp<any>
+    value? : number
 }) => {
     return (
+        !value ?
+        <Skeleton
+            style={{
+                width : sizes.screenWidth/3,
+                height : sizes.screenWidth/3,
+                backgroundColor : theme.colors.dark[11],
+                borderRadius : 10,
+                display : 'flex',
+                flex : 1,
+            }}
+        />
+        :
         <TouchableOpacity
             style={{
                 width : sizes.screenWidth/3,
@@ -70,7 +85,7 @@ const MidWeatherCard = ({
                         bold={TypographyBold.md2}
                         textColor={`${theme.colors.main.primary}${hexOpacity(50)}`}
                     >
-                        13.69
+                        {value}
                     </AppTypography>
                     <MaterialIcons
                         name="dew-point"
@@ -87,7 +102,7 @@ const MidWeatherCard = ({
                     bold={TypographyBold.md}
                     numberOfLines={2}
                 >
-                    The dew point is 13.64 deg right now
+                    The dew point is {value} deg right now
                 </AppTypography>
             </Flex>
         </TouchableOpacity>

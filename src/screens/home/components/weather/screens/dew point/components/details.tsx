@@ -29,75 +29,47 @@ const Details = ({
             >
                 <DewPointChart />
                 <DewpointSettings navigation={navigation}/>
-                <Container title={'Understanding Humidity Levels'}>
-                    <Flex
-                        direction="column"
-                        gap={16}
-                    >
-                        <Flex
-                            direction="column"
-                            gap={1}
-                        >
-                            <B>Absolute humidity</B>
+                <Container title={'Understanding Dew Point'}>
+                    <Flex direction="column" gap={16}>
+                        <Flex direction="column" gap={1}>
+                            <B>Dew Point</B>
                             <AppTypography>
-                                is the total mass of water vapor present in a given volume or mass of air. It is expressed in grams per cubic meter <B>(g/m³)</B>.
+                                is the temperature at which air becomes saturated with moisture and water vapor begins to condense into liquid water. It is expressed in degrees Celsius (°C) or Fahrenheit (°F).
                             </AppTypography>
                             <Container 
                                 style={{
-                                    backgroundColor : `${theme.colors.dark[8]}${hexOpacity(50)}`,
-                                    marginTop : -10
+                                    backgroundColor: `${theme.colors.dark[8]}${hexOpacity(50)}`,
+                                    marginTop: -10
                                 }}
                             >
                                 <AppTypography>
-                                    <B>Formula:</B> AH = (mass of water vapor) / (volume of air)
+                                    <B>Concept:</B> The dew point is a direct measure of the amount of moisture in the air. A higher dew point indicates more moisture, while a lower dew point indicates drier air.
                                 </AppTypography>
                             </Container>
                         </Flex>
                         <Divider color={theme.colors.dark[8]}/>
-                        <Flex
-                            direction="column"
-                            gap={1}
-                        >
-                            <B>Relative humidity (RH)</B>
+                        <Flex direction="column" gap={1}>
+                            <B>How Dew Point is Calculated</B>
                             <AppTypography>
-                                is the ratio of the current absolute humidity to the highest possible absolute humidity at a given temperature, expressed as a percentage.
+                                The dew point can be determined through various methods, including the use of dew point hygrometers or psychrometers. These instruments measure the air temperature and relative humidity, which can then be used to calculate the dew point.
                             </AppTypography>
-                            <Container 
-                                style={{
-                                    backgroundColor : `${theme.colors.dark[8]}${hexOpacity(50)}`,
-                                    marginTop : -10
-                                }}
-                            >
-                                <AppTypography>
-                                    <B>Formula:</B>  (current absolute humidity / maximum absolute humidity at that temperature) × 100%
-                                </AppTypography>
-                            </Container>
                         </Flex>
                     </Flex>
                 </Container>
-                <Container title={'Importance of Humidity Monitoring'}>
 
-                    <Flex
-                        direction="column"
-                        gap={16}
-                    >
-                        <Flex
-                            direction="column"
-                            gap={1}
-                        >
-                            <B>Climate Study</B>
+                <Container title={'Importance of Dew Point Monitoring'}>
+                    <Flex direction="column" gap={16}>
+                        <Flex direction="column" gap={1}>
+                            <B>Weather Prediction</B>
                             <AppTypography>
-                            Accurate Weather Predictions: Monitoring humidity is crucial for predicting weather patterns. Humidity influences cloud formation, precipitation, and storm development. Accurate humidity data helps meteorologists forecast rain, storms, and other weather events more precisely
+                                Monitoring the dew point is crucial for predicting weather patterns. The dew point provides insight into potential precipitation, fog, and storm development. Meteorologists use dew point data to forecast rain, storms, and other weather events more accurately.
                             </AppTypography>
                         </Flex>
                         <Divider color={theme.colors.dark[8]}/>
-                        <Flex
-                            direction="column"
-                            gap={1}
-                        >
-                            <B>Human Health and Comfort</B>
+                        <Flex direction="column" gap={1}>
+                            <B>Human Comfort and Health</B>
                             <AppTypography>
-                            Indoor Air Quality: Humidity monitoring in homes and workplaces ensures indoor air quality is maintained at comfortable levels. High humidity can cause mold growth, dust mites, and respiratory issues, while low humidity can lead to dry skin, irritated eyes, and respiratory discomfort.
+                                The dew point is a significant factor in determining human comfort. A high dew point indicates high moisture content in the air, which can make it feel warmer and more uncomfortable, especially in summer. A lower dew point indicates drier air, which can be more comfortable but may cause issues like dry skin and respiratory discomfort.
                             </AppTypography>
                         </Flex>
                     </Flex>

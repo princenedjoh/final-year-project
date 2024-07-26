@@ -9,9 +9,13 @@ import { useState } from "react"
 import { NavigationProp } from "@react-navigation/native"
 
 const Details = ({
-    navigation
+    navigation,
+    descriptionData,
+    title
 } : {
-    navigation : NavigationProp<any>
+    navigation : NavigationProp<any>,
+    descriptionData : any,
+    title : string
 }) => {
     
     const [activeIndex, setActiveIndex] = useState(0)
@@ -31,15 +35,22 @@ const Details = ({
                         display : 'flex',
                         flexWrap : 'nowrap',
                         flexDirection : 'row',
-                        transform : [{
-                            translateX : - (activeIndex * sizes.screenWidth) ,
-                        }],
+                        // transform : [{
+                        //     translateX : - (activeIndex * sizes.screenWidth) ,
+                        // }],
                     }}
                 >
-                    <Samples 
-                        navigation={navigation}
-                    />
-                    <Description />
+                    {
+                        activeIndex === 0 &&
+                        <Samples 
+                            navigation={navigation}
+                            title={title}
+                        />
+                    }
+                    {
+                        activeIndex === 1 &&
+                        <Description descriptionData={descriptionData}/>
+                    }
                 </View>
             </Flex>
         </Flex>

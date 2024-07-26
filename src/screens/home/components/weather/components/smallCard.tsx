@@ -8,13 +8,27 @@ import { TypographyBold, TypographySize } from "../../../../../styles/components
 import { hexOpacity } from "../../../../../utils/hexOpacity";
 import { NavigationProp } from "@react-navigation/native";
 import { screenNames } from "../../../../../constants/screennames";
+import Skeleton from '../../../../../components/skeleton/skeleton';
 
 const SmallWeatherCard = ({
-    navigation
+    navigation,
+    value
 } : {
     navigation : NavigationProp<any>
+    value? : number
 }) => {
     return (
+        !value ?
+        <Skeleton 
+            style={{
+                width : sizes.screenWidth/3,
+                height : sizes.screenWidth/3,
+                backgroundColor : theme.colors.dark[11],
+                borderRadius : 10,
+                display : 'flex',
+            }}
+        />
+        :
         <TouchableOpacity
             style={{
                 width : sizes.screenWidth/3,
@@ -70,7 +84,7 @@ const SmallWeatherCard = ({
                         bold={TypographyBold.md2}
                         textColor={`${theme.colors.main.primary}${hexOpacity(50)}`}
                     >
-                        78%
+                        {value}
                     </AppTypography>
                 </Flex>
                 <AppTypography
@@ -79,7 +93,7 @@ const SmallWeatherCard = ({
                     bold={TypographyBold.md}
                     numberOfLines={2}
                 >
-                    The Humidity is 78% right now
+                    The Humidity is {value} right now
                 </AppTypography>
             </Flex>
         </TouchableOpacity>

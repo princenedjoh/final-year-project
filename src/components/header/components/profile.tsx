@@ -24,7 +24,7 @@ const Profile = ({
                     width : 35,
                     height : 35
                 }}
-                source={images.profile1}
+                source={images.profile2}
             ></Image>
         </TouchableOpacity>
     )

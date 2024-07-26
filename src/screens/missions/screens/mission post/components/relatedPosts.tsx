@@ -4,6 +4,8 @@ import Flex from "../../../../../styles/components/flex"
 import { sizes } from "../../../../../utils/sizes"
 import RelatedContainer from "./relatedContainer"
 import { NavigationProp } from "@react-navigation/native"
+import shuffleArray from "../../../../../utils/shuffleArray"
+import { posts } from "../../../components/posts"
 
 const RelatedPosts = ({
     navigation
@@ -30,12 +32,15 @@ const RelatedPosts = ({
                     marginLeft={sizes.marginSM}
                 >
                     {
-                        [1,2,3,4,5].map((items, index : number) => (
+                        shuffleArray(posts).map((item, index : number) => (
                             <Flex
                                 width={280}
                                 key={index}
                             >
-                                <RelatedContainer navigation={navigation}/>
+                                <RelatedContainer 
+                                    navigation={navigation}
+                                    post={item}
+                                />
                             </Flex>
                         ))
                     }

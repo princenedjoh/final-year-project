@@ -5,9 +5,11 @@ import ImageBG from '../../../components/imgbg/imgbg';
 import { images } from '../../../assets/assets';
 
 const ImageContainer = ({
-    navigation
+    navigation,
+    image
 } : {
-    navigation : NavigationProp<any>
+    navigation : NavigationProp<any>,
+    image : string
 }) => {
     return (
         <TouchableHighlight
@@ -17,7 +19,7 @@ const ImageContainer = ({
             }}
         >
             <ImageBG
-                source={images.bg4}
+                source={{uri : image}}
                 width={'100%'}
                 height={200}
             >

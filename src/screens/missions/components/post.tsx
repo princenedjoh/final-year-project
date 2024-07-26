@@ -11,19 +11,37 @@ import { screenNames } from "../../../constants/screennames"
 import ProfileInfo from "./profileInfo"
 
 const Post = ({
-    navigation
+    navigation,
+    title,
+    body,
+    date,
+    image,
+    missionTitle
 } : {
-    navigation : NavigationProp<any>
+    navigation : NavigationProp<any>,
+    title : string,
+    body : string,
+    date : Date,
+    image : string,
+    missionTitle : string
 }) => {
     return (
         <TouchableOpacity
             activeOpacity={0.9}
-            onPress={()=>navigation.navigate(screenNames.missionPost)}
+            onPress={()=>navigation.navigate(screenNames.missionPost, {
+                title,
+                body,
+                image
+            })}
         >
             <Flex
                 direction="column"
             >
-                <ProfileInfo displayProfile={false}/>
+                <ProfileInfo 
+                    displayProfile={false}
+                    title={missionTitle}
+                    date={date}
+                />
                 <Flex
                     direction="column"
                     width={'auto'}
@@ -33,22 +51,18 @@ const Post = ({
                         size={TypographySize.sm2}
                         textColor={theme.colors.main.text.head}
                     >
-                        Linear clouds crisscrossed 
+                        {title}
                     </AppTypography>
                     <AppTypography
                         numberOfLines={5}
                         ellipsizeMode="tail"
                     >
-                        the Pacific Ocean off the coast of California in 
-                        early April 2024, each marking  the passage of a 
-                        ship. The Moderate Resolution Imaging 
-                        Spectroradiometer (MODIS) acquired this 
-                        true-color image of the. Spectroradiometer (MODIS) acquired this 
-                        true-color image of the.
+                        {body}
                     </AppTypography>
                 </Flex>
                 <ImageContainer
                     navigation={navigation}
+                    image={image}
                 />
                 <View
                     style={{
@@ -60,7 +74,7 @@ const Post = ({
                 >
                     <Image
                         style={style.profileImage}
-                        source={images.profile1}
+                        source={images.profile2}
                     ></Image>
                 </View>
             </Flex>

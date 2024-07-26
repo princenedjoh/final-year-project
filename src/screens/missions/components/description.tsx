@@ -4,12 +4,20 @@ import { sizes } from "../../../utils/sizes"
 import AppTypography from "../../../styles/components/appTypography"
 import { TypographyBold } from "../../../styles/components/types"
 import DescriptionHead from "./descriptionHead"
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { data } from "./descriptionData"
 
-const Description = () => {
+const Description = ({
+    descriptionData
+} : {
+    descriptionData : any
+}) => {
 
     const [items, setItems] = useState(data)
+
+    // useEffect(()=>{
+    //     console.log({descriptionData : descriptionData[4]})
+    // },[])
 
     return (
         <Flex
@@ -20,27 +28,48 @@ const Description = () => {
             width={sizes.screenWidth}
         >
             {
-                items.map((item, index : number) => {
+                descriptionData.map((item : any, index : number) => {
                     return (
                         <Flex
                             direction="column"
                             key={index}
                         >
                             <DescriptionHead 
-                                open={item.active}
+                                open={item.active ?? true}
                                 index={index}
                                 items={items}
                                 setItems={setItems}
+                                title={item.name}
                             />
                             <Flex
                                 paddingHorizontal={15}
                                 height={item.active ? 'auto' : 0}
                             >
-                                <AppTypography
-                                    lineHeight={20}
-                                >
-                                    {item.description}
-                                </AppTypography>
+                                {
+                                    Array.isArray(item.value)
+                                    ?
+                                    <Flex
+                                        direction="column"
+                                    >
+                                        {
+                                            item.value.map((item : any, index : number) => (
+                                                <AppTypography
+                                                    lineHeight={20}
+                                                    key={index}
+                                                >
+                                                    {item.text ?? item}
+                                                </AppTypography>
+                                            ))
+                                        }
+                                    </Flex>
+                                    :
+                                    <AppTypography
+                                        lineHeight={20}
+                                        key={index}
+                                    >
+                                        {item.value}
+                                    </AppTypography>
+                                }
                             </Flex>
                         </Flex>
                     )
