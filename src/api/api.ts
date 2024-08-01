@@ -84,7 +84,7 @@ class PublicAPI {
         const response = await axios.get(`${this.baseURL}${url}`, { params });
         return {response : response.data}
       } catch (error : any) {
-        console.log(error)
+        console.log(error.response.data)
         return {error : {message : 'unauthorized', detail : error}}
       }
     };
