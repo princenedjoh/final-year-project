@@ -12,6 +12,7 @@ import Hr from "../../../../styles/components/hr";
 import { AuthContext } from "../../../../context/authcontext";
 import { protectedAPI } from "../../../../api/api";
 import SmallCardSkeleton from "../../../../components/article card/smallCardSkeleton";
+import NoAlerts from "../../../alert/components/noAlerts";
 
 const AlertSection = ({
     navigation,
@@ -22,12 +23,7 @@ const AlertSection = ({
 }) => {
     const {isLoggedIn} = useContext(AuthContext)
     const [alerts, setAlerts] = useState<'loading' | null | any[]>('loading')
-
-    if(Array.isArray(alerts)){
-        alerts.reverse()
-        alerts.length = 5
-    }
-
+    
     const getAlerts = async () => {
         setAlerts('loading')
         const {response : alerts, error : alertsError} = await protectedAPI.get('/alert/get/')
@@ -45,10 +41,13 @@ const AlertSection = ({
 
     useEffect(()=>{
         if(refreshing){
-            setAlerts(refreshing ? 'loading' : "loading")
             getAlerts()
         }
     }, [refreshing])
+
+    useEffect(()=>{
+        console.log({jjksdkjk : alerts})
+    },[])
 
     return (
         <Flex
@@ -102,7 +101,11 @@ const AlertSection = ({
                             </Flex>
                         )
                     })
-            }
+                }
+                {
+                    alerts !== 'loading' && alerts !== null && alerts.length === 0 &&
+                    <NoAlerts />
+                }
             </Flex>
             {
                 alerts === 'loading' &&

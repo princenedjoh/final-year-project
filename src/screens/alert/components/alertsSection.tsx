@@ -9,6 +9,7 @@ import { NavigationProp } from "@react-navigation/native"
 import { protectedAPI } from "../../../api/api"
 import { AuthContext } from "../../../context/authcontext"
 import SmallCardSkeleton from "../../../components/article card/smallCardSkeleton"
+import NoAlerts from "./noAlerts"
 
 const AlertsSection = ({
     navigation,
@@ -87,6 +88,10 @@ const AlertsSection = ({
                     })
                 }
             </Flex>
+            {
+                alerts !== 'loading' && alerts !== null && alerts.length === 0 &&
+                <NoAlerts />
+            }
             {
                 alerts === 'loading' &&
                 [1,2,3,4,5,6].map((item, index : number) => (

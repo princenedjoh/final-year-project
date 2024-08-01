@@ -71,7 +71,7 @@ const Weather = ({
     },[refreshing])
 
     useEffect(()=>{
-        getweather()
+        // getweather()
     },[])
 
     return (

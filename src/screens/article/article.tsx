@@ -13,6 +13,7 @@ import SmallCardSkeleton from "../../components/article card/smallCardSkeleton"
 import LargeCardSkeleton from "../../components/article card/largeCardSkeleton"
 import { RefreshControl } from "react-native"
 import { HomeDivider } from "../home/home"
+import AppTypography from "../../styles/components/appTypography"
 
 const Article = ({
     navigation
@@ -31,7 +32,9 @@ const Article = ({
 
     const getArticles = async () => {
         const response = await getAllArticles()
-        setData(response.results)
+        const filteredData = response.results.filter((item : any, index : number) => item.type === 'article')
+        console.log({filteredData})
+        setData(filteredData)
     }
 
     const splitArticles = () => {
@@ -61,9 +64,14 @@ const Article = ({
     }, [])
 
     useEffect(()=>{
+        console.log({largeArticles : largeArticles.length})
+        console.log({smallArticles : smallArticles.length})
+    },[largeArticles, smallArticles])
+
+    useEffect(()=>{
         if(refreshing){
-            setLargeArticles(refreshing ? 'loading' : "loading")
-            setSmallArticles(refreshing ? 'loading' : "loading")
+            setLargeArticles("loading")
+            setSmallArticles("loading")
             getArticles()
         }
     }, [refreshing])
