@@ -6,12 +6,23 @@ import Top from "./components/top"
 import Imagefacts from "./components/imageFacts"
 import RelatedPosts from "./components/relatedPosts"
 import { NavigationProp } from "@react-navigation/native"
+import { useEffect } from "react"
 
 const MissionPost = ({
-    navigation
+    navigation,
+    route
 } : {
-    navigation : NavigationProp<any>
+    navigation : NavigationProp<any>,
+    route? : any
 }) => {
+    const {image} = route?.params
+    const {title} = route?.params
+    const {body} = route?.params
+
+    useEffect(()=>{
+        console.log({image})
+    },[])
+
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <Flex
@@ -19,8 +30,13 @@ const MissionPost = ({
                 gap={20}
                 paddingBottom={50}
             >
-                <Top />
-                <Middle />
+                <Top 
+                    image={image}
+                />
+                <Middle 
+                    title={title}
+                    body={body}
+                />
                 <Imagefacts />
                 <RelatedPosts navigation={navigation}/>
             </Flex>

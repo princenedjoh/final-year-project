@@ -9,8 +9,14 @@ import { TypographyBold, TypographySize } from "../../../../../styles/components
 import theme from "../../../../../styles/theme"
 import { Image } from "react-native"
 import ProfileInfo from "../../../components/profileInfo"
+import { useEffect } from "react"
 
-const Top = () => {
+const Top = ({
+    image
+} : {
+    image? : string
+}) => {
+    
     return (
         <ScrollView>
             <Flex
@@ -23,7 +29,7 @@ const Top = () => {
                         height : 0.3 * sizes.screenHeight
                 }}>
                     <ImageBG
-                        source={images.bg6}
+                        source={image ? {uri : image} : images.bg6}
                         resizeMode="cover"
                         rounded={0}
                         height={'100%'}
@@ -62,6 +68,7 @@ const Top = () => {
                         >
                             <ProfileInfo 
                                 color={theme.colors.dark[10]}
+                                displayProfile
                                 dateColor={theme.colors.dark[8]}
                             />
                         </View>

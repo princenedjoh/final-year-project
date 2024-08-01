@@ -1,19 +1,20 @@
-import { Image, StyleSheet, View } from "react-native"
-import AppTypography from "../../../styles/components/appTypography"
+import { View } from "react-native"
 import Flex from "../../../styles/components/flex"
 import { sizes } from "../../../utils/sizes"
 import theme from "../../../styles/theme"
-import { TypographyBold, TypographySize } from "../../../styles/components/types"
-import ImageContainer from "./imageContainer"
 import { NavigationProp } from "@react-navigation/native"
-import { images } from "../../../assets/assets"
 import Post from "./post"
+import { posts as allPosts } from "./posts"
+import shuffleArray from "../../../utils/shuffleArray"
 
 const Samples= ({
-    navigation
+    navigation,
+    title
 } : {
     navigation : NavigationProp<any>
+    title : string
 }) => {
+    const posts = shuffleArray(allPosts)
     return (
         <Flex
             width={sizes.screenWidth}
@@ -30,7 +31,7 @@ const Samples= ({
                 <View
                     style={{
                         width : 1,
-                        height : sizes.screenHeight,
+                        height : '100%',
                         backgroundColor : theme.colors.dark[9]
                     }}
                 >
@@ -41,11 +42,16 @@ const Samples= ({
                     gap={20}
                 >
                     {
-                        [1,2,3,4,5].map((item, index : number) => {
+                        posts.map((item, index : number) => {
                             return (
                                 <Post 
                                     key={index}
                                     navigation={navigation}
+                                    title={item.title}
+                                    body={item.body}
+                                    date={item.date}
+                                    image={item.image}
+                                    missionTitle={title}
                                 />
                             )
                         })

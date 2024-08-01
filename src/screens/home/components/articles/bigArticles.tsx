@@ -16,21 +16,31 @@ import Hr from "../../../../styles/components/hr"
 import BigArticleSkeleton from "./bigArticlesSkeleton"
 
 const ArticleFeature = ({
-    navigation
+    navigation,
+    refreshing
 } : {
     navigation : NavigationProp<any>
+    refreshing? : boolean
 }) => {
     const [data, setData] = useState<any>([])
     const [dataResponse, setResponse] = useState()
     const getArticles = async () => {
         const response = await getAllArticles()
-        setData(response.results)
+        const filteredData = response.results.filter((item : any, index : number) => item.type === 'article')
+        setData(filteredData)
         setResponse(dataResponse)
     }
 
     useEffect(()=>{
         getArticles()
     }, [])
+
+    useEffect(()=>{
+        if(refreshing){
+            setData(refreshing ? [] : [])
+            getArticles()
+        }
+    }, [refreshing])
 
     return (
         data.length <= 0 ?
@@ -53,7 +63,7 @@ const ArticleFeature = ({
             >
                 <Flex
                     gap={8}
-                    paddingLeft={sizes.marginSM}
+                    paddingHorizontal={sizes.marginSM}
                 >
                     {
                         data.length < 0 ?
@@ -79,17 +89,12 @@ const ArticleFeature = ({
                                         <LargeCard
                                             navigation={navigation}
                                             title = {item.data.title[0].text}
-                                            description={item.data.content[0].text}
+                                            description={JSON.stringify(item.data.content)}
                                             date={new Date(item.data.date)}
                                             coverImageURL={{uri : item.data.cover_image.url}}
                                             full_name1={item.data.full_name1}
+                                            width={sizes.screenWidth - sizes.screenWidth/5}
                                         />
-                                        {
-                                            index < data.length - 1 &&
-                                            <Hr
-                                                marginLeft={85}
-                                            />
-                                        }
                                     </Flex>
                                 </TouchableOpacity>
                             )
@@ -99,6 +104,7 @@ const ArticleFeature = ({
             </ScrollView>
             <Flex
                 paddingLeft={sizes.marginSM}
+                marginTop={10}
             >
                 <TouchableOpacity
                     onPress={()=>navigation.navigate(screenNames.article)}

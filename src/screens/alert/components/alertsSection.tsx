@@ -9,11 +9,14 @@ import { NavigationProp } from "@react-navigation/native"
 import { protectedAPI } from "../../../api/api"
 import { AuthContext } from "../../../context/authcontext"
 import SmallCardSkeleton from "../../../components/article card/smallCardSkeleton"
+import NoAlerts from "./noAlerts"
 
 const AlertsSection = ({
-    navigation
+    navigation,
+    refreshing
 } : {
-    navigation : NavigationProp<any>
+    navigation : NavigationProp<any>,
+    refreshing? : boolean
 }) => {
     const {isLoggedIn} = useContext(AuthContext)
     const [alerts, setAlerts] = useState<'loading' | null | any[]>('loading')
@@ -33,6 +36,12 @@ const AlertsSection = ({
             getAlerts()
     }, [isLoggedIn])
 
+    useEffect(()=>{
+        if(refreshing){
+            getAlerts()
+        }
+    }, [refreshing])
+
     return (
         <>
             <Flex
@@ -45,7 +54,7 @@ const AlertsSection = ({
                 </Title> */}
                 {
                     alerts !== 'loading' && alerts !== null &&
-                    alerts.map((item : any, index : number) => {
+                    alerts.reverse().map((item : any, index : number) => {
                         return (
                             <Flex 
                                 key={index}
@@ -79,6 +88,10 @@ const AlertsSection = ({
                     })
                 }
             </Flex>
+            {
+                alerts !== 'loading' && alerts !== null && alerts.length === 0 &&
+                <NoAlerts />
+            }
             {
                 alerts === 'loading' &&
                 [1,2,3,4,5,6].map((item, index : number) => (

@@ -44,6 +44,7 @@ const Top = ({
         <Flex
             justify="space-between"
             align="center"
+            gap={8}
         >
             <Flex
                 width={'auto'}
@@ -57,7 +58,7 @@ const Top = ({
                         style={{
                             width : 35,
                             height : 35,
-                            borderRadius : 100,
+                            borderRadius : 5,
                             elevation : 100,
                             shadowColor: 'black',
                             shadowOffset: { width: 0, height: 3 },
@@ -100,7 +101,7 @@ const Top = ({
                         </AppTypography>
                     }
                     {
-                        countryName !== 'N/A' ?
+                        countryName === 'N/A' || !countryName ?
                         <AppTypography
                             bold={TypographyBold.md2}
                             size={TypographySize.md}

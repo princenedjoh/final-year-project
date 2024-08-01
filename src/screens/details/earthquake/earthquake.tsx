@@ -8,7 +8,7 @@ import MoreDetails from "./components/moreDetail"
 import Map from "../components/map"
 import TopControls from "../components/topControls"
 import { protectedAPI } from "../../../api/api"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import DetailsSkeleton from "./components/deailsSkeleton"
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import theme from "../../../styles/theme"
@@ -17,11 +17,12 @@ import NoAlerts from "../../alert/components/noAlerts"
 import SmallCardSkeleton from "../../../components/article card/smallCardSkeleton"
 import MoreDetailsSkeleton from "./components/moreDetailsSkeleton"
 import Skeleton from "../../../components/skeleton/skeleton"
+import { Marker } from "react-native-maps"
 
 
 const EarthquakeDetails = ({
     navigation,
-    route
+    route,
 } : {
     navigation : NavigationProp<any>
     route? : any
@@ -30,6 +31,10 @@ const EarthquakeDetails = ({
     const navigate = useNavigation()
     const [alerts, setAlerts] = useState<'loading' | null | any>('loading')
     let [alertData, setAlertData] = useState<any>()
+    let [place, setPlace] = useState<string>()
+    let [coordinates, setCoordinates] = useState<string>()
+    let [latitude, setLatitude] = useState<number>(0)
+    let [longitude, setLongitude] = useState<number>(0)
     
     const getAlerts = async () => {
         setAlerts('loading')
@@ -56,16 +61,40 @@ const EarthquakeDetails = ({
             user : alerts.user,
             image : alerts.image
         })
+        setPlace(JSON.parse(alerts?.data).place)
+        setCoordinates(JSON.parse(alerts?.data).coordinates)
+        setLongitude(JSON.parse(alerts?.data).coordinates[0])
+        setLatitude(JSON.parse(alerts?.data).coordinates[1])
         setAlerts(alerts)
     }
 
     useEffect(()=>{
         getAlerts()
     },[])
+
+    const markers = [
+        <Marker
+            coordinate={{
+                latitude,
+                longitude,
+            }}
+            title={place}
+        />
+    ]
     
     return (
         <>
-            <Map />
+            {
+                alerts !== 'loading' && alerts !== null && alertData ?
+                <Map 
+                    alertData={alertData}
+                    markers={markers}
+                />
+                : alerts === 'loading' ?
+                <></>
+                :
+                <NoAlerts />
+            }
             <TopControls navigation={navigation}/>
             <Drawer 
                 props={{index : 1}}

@@ -12,10 +12,15 @@ import Menu from "./components/menu"
 import Details from "./components/details"
 
 const Missions = ({
-    navigation
+    navigation,
+    route
 } : {
-    navigation : NavigationProp<any>
+    navigation : NavigationProp<any>,
+    route : any
 }) => {
+
+    const data = route.params.data
+
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <Flex
@@ -23,9 +28,20 @@ const Missions = ({
                 gap={12}
                 align="center"
             >
-                <Top />
-                <Info />
-                <Details navigation={navigation}/>
+                <Top 
+                    profileImage={data.image}
+                />
+                <Info 
+                    title={data.name}
+                    description={data.description}
+                    date={data.date}
+                    coordinates={data.coordinates}
+                />
+                <Details 
+                    navigation={navigation}
+                    descriptionData={data.descriptionData}
+                    title={data.name}
+                />
             </Flex>
         </ScrollView>
     )

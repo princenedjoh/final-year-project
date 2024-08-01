@@ -12,15 +12,18 @@ import Hr from "../../../../styles/components/hr";
 import { AuthContext } from "../../../../context/authcontext";
 import { protectedAPI } from "../../../../api/api";
 import SmallCardSkeleton from "../../../../components/article card/smallCardSkeleton";
+import NoAlerts from "../../../alert/components/noAlerts";
 
 const AlertSection = ({
-    navigation
+    navigation,
+    refreshing
 } : {
     navigation : NavigationProp<any>
+    refreshing? : boolean
 }) => {
     const {isLoggedIn} = useContext(AuthContext)
     const [alerts, setAlerts] = useState<'loading' | null | any[]>('loading')
-
+    
     const getAlerts = async () => {
         setAlerts('loading')
         const {response : alerts, error : alertsError} = await protectedAPI.get('/alert/get/')
@@ -35,6 +38,17 @@ const AlertSection = ({
         if(isLoggedIn)
             getAlerts()
     }, [isLoggedIn])
+
+    useEffect(()=>{
+        if(refreshing){
+            getAlerts()
+        }
+    }, [refreshing])
+
+    useEffect(()=>{
+        console.log({jjksdkjk : alerts})
+    },[])
+
     return (
         <Flex
             direction="column"
@@ -74,7 +88,8 @@ const AlertSection = ({
                                         id : item.id,
                                         read : item.read,
                                         severity : item.severity,
-                                        user : item.user
+                                        user : item.user,
+                                        image : item.image
                                     }}
                                 />
                                 {
@@ -86,7 +101,11 @@ const AlertSection = ({
                             </Flex>
                         )
                     })
-            }
+                }
+                {
+                    alerts !== 'loading' && alerts !== null && alerts.length === 0 &&
+                    <NoAlerts />
+                }
             </Flex>
             {
                 alerts === 'loading' &&

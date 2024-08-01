@@ -1,5 +1,6 @@
 export const images = {
     profile1 : require('./dev/profile1.png'),
+    profile2 : require('./dev/profile2.png'),
     bg1 : require('./dev/bg1.png'),
     bg2 : require('./dev/bg2.png'),
     bg3 : require('./dev/bg3.jpg'),
@@ -10,10 +11,10 @@ export const images = {
 
 export const satellites = {
     geos : require('./satellites/geos.png'),
-    landsat : require('./satellites/landsat.png'),
-    modis : require('./satellites/modis.png'),
+    landsat : require('./satellites/landsat.jpg'),
+    modis : require('./satellites/modis.jpg'),
     noaa : require('./satellites/noaa.png'),
-    sentinel : require('./satellites/sentinel.png')
+    sentinel : require('./satellites/sentinel.jpg')
 }
 
 export const onboarding = {

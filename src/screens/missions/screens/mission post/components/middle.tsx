@@ -3,7 +3,13 @@ import Flex from "../../../../../styles/components/flex"
 import { TypographySize } from "../../../../../styles/components/types"
 import { sizes } from "../../../../../utils/sizes"
 
-const Middle = () => {
+const Middle = ({
+    body,
+    title
+} : {
+    title? : string,
+    body? : string
+}) => {
 
     const text = `off the coast of California in early April 2024, 
 each marking  the passage of a ship. The 
@@ -27,14 +33,13 @@ distinctive clouds known as “ship tracks” on April 1.`
             <Title
                 size={TypographySize.lg2}
             >
-                Linear clouds crisscrossed the 
-                Pacific Ocean 
+                {title ?? 'Linear clouds crisscrossed the  Ocean' }
             </Title>
             <AppTypography
                 size={TypographySize.sm2}
                 lineHeight={23}
             >
-                {text}
+                {body ?? text}
             </AppTypography>
         </Flex>
     )

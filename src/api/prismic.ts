@@ -25,3 +25,9 @@ export const getAllArticles = async () : Promise<any> => {
     const response = await axios.get(api)
     return response.data
 }
+
+export const getPrismicData = async () : Promise<any> => {
+    const api = await getCurrentDocApi()
+    const response = await axios.get(api)
+    return response.data
+}

@@ -31,22 +31,36 @@ const ArticlePost = ({route} : any) => {
             >
                 <Top 
                     title={title}
+                    coverImage={coverImageURL}
                 />
                 <Flex
                     marginLeft={sizes.marginSM}
                     direction="column"
                     gap={10}
+                    width={'auto'}
                 >
                     <ArticleProfileInfo 
                         name={full_name1}
                         date={new Date(date)}
                     />
-                    <AppTypography
-                        size={TypographySize.sm2}
-                        lineHeight={25}
+                    <Flex
+                        direction="column"
+                        gap={20}
+                        width={'auto'}
                     >
-                        {description}
-                    </AppTypography>
+                        {
+                            description &&
+                            JSON.parse(description).map((item : any, index : number) => (
+                                <AppTypography
+                                    size={TypographySize.sm2}
+                                    lineHeight={25}
+                                    key={index}
+                                >
+                                    {item.text}
+                                </AppTypography>
+                            ))
+                        }
+                    </Flex>
                 </Flex>
                 <RelatedPosts navigation={navigation}/>
             </Flex>

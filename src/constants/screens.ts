@@ -32,6 +32,9 @@ import OnBoarding from "../screens/onboarding/onboarding"
 import EarthquakeDetails from "../screens/details/earthquake/earthquake"
 import FloodDetails from "../screens/details/floods/floods"
 import AirQuality from "../screens/details/air quality/airQuality"
+import Weather from "../screens/home/components/weather/weather"
+import Humidity from "../screens/home/components/weather/screens/humidity/humidity"
+import DewPoint from "../screens/home/components/weather/screens/dew point/dewPoint"
 
 const sn = screenNames
 const screens = {
@@ -166,6 +169,18 @@ const screens = {
     airQuality : {
         name : sn.airQuality,
         component : AirQuality
+    },
+    weather : {
+        name : sn.weather,
+        component : Weather
+    },
+    humidity : {
+        name : sn.humidity,
+        component : Humidity
+    },
+    dewpoint : {
+        name : sn.dewPoint,
+        component : DewPoint
     }
 }
 
@@ -198,7 +213,10 @@ export const subScreens = [
     s.savedArticlesSettings,
     s.earthquakeDetails,
     s.floodDetails,
-    s.airQuality
+    s.airQuality,
+    s.weather,
+    s.humidity,
+    s.dewpoint
 ]
 
 export default screens

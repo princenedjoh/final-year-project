@@ -10,6 +10,7 @@ import AccGroup from "./components/accGroup"
 import Logout from "./components/logout"
 import { useContext } from "react"
 import { AuthContext } from "../../context/authcontext"
+import ReportGroup from "./components/reportGroup"
 
 const Settings = ({
     navigation
@@ -46,6 +47,7 @@ const Settings = ({
                         <>
                             <NotifGroup navigation={navigation}/>
                             <AccGroup navigation={navigation}/>
+                            <ReportGroup navigation={navigation}/>
                             <Logout />
                         </>
                     }

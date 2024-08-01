@@ -8,7 +8,11 @@ import { images, satellites } from "../../../assets/assets"
 import theme from "../../../styles/theme"
 import { sizes } from "../../../utils/sizes"
 
-const Top = () => {
+const Top = ({
+    profileImage
+} : {
+    profileImage : string
+}) => {
     return (
         <Flex
             direction="column"
@@ -39,7 +43,7 @@ const Top = () => {
             <View style={style.profile}>
                 <View style={style.innerProfile}>
                     <ImageBG 
-                        source={satellites.modis}
+                        source={{uri : profileImage}}
                         resizeMode="contain"
                         rounded={100}
                         height={'100%'}

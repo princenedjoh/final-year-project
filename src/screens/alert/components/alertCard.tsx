@@ -13,7 +13,13 @@ import { NavigationProp } from "@react-navigation/native"
 import { screenNames } from "../../../constants/screennames"
 import getDate, { getRelativeTime } from "../../../utils/getDate"
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { alertDataTypes } from "../../../utils/types"
+import { alertDataTypes, severityTypes } from "../../../utils/types"
+import { useEffect, useState } from "react"
+import { getCountryFromCoordinates, getCountrynameandIso } from "../../../utils/getCountryFromCordinates"
+import Divider from "../../../components/divider/divider"
+import axios from "axios"
+import Flag from "./flag"
+import { getCategoryColor } from "../../../utils/getCategoryColor"
 
 const AlertCard = ({
     navigation,
@@ -22,11 +28,30 @@ const AlertCard = ({
     navigation : NavigationProp<any>,
     data : alertDataTypes
 }) => {
+
+    const [iso, setiso] = useState<string>()
+    const [countryName, setCountryName] = useState<string | null>()
+    const coordinates = JSON.parse(data.data).coordinates
+    const place = JSON.parse(data.data).place
+
+    const getCountryDetails = async () => {
+        const {countryName, iso} = await getCountrynameandIso(coordinates)
+        countryName && setCountryName(countryName)
+        iso && setiso(iso)
+    } 
+
+    useEffect(()=>{
+        getCountryDetails()
+    },[])
     return (
         <TouchableOpacity
             onPress={
                 data.category === 'earthquake'
                     ? ()=>navigation.navigate(screenNames.earthquakeDetails, {id : data.id})
+                    : data.category === 'water'
+                    ? ()=>navigation.navigate(screenNames.floodDetails, {id : data.id})
+                    : data.category === 'atmosphere'
+                    ? ()=>navigation.navigate(screenNames.airQuality, {id : data.id})
                     : ()=>navigation.navigate(screenNames.earthquakeDetails, {id : data.id})
             }
         >
@@ -52,11 +77,16 @@ const AlertCard = ({
                         background={theme.colors.dark[11]}
                         rounded={5}
                     >
-                        <MaterialIcons 
-                            name="crisis-alert"
-                            size={30}
-                            color={theme.colors.red.red4}
-                        />
+                        {
+                            iso ?
+                            <Flag iso={iso}/>
+                            :
+                            <MaterialIcons 
+                                name="crisis-alert"
+                                size={30}
+                                color={getCategoryColor(data.category)}
+                            />
+                        }
                     </Flex>
                 }
                 <Flex
@@ -71,7 +101,7 @@ const AlertCard = ({
                         <AppTypography
                             size={TypographySize.xs}
                             bold={TypographyBold.md}
-                            textColor={getSeverityColor('critical')}
+                            textColor={getCategoryColor(data.category)}
                         >
                             {data.category}
                         </AppTypography>
@@ -80,7 +110,7 @@ const AlertCard = ({
                             color={theme.colors.main.primary}
                             size={10}
                         />
-                        <Severity severity="critical" />
+                        <Severity severity={data.severity as severityTypes} />
                     </Flex>
                     <AppTypography
                         size={TypographySize.md2}
@@ -98,13 +128,28 @@ const AlertCard = ({
                     <Flex
                         width={'auto'}
                         marginTop={3}
+                        align="center"
                     >
                         <AppTypography
                             size={TypographySize.xs}
                             bold={TypographyBold.md}
-                            textColor={theme.colors.main.text.light}
+                            textColor={theme.colors.main.text.body}
                         >
                             {getRelativeTime(new Date(data.date))}
+                        </AppTypography>
+                        <Divider 
+                            size={{
+                                width : 1,
+                                height : '100%'
+                            }}
+                        />
+                        <AppTypography
+                            size={TypographySize.xs}
+                            bold={TypographyBold.md}
+                            textColor={getCategoryColor(data.category)}
+                            numberOfLines={1}
+                        >
+                            {countryName ?? place}
                         </AppTypography>
                     </Flex>
                 </Flex>

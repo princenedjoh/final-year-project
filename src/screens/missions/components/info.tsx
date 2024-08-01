@@ -6,7 +6,17 @@ import theme from "../../../styles/theme"
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6'
 
-const Info = () => {
+const Info = ({
+    title,
+    description,
+    date,
+    coordinates
+} : {
+    title : string,
+    description : string,
+    date : string,
+    coordinates : string
+}) => {
     return (
         <Flex
             direction="column"
@@ -17,7 +27,7 @@ const Info = () => {
             <Title
                 bold={TypographyBold.lg}
             >
-                MODIS
+                {title}
             </Title>
             <Flex
                 width={'70%'}
@@ -28,7 +38,7 @@ const Info = () => {
                     size={TypographySize.sm2}
                     textAlign="center"
                 >
-                    Moderate Resolution Imaging Spectroradiometer
+                    {description}
                 </AppTypography>
             </Flex>
             <View
@@ -52,7 +62,7 @@ const Info = () => {
                             color={theme.colors.dark[5]}
                         />
                         <AppTypography>
-                            25th March, 1995
+                            {date}
                         </AppTypography>
                     </Flex>
                     <Flex
@@ -64,7 +74,7 @@ const Info = () => {
                             color={theme.colors.dark[5]}
                         />
                         <AppTypography>
-                            16.435943, 182.03923
+                            {coordinates}
                         </AppTypography>
                     </Flex>
                 </Flex>
